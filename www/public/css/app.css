@@ -1,0 +1,8 @@
+.server-item {
+  cursor: pointer;
+}
+
+.server-item:hover {
+  background: #e0e0e0 !important;
+}
+
