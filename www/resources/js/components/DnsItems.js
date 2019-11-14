@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import AuthUser from "./AuthUser";
 
 const AUTH_USER_URL = '/api/v1/auth/';
 const DNS_ITEMS_SERVICE_URL = '/api/v1/domains/';
@@ -98,22 +97,6 @@ export default class DnsItems extends Component {
         }
     }
 
-    arrayLookup(searchValue,array,searchIndex,returnIndex)
-    {
-        let returnVal = null;
-        let i;
-        for(i=0; i<array.length; i++)
-        {
-            if(array[i][searchIndex]===searchValue)
-            {
-                returnVal = array[i][returnIndex];
-                break;
-            }
-        }
-
-        return returnVal;
-    }
-
     userHasPermission(permission) {
         const permissions = this.state.authUser.permissions;
         let match = false;
@@ -134,11 +117,11 @@ export default class DnsItems extends Component {
             <div className={"d-block"}>
                 { canEdit ? (
                 <button type={"button"} className={"btn btn-warning btn-sm px-2 mx-1"}>
-                    <i className="lnr lnr-pencil"></i></button>
+                    <span className="lnr lnr-pencil"></span> Edit</button>
                     ) : null }
                 { canDelete ? (
                     <button type={"button"} className={"btn btn-danger btn-sm px-2 mx-1"}>
-                        <i className="lnr lnr-trash"></i></button>
+                        <span className="lnr lnr-trash"></span> Delete</button>
                     ) : null}
             </div>
         )

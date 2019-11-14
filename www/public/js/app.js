@@ -55467,7 +55467,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _AuthUser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AuthUser */ "./resources/js/components/AuthUser.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55485,7 +55484,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -55607,21 +55605,6 @@ function (_Component) {
       }
     }
   }, {
-    key: "arrayLookup",
-    value: function arrayLookup(searchValue, array, searchIndex, returnIndex) {
-      var returnVal = null;
-      var i;
-
-      for (i = 0; i < array.length; i++) {
-        if (array[i][searchIndex] === searchValue) {
-          returnVal = array[i][returnIndex];
-          break;
-        }
-      }
-
-      return returnVal;
-    }
-  }, {
     key: "userHasPermission",
     value: function userHasPermission(permission) {
       var permissions = this.state.authUser.permissions;
@@ -55645,14 +55628,14 @@ function (_Component) {
       }, canEdit ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         className: "btn btn-warning btn-sm px-2 mx-1"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "lnr lnr-pencil"
-      })) : null, canDelete ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), " Edit") : null, canDelete ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         className: "btn btn-danger btn-sm px-2 mx-1"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "lnr lnr-trash"
-      })) : null);
+      }), " Delete") : null);
     }
   }, {
     key: "render",
@@ -55977,6 +55960,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+var AUTH_USER_URL = '/api/v1/auth/';
 var SERVER_SERVICE_URL = '/api/v1/domains';
 
 var DomainAccounts =
@@ -56026,16 +56010,31 @@ function (_Component) {
       });
     }
   }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.fetchDomains();
-    }
-  }, {
-    key: "handleSaveChanges",
-    value: function handleSaveChanges(e) {
+    key: "fetchAuthUser",
+    value: function fetchAuthUser() {
       var _this3 = this;
 
-      console.log(e);
+      fetch(AUTH_USER_URL).then(function (response) {
+        return response.json();
+      }).then(function (result) {
+        return _this3.setState({
+          authUser: result.auth
+        });
+      })["catch"](function (error) {
+        return _this3.setState({
+          error: error,
+          isLoaded: false,
+          hasError: true
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this4 = this;
+
+      this.fetchAuthUser();
+      this.fetchDomains();
       var form = $("#create-account-form");
       var modal = $("#create-domain-account");
       form.submit(function (e) {
@@ -56048,15 +56047,63 @@ function (_Component) {
           if (data.success) {
             modal.modal('hide');
 
-            _this3.fetchDomains();
+            _this4.fetchDomains();
           }
         });
       });
     }
   }, {
+    key: "userHasPermission",
+    value: function userHasPermission(permission) {
+      var permissions = this.state.authUser.permissions;
+      var match = false;
+
+      for (var i = 0; i < permissions.length; i++) {
+        if (permissions[i].name === permission) {
+          match = true;
+        }
+      }
+
+      return match;
+    }
+  }, {
+    key: "editAccount",
+    value: function editAccount(uid) {
+      if (this.userHasPermission('edit domain account')) {}
+    }
+  }, {
+    key: "deleteAccount",
+    value: function deleteAccount(uid) {
+      if (this.userHasPermission('delete domain account')) {}
+    }
+  }, {
+    key: "accountOptions",
+    value: function accountOptions(uid) {
+      var canEdit = this.userHasPermission('edit domain account');
+      var canDelete = this.userHasPermission('delete domain account');
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "d-block"
+      }, canEdit ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.editAccount(uid),
+        type: "button",
+        className: "btn px-2 btn-xs btn-warning mx-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "ion ion-md-eye"
+      }), " Edit") : null, canDelete ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.deleteAccount(uid),
+        type: "button",
+        className: "btn btn-danger btn-xs px-2 mx-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "lnr lnr-trash"
+      }), " Delete") : null);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this5 = this;
+
       if (this.state.isLoaded) {
+        console.log(this.state);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
           className: "breadcrumb"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -56065,14 +56112,14 @@ function (_Component) {
           href: "#"
         }, "Domains"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
           className: "d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Domain Name Servers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Domain Name Servers"), this.userHasPermission('add domain account') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
           className: "btn d-block btn-primary rounded-pill waves-effect",
           "data-toggle": "modal",
           "data-target": "#create-domain-account"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "ion ion-md-add"
-        }), "\xA0 Add Account")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }), "\xA0 Add Account") : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "row"
         }, this.state.domains.map(function (domain, index) {
           var name = '';
@@ -56089,13 +56136,19 @@ function (_Component) {
           }
 
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "col-6",
-            key: domain.id
+            className: "col-md-6",
+            key: index
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "card mb-4"
+            className: "card mb-3"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "card-body"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "card-title with-elements"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+            className: "m-0 mr-2"
+          }, "".concat(domain.nickname)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "card-title-elements ml-md-auto"
+          }, _this5.accountOptions(domain.uid))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "d-flex justify-content-start"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
             src: "".concat(logo),
@@ -56115,113 +56168,10 @@ function (_Component) {
             style: {
               fontSize: ".8rem"
             }
-          }, "Setup"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-            className: "card-text mt-2"
-          }, "Some quick example text to build on the card title and make up the bulk of the card's content."))));
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "modal fade",
-          id: "create-domain-account",
-          tabIndex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "modal-dialog",
-          role: "document"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-          id: "create-account-form",
-          action: "/domains/",
-          method: "post"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "modal-content"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "modal-header"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-          className: "modal-title",
-          id: "exampleModalLabel"
-        }, "Add an account"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          type: "button",
-          className: "close",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          "aria-hidden": "true"
-        }, "\xD7"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "modal-body"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "form-group"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          htmlFor: "account-nickname"
-        }, "Nickname"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          className: "form-control",
-          type: "text",
-          id: "account-nickname",
-          name: "account-nickname",
-          placeholder: "Nickname"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "form-group"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          htmlFor: "account-type",
-          className: "form-label"
-        }, "Type"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-          name: "domain-account-type",
-          id: "account-type",
-          className: "select2"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          value: "godaddy"
-        }, "Godaddy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          value: "google"
-        }, "Google Domains"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          id: "godaddy-options"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "form-group"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          htmlFor: "godaddy-account-api-key",
-          className: "form-label"
-        }, "Api Key"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "text",
-          id: "godaddy-account-api-key",
-          name: "godaddy-account-api-key",
-          className: "form-control",
-          placeholder: "Api Key"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "form-group"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          htmlFor: "godaddy-account-api-secret",
-          className: "form-label"
-        }, "Api Secret"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "text",
-          id: "godaddy-account-api-secret",
-          name: "godaddy-account-api-secret",
-          className: "form-control",
-          placeholder: "Api Secret"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          id: "google-options",
-          style: {
-            display: 'none'
-          }
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "In progress"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "form-group"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          htmlFor: "account-api-key",
-          className: "form-label"
-        }, "Api Key"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "text",
-          id: "account-api-key",
-          name: "account-api-key",
-          className: "form-control",
-          placeholder: "Api Key"
-        })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "modal-footer"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          type: "button",
-          className: "btn btn-secondary",
-          "data-dismiss": "modal"
-        }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          type: "submit",
-          onSubmit: this.handleSaveChanges(),
-          className: "btn btn-primary"
-        }, "Save changes")))))));
+          }, "View"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            className: "card-text"
+          }, "Lorem ipsum dolor sit amet, idque nostro eirmod qui at."))));
+        })));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loading..."));
       }

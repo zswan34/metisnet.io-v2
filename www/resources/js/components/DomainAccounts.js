@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+const AUTH_USER_URL = '/api/v1/auth/';
 const SERVER_SERVICE_URL = '/api/v1/domains';
 
 export default class DomainAccounts extends Component {
@@ -32,12 +33,20 @@ export default class DomainAccounts extends Component {
             .catch(error => this.setState({ error, isLoaded: false, hasError: true }));
     }
 
-    componentDidMount() {
-        this.fetchDomains();
+    fetchAuthUser() {
+        fetch(AUTH_USER_URL)
+            .then(response => response.json())
+            .then(result =>
+                this.setState({
+                    authUser: result.auth
+                })
+            )
+            .catch(error => this.setState({error, isLoaded: false, hasError: true}));
     }
 
-    handleSaveChanges(e) {
-        console.log(e);
+    componentDidMount() {
+        this.fetchAuthUser();
+        this.fetchDomains();
 
         let form = $("#create-account-form");
         let modal = $("#create-domain-account");
@@ -55,11 +64,54 @@ export default class DomainAccounts extends Component {
                         this.fetchDomains();
                     }
                 })
-        })
+        });
+    }
+
+    userHasPermission(permission) {
+        const permissions = this.state.authUser.permissions;
+        let match = false;
+        for(let i = 0; i < permissions.length; i++) {
+            if (permissions[i].name === permission) {
+                match = true;
+            }
+        }
+        return match;
+    }
+
+    editAccount(uid) {
+        if (this.userHasPermission('edit domain account')) {
+
+        }
+    }
+
+    deleteAccount(uid) {
+        if (this.userHasPermission('delete domain account')) {
+
+        }
+    }
+
+    accountOptions(uid) {
+
+        const canEdit = this.userHasPermission('edit domain account');
+        const canDelete = this.userHasPermission('delete domain account');
+
+        return (
+            <div className={"d-block"}>
+                { canEdit ? (
+                    <button onClick={this.editAccount(uid)} type={"button"} className={"btn px-2 btn-xs btn-warning mx-1"}>
+                        <span className="ion ion-md-eye"></span> Edit</button>
+                ) : null }
+                { canDelete ? (
+                    <button onClick={this.deleteAccount(uid)} type={"button"} className={"btn btn-danger btn-xs px-2 mx-1"}>
+                        <span className="lnr lnr-trash"></span> Delete</button>
+                ) : null}
+            </div>
+        )
     }
 
     render() {
         if (this.state.isLoaded) {
+            console.log(this.state);
             return (
                 <div>
                     <ol className="breadcrumb">
@@ -69,13 +121,15 @@ export default class DomainAccounts extends Component {
                     </ol>
                     <h4 className="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
                         <div>Domain Name Servers</div>
+                        { this.userHasPermission('add domain account') ? (
                         <button type="button" className="btn d-block btn-primary rounded-pill waves-effect"
                                 data-toggle="modal" data-target="#create-domain-account">
                             <span className="ion ion-md-add"></span>&nbsp; Add Account
                         </button>
+                        ): null}
                     </h4>
                     <div className={"row"}>
-                        {this.state.domains.map(function (domain, index) {
+                        {this.state.domains.map((domain, index) => {
                             let name = '';
                             let logo = '';
                             if (domain.type === 'godaddy') {
@@ -88,90 +142,38 @@ export default class DomainAccounts extends Component {
                                 logo = '/assets/brands/godaddy.png';
                             }
 
-                            return <div className="col-6" key={domain.id}>
-                                <div className="card mb-4">
-                                    <div className="card-body">
-                                        <div className="d-flex justify-content-start">
-                                            <img src={`${logo}`} alt={"Godaddy"} style={{height: "100px"}}/>
-                                            <div className="flex ml-3">
-                                                <h4 className="card-title">{`${domain.nickname}`}</h4>
-                                                <div className="card-subtitle text-muted">
-                                                    {`${ name }`}
+                            return (
+                                <div className="col-md-6" key={index}>
+                                    <div className="card mb-3">
+                                        <div className="card-body">
+                                            <div className="card-title with-elements">
+                                                <h5 className="m-0 mr-2">{`${ domain.nickname }`}</h5>
+                                                <div className="card-title-elements ml-md-auto">
+
+                                                    {this.accountOptions(domain.uid)}
                                                 </div>
-                                                <a className={"mt-2"} href={"/domains/" + domain.uid}
-                                                   style={{fontSize: ".8rem"}}>Setup</a>
                                             </div>
+                                            <div className="d-flex justify-content-start">
+                                                <img src={`${logo}`} alt={"Godaddy"} style={{height: "100px"}}/>
+                                                <div className="flex ml-3">
+                                                    <h4 className="card-title">{`${domain.nickname}`}</h4>
+                                                    <div className="card-subtitle text-muted">
+                                                        {`${ name }`}
+                                                    </div>
+                                                    <a className={"mt-2"} href={"/domains/" + domain.uid}
+                                                       style={{fontSize: ".8rem"}}>View</a>
+                                                </div>
+                                            </div>
+
+                                            <p className="card-text">Lorem ipsum dolor sit amet, idque nostro eirmod qui at.</p>
                                         </div>
-                                        <p className="card-text mt-2">Some quick example text to build on the card title
-                                            and make up the bulk of the card's content.</p>
                                     </div>
                                 </div>
-                            </div>
+                            )
+
                         })}
                     </div>
-                    <div className="modal fade" id="create-domain-account" tabIndex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div className="modal-dialog" role="document">
-                            <form id="create-account-form" action="/domains/" method={"post"}>
-                                <div className="modal-content">
-                                    <div className="modal-header">
-                                        <h5 className="modal-title" id="exampleModalLabel">Add an account</h5>
-                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div className="modal-body">
-                                        <div className="form-group">
-                                            <label htmlFor="account-nickname">Nickname</label>
-                                            <input className="form-control" type="text" id="account-nickname"
-                                                   name="account-nickname" placeholder="Nickname"/>
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="account-type" className="form-label">Type</label>
-                                            <select name="domain-account-type" id="account-type" className="select2">
-                                                <option value="godaddy">Godaddy</option>
-                                                <option value="google">Google Domains</option>
-                                            </select>
-                                        </div>
-                                        <div id="godaddy-options">
-                                            <div className="form-group">
-                                                <label htmlFor="godaddy-account-api-key" className="form-label">Api
-                                                    Key</label>
-                                                <input type="text" id="godaddy-account-api-key"
-                                                       name="godaddy-account-api-key" className="form-control"
-                                                       placeholder="Api Key"/>
-                                            </div>
-                                            <div className="form-group">
-                                                <label htmlFor="godaddy-account-api-secret" className="form-label">Api
-                                                    Secret</label>
-                                                <input type="text" id="godaddy-account-api-secret"
-                                                       name="godaddy-account-api-secret" className="form-control"
-                                                       placeholder="Api Secret"/>
-                                            </div>
-                                        </div>
 
-                                        <div id="google-options" style={{display: 'none'}}>
-                                            <p>In progress</p>
-                                            <div className="form-group">
-                                                <label htmlFor="account-api-key" className="form-label">Api Key</label>
-                                                <input type="text" id="account-api-key" name="account-api-key"
-                                                       className="form-control" placeholder={"Api Key"}/>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div className="modal-footer">
-                                        <button type="button" className="btn btn-secondary"
-                                                data-dismiss="modal">Cancel
-                                        </button>
-                                        <button type="submit" onSubmit={this.handleSaveChanges()}
-                                                className="btn btn-primary">Save changes
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                 </div>
 
             )
