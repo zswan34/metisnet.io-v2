@@ -31,6 +31,7 @@ class GoDaddy {
 
     public function getDomains() {
         return json_decode($this->domains->getDomains());
+        //
     }
 
     public function getDomain($name) {
