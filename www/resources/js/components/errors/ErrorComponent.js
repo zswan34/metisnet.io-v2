@@ -7,10 +7,12 @@ export default class ErrorComponent extends Component {
 
     render() {
         return (
-            <div className={"row"}>
+            <div>
                 <div className="d-flex justify-content-center">
-                    <div className="bg-danger">
-                        <p>Unable to load component</p>
+                    <div className="bg-danger col-md-4 p-3 rounded-lg shadow-lg">
+                        <span className={"text-white"}><i className={"lnr lnr-warning"}></i>
+                            &nbsp; An error occurred. Unable to load component.
+                        </span>
                     </div>
                 </div>
             </div>

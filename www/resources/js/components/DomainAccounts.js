@@ -132,97 +132,101 @@ export default class DomainAccounts extends Component {
     }
 
     render() {
-        if (this.state.hasError) {
-            return (
-                <ErrorComponent/>
-            )
-        }
-        if (this.state.isLoaded) {
-            return (
-                <div>
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item">
-                            <a href="#">Domains</a>
-                        </li>
-                    </ol>
-                    <h4 className="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
-                        <div>Domain Name Servers</div>
-                        { this.userHasPermission('add domain account') ? (
-                        <button type="button" className="btn d-block btn-primary rounded-pill waves-effect"
-                                data-toggle="modal" data-target="#create-domain-account">
-                            <span className="ion ion-md-add"></span>&nbsp; Add Account
-                        </button>
-                            ): null}
-                    </h4>
-
-                    <div className={"row"}>
-                        {this.state.domains.map((domain, index) => {
-                            let name = '';
-                            let logo = '';
-                            if (domain.type === 'godaddy') {
-                                name = 'Go Daddy';
-                                logo = '/assets/brands/godaddy.png';
-                            }
-
-                            if (domain.type === 'google') {
-                                name = 'Google Domains';
-                                logo = '/assets/brands/godaddy.png';
-                            }
-
-                            return (
-                                <div className="col-md-6" key={index}>
-                                    <div className="card mb-3">
-                                        <div className="card-body">
-                                            <div className="card-title with-elements">
-                                                <h5 className="m-0 mr-2">{`${ domain.nickname }`}</h5>
-                                                <div className="card-title-elements ml-md-auto">
-
-                                                    {this.accountOptions(domain.uid)}
-                                                </div>
-                                            </div>
-                                            <div className="d-flex justify-content-start">
-                                                <img src={`${logo}`} alt={"Godaddy"} style={{height: "100px"}}/>
-                                                <div className="flex ml-3">
-                                                    <h4 className="card-title">{`${domain.nickname}`}</h4>
-                                                    <div className="card-subtitle text-muted">
-                                                        {`${ name }`}
-                                                    </div>
-                                                    <a className={"mt-2"} href={"/domains/" + domain.uid}
-                                                       style={{fontSize: ".8rem"}}>View</a>
-                                                </div>
-                                            </div>
-                                            <p className="card-text">Lorem ipsum dolor sit amet, idque nostro eirmod qui at.</p>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            )
-                        })}
-
-                    </div>
+        if (!this.state.hasError) {
+            if (this.state.isLoaded) {
+                return (
                     <div>
-                        {this.state.domains.map((domain, index) => {
-                            return (
-                                <EditDomainsAccountsModal updateDomains={this.updateDomains.bind(this)} domain={domain} key={index}/>
-                            );
-                        })}
-                        {this.state.domains.map((domain, index) => {
-                            return (
-                                <DeleteDomainsAccountsModal updateDomains={this.updateDomains.bind(this)} domain={domain} key={index}/>
-                            );
-                        })}
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item">
+                                <a href="#">Domains</a>
+                            </li>
+                        </ol>
+                        <h4 className="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+                            <div>Domain Name Servers</div>
+                            {this.userHasPermission('add domain account') ? (
+                                <button type="button" className="btn d-block btn-primary rounded-pill waves-effect"
+                                        data-toggle="modal" data-target="#create-domain-account">
+                                    <span className="ion ion-md-add"></span>&nbsp; Add Account
+                                </button>
+                            ) : null}
+                        </h4>
+
+                        <div className={"row"}>
+                            {this.state.domains.map((domain, index) => {
+                                let name = '';
+                                let logo = '';
+                                if (domain.type === 'godaddy') {
+                                    name = 'Go Daddy';
+                                    logo = '/assets/brands/godaddy.png';
+                                }
+
+                                if (domain.type === 'google') {
+                                    name = 'Google Domains';
+                                    logo = '/assets/brands/godaddy.png';
+                                }
+
+                                return (
+                                    <div className="col-md-6" key={index}>
+                                        <div className="card mb-3">
+                                            <div className="card-body">
+                                                <div className="card-title with-elements">
+                                                    <h5 className="m-0 mr-2">{`${ domain.nickname }`}</h5>
+                                                    <div className="card-title-elements ml-md-auto">
+
+                                                        {this.accountOptions(domain.uid)}
+                                                    </div>
+                                                </div>
+                                                <div className="d-flex justify-content-start">
+                                                    <img src={`${logo}`} alt={"Godaddy"} style={{height: "100px"}}/>
+                                                    <div className="flex ml-3">
+                                                        <h4 className="card-title">{`${domain.nickname}`}</h4>
+                                                        <div className="card-subtitle text-muted">
+                                                            {`${ name }`}
+                                                        </div>
+                                                        <a className={"mt-2"} href={"/domains/" + domain.uid}
+                                                           style={{fontSize: ".8rem"}}>View</a>
+                                                    </div>
+                                                </div>
+                                                <p className="card-text">Lorem ipsum dolor sit amet, idque nostro eirmod
+                                                    qui at.</p>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                )
+                            })}
+
+                        </div>
+                        <div>
+                            {this.state.domains.map((domain, index) => {
+                                return (
+                                    <EditDomainsAccountsModal updateDomains={this.updateDomains.bind(this)}
+                                                              domain={domain} key={index}/>
+                                );
+                            })}
+                            {this.state.domains.map((domain, index) => {
+                                return (
+                                    <DeleteDomainsAccountsModal updateDomains={this.updateDomains.bind(this)}
+                                                                domain={domain} key={index}/>
+                                );
+                            })}
+
+                        </div>
 
                     </div>
 
-                </div>
-
-            )
+                )
+            } else {
+                return (
+                    <div>
+                        <p>Loading...</p>
+                    </div>
+                )
+            }
         } else {
             return (
-                <div>
-                    <p>Loading...</p>
-                </div>
+                <ErrorComponent/>
             )
         }
     }

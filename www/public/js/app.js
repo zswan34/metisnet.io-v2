@@ -55717,6 +55717,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./errors/ErrorComponent */ "./resources/js/components/errors/ErrorComponent.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55734,6 +55735,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -55825,9 +55827,7 @@ function (_Component) {
   }, {
     key: "errorHasOccurred",
     value: function errorHasOccurred() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "text-danger"
-      }, "Oops.. An error occurred..."));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null);
     }
   }, {
     key: "buyDomainButton",
@@ -56137,93 +56137,93 @@ function (_Component) {
     value: function render() {
       var _this6 = this;
 
-      if (this.state.hasError) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null);
-      }
+      if (!this.state.hasError) {
+        if (this.state.isLoaded) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
+            className: "breadcrumb"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            className: "breadcrumb-item"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+            href: "#"
+          }, "Domains"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+            className: "d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Domain Name Servers"), this.userHasPermission('add domain account') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            type: "button",
+            className: "btn d-block btn-primary rounded-pill waves-effect",
+            "data-toggle": "modal",
+            "data-target": "#create-domain-account"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "ion ion-md-add"
+          }), "\xA0 Add Account") : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "row"
+          }, this.state.domains.map(function (domain, index) {
+            var name = '';
+            var logo = '';
 
-      if (this.state.isLoaded) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
-          className: "breadcrumb"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "breadcrumb-item"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "#"
-        }, "Domains"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-          className: "d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Domain Name Servers"), this.userHasPermission('add domain account') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          type: "button",
-          className: "btn d-block btn-primary rounded-pill waves-effect",
-          "data-toggle": "modal",
-          "data-target": "#create-domain-account"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "ion ion-md-add"
-        }), "\xA0 Add Account") : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row"
-        }, this.state.domains.map(function (domain, index) {
-          var name = '';
-          var logo = '';
-
-          if (domain.type === 'godaddy') {
-            name = 'Go Daddy';
-            logo = '/assets/brands/godaddy.png';
-          }
-
-          if (domain.type === 'google') {
-            name = 'Google Domains';
-            logo = '/assets/brands/godaddy.png';
-          }
-
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "col-md-6",
-            key: index
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "card mb-3"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "card-body"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "card-title with-elements"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-            className: "m-0 mr-2"
-          }, "".concat(domain.nickname)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "card-title-elements ml-md-auto"
-          }, _this6.accountOptions(domain.uid))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "d-flex justify-content-start"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-            src: "".concat(logo),
-            alt: "Godaddy",
-            style: {
-              height: "100px"
+            if (domain.type === 'godaddy') {
+              name = 'Go Daddy';
+              logo = '/assets/brands/godaddy.png';
             }
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "flex ml-3"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-            className: "card-title"
-          }, "".concat(domain.nickname)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "card-subtitle text-muted"
-          }, "".concat(name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-            className: "mt-2",
-            href: "/domains/" + domain.uid,
-            style: {
-              fontSize: ".8rem"
+
+            if (domain.type === 'google') {
+              name = 'Google Domains';
+              logo = '/assets/brands/godaddy.png';
             }
-          }, "View"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-            className: "card-text"
-          }, "Lorem ipsum dolor sit amet, idque nostro eirmod qui at."))));
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.domains.map(function (domain, index) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_EditDomainsAccountsModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            updateDomains: _this6.updateDomains.bind(_this6),
-            domain: domain,
-            key: index
-          });
-        }), this.state.domains.map(function (domain, index) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_DeleteDomainsAccountsModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
-            updateDomains: _this6.updateDomains.bind(_this6),
-            domain: domain,
-            key: index
-          });
-        })));
+
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "col-md-6",
+              key: index
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "card mb-3"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "card-body"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "card-title with-elements"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+              className: "m-0 mr-2"
+            }, "".concat(domain.nickname)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "card-title-elements ml-md-auto"
+            }, _this6.accountOptions(domain.uid))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "d-flex justify-content-start"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+              src: "".concat(logo),
+              alt: "Godaddy",
+              style: {
+                height: "100px"
+              }
+            }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "flex ml-3"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+              className: "card-title"
+            }, "".concat(domain.nickname)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "card-subtitle text-muted"
+            }, "".concat(name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+              className: "mt-2",
+              href: "/domains/" + domain.uid,
+              style: {
+                fontSize: ".8rem"
+              }
+            }, "View"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+              className: "card-text"
+            }, "Lorem ipsum dolor sit amet, idque nostro eirmod qui at."))));
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.domains.map(function (domain, index) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_EditDomainsAccountsModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+              updateDomains: _this6.updateDomains.bind(_this6),
+              domain: domain,
+              key: index
+            });
+          }), this.state.domains.map(function (domain, index) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_DeleteDomainsAccountsModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              updateDomains: _this6.updateDomains.bind(_this6),
+              domain: domain,
+              key: index
+            });
+          })));
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loading..."));
+        }
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loading..."));
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null);
       }
     }
   }]);
@@ -56364,7 +56364,7 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ServerMonitors).call(this, props));
     _this.state = {
-      error: null,
+      errors: null,
       isFetching: false,
       hasError: false,
       isLoaded: false,
@@ -56394,7 +56394,7 @@ function (_Component) {
       }) // Catch any errors we hit and update the app
       ["catch"](function (error) {
         return _this2.setState({
-          error: error,
+          errors: error,
           isLoading: false,
           hasError: true
         });
@@ -56414,126 +56414,132 @@ function (_Component) {
     key: "render",
     value: function render() {
       if (!this.state.hasError) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "h-100"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "d-flex justify-content-between align-items-center mb-5"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-          className: "font-weight-light mb-2"
-        }, "Server Statistics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "badge badge-success font-weight-bold"
-        }, "RUNNING")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          className: "btn btn-lg btn-default",
-          onClick: this.refreshData()
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "ion ion-md-refresh text-primary"
-        }), " Refresh")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row"
-        }, this.state.monitors.map(function (monitor, index) {
-          var time = moment.unix(monitor.create_datetime).format("dddd, MMMM Do YYYY");
-          var downTime = 100 - Math.floor(monitor.all_time_uptime_ratio);
-          var iconStyle = 'ion ion-ios-trending-up';
-          var textColor = 'text-success';
-
-          if (monitor.status !== 2) {
-            backgroundColor = 'bg-danger';
-            iconStyle = 'ion ion-ios-trending-down';
-          }
-
+        if (this.state.isLoaded) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "col-sm-6 col-md-4 col-lg-6 col-xl-4",
-            key: index
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-            href: '/servers/' + monitor.id
+            className: "h-100"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "server-item border-light ui-bordered p-3 mt-2 bg-light shadow-sm"
+            className: "d-flex justify-content-between align-items-center mb-5"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+            className: "font-weight-light mb-2"
+          }, "Server Statistics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "badge badge-success font-weight-bold"
+          }, "RUNNING")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            className: "btn btn-lg btn-default",
+            onClick: this.refreshData()
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "ion ion-md-refresh text-primary"
+          }), " Refresh")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "row"
+          }, this.state.monitors.map(function (monitor, index) {
+            var time = moment.unix(monitor.create_datetime).format("dddd, MMMM Do YYYY");
+            var downTime = 100 - Math.floor(monitor.all_time_uptime_ratio);
+            var iconStyle = 'ion ion-ios-trending-up';
+            var textColor = 'text-success';
+
+            if (monitor.status !== 2) {
+              backgroundColor = 'bg-danger';
+              iconStyle = 'ion ion-ios-trending-down';
+            }
+
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "col-sm-6 col-md-4 col-lg-6 col-xl-4",
+              key: index
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+              href: '/servers/' + monitor.id
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "server-item border-light ui-bordered p-3 mt-2 bg-light shadow-sm"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "media align-items-center"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "media-body small mr-3"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "font-weight-semibold"
+            }, "".concat(monitor.friendly_name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "text-xs text-muted"
+            }, "".concat(monitor.url)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "text-xs text-muted mb-3"
+            }, "".concat(time)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "mb-1"
+            }, "Up time: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+              className: "d-inline text-success"
+            }, "%", "".concat(Math.floor(monitor.all_time_uptime_ratio)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "pe-7s-angle-up text-success font-weight-bold"
+            }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "mb-1"
+            }, "Down time: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+              className: "d-inline text-danger"
+            }, "%", "".concat(downTime), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "pe-7s-angle-down text-danger font-weight-bold"
+            })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "d-flex align-items-center position-relative",
+              style: {
+                height: '60px',
+                width: '60px'
+              }
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "w-100 position-absolute",
+              style: {
+                height: '60px',
+                top: '0'
+              }
+            }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "w-100 text-center font-weight-bold text-center " + textColor
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "p-3 d-block bg-success",
+              style: {
+                borderRadius: '100%',
+                width: '40px',
+                height: '40px'
+              }
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "text-white d-block " + iconStyle,
+              style: {
+                fontSize: '24px',
+                margin: '-8px'
+              }
+            }))))))));
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "col-sm-6 col-md-4 col-lg-6 col-xl-4"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "server-item border-light ui-bordered p-3 mt-2 bg-light shadow-sm",
+            style: {
+              border: '3px dashed #cdcdcd'
+            }
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "media align-items-center"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "media-body small mr-3"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "font-weight-semibold"
-          }, "".concat(monitor.friendly_name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "text-xs text-muted"
-          }, "".concat(monitor.url)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "text-xs text-muted mb-3"
-          }, "".concat(time)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "mb-1"
-          }, "Up time: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-            className: "d-inline text-success"
-          }, "%", "".concat(Math.floor(monitor.all_time_uptime_ratio)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-            className: "pe-7s-angle-up text-success font-weight-bold"
-          }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "mb-1"
-          }, "Down time: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-            className: "d-inline text-danger"
-          }, "%", "".concat(downTime), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-            className: "pe-7s-angle-down text-danger font-weight-bold"
-          })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "d-flex align-items-center position-relative",
-            style: {
-              height: '60px',
-              width: '60px'
-            }
+            className: "d-flex justify-content-center"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "w-100 position-absolute",
+            className: "text-center m-3",
             style: {
-              height: '60px',
-              top: '0'
-            }
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "w-100 text-center font-weight-bold text-center " + textColor
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "p-3 d-block bg-success",
-            style: {
+              width: '45px',
+              height: '45px',
               borderRadius: '100%',
-              width: '40px',
-              height: '40px'
+              border: '1px dashed #cdcdcd'
             }
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-            className: "text-white d-block " + iconStyle,
+            className: "ion ion-md-add",
             style: {
-              fontSize: '24px',
-              margin: '-8px'
+              fontSize: '18px',
+              color: '#888',
+              marginTop: '13px'
             }
-          }))))))));
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-sm-6 col-md-4 col-lg-6 col-xl-4"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "server-item border-light ui-bordered p-3 mt-2 bg-light shadow-sm",
-          style: {
-            border: '3px dashed #cdcdcd'
-          }
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "media align-items-center"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "media-body small mr-3"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "d-flex justify-content-center"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "text-center m-3",
-          style: {
-            width: '45px',
-            height: '45px',
-            borderRadius: '100%',
-            border: '1px dashed #cdcdcd'
-          }
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "ion ion-md-add",
-          style: {
-            fontSize: '18px',
-            color: '#888',
-            marginTop: '13px'
-          }
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "d-flex justify-content-center"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "text-center"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: "m-1"
-        }, "Add Server")))))))));
+          }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "d-flex justify-content-center"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "text-center"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            className: "m-1"
+          }, "Add Server")))))))));
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loading..."));
+        }
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          errorDetails: this.state.errors
+        });
       }
     }
   }]);
@@ -56738,13 +56744,15 @@ function (_Component) {
   _createClass(ErrorComponent, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-flex justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "bg-danger"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unable to load component"))));
+        className: "bg-danger col-md-4 p-3 rounded-lg shadow-lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-white"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "lnr lnr-warning"
+      }), "\xA0 An error occurred. Unable to load component."))));
     }
   }]);
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import ErrorComponent from "./errors/ErrorComponent";
 
 const AUTH_USER_URL = '/api/v1/auth/';
 const SERVER_SERVICE_URL = '/api/v1/domains/';
@@ -62,9 +63,7 @@ export default class DomainAccount extends Component {
 
     errorHasOccurred() {
         return (
-            <div>
-                <p className="text-danger">Oops.. An error occurred...</p>
-            </div>
+            <ErrorComponent/>
         )
     }
 
