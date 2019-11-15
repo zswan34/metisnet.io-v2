@@ -55988,6 +55988,7 @@ function (_Component) {
       hasError: false,
       isLoaded: false,
       authUser: [],
+      permissions: [],
       domains: [],
       domain: []
     };
@@ -56054,7 +56055,8 @@ function (_Component) {
       }) // ...then we update the users state
       .then(function (result) {
         return _this4.setState({
-          authUser: result.auth
+          authUser: result.auth,
+          permissions: result.auth.permissions
         });
       })["catch"](function (error) {
         return _this4.setState({
@@ -56069,6 +56071,7 @@ function (_Component) {
     value: function componentDidMount() {
       var _this5 = this;
 
+      this.fetchAuthUser();
       this.fetchDomains();
       $('.modal').on('hidden.bs.modal', function () {//this.fetchDomains();
       });
@@ -56091,11 +56094,10 @@ function (_Component) {
   }, {
     key: "userHasPermission",
     value: function userHasPermission(permission) {
-      var auth = this.state.authUser;
       var match = false;
 
-      for (var i = 0; i < auth.permissions.length; i++) {
-        if (auth.permissions[i].name === permission) {
+      for (var i = 0; i < this.state.permissions.length; i++) {
+        if (this.state.permissions[i].name === permission) {
           match = true;
         }
       }
@@ -56326,6 +56328,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./errors/ErrorComponent */ "./resources/js/components/errors/ErrorComponent.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -56343,6 +56346,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -56529,11 +56533,7 @@ function (_Component) {
           className: "m-1"
         }, "Add Server")))))))));
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "bg-danger"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unable to connect")));
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null);
       }
     }
   }]);

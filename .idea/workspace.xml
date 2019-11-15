@@ -26,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DomainAccounts.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DomainAccounts.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="13">
-              <caret line="48" column="35" lean-forward="true" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
+            <state relative-caret-position="289">
+              <caret line="72" column="29" lean-forward="false" selection-start-line="72" selection-start-column="29" selection-end-line="72" selection-end-column="29" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -44,6 +44,18 @@
             <state relative-caret-position="322">
               <caret line="14" column="22" lean-forward="false" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerMonitors.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/resources/js/components/ServerMonitors.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="262">
+              <caret line="139" column="13" lean-forward="true" selection-start-line="139" selection-start-column="13" selection-end-line="139" selection-end-column="13" />
+              <folding>
+                <element signature="e#506#1161#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -283,7 +295,6 @@
         <option value="$PROJECT_DIR$/www/app/Http/Controllers/ServerController.php" />
         <option value="$PROJECT_DIR$/www/resources/views/server.blade.php" />
         <option value="$PROJECT_DIR$/www/resources/views/servers.blade.php" />
-        <option value="$PROJECT_DIR$/www/resources/js/components/ServerMonitors.js" />
         <option value="$PROJECT_DIR$/www/app/Libs/ServerStatus.php" />
         <option value="$PROJECT_DIR$/www/resources/js/components/SingleServerMonitor.js" />
         <option value="$PROJECT_DIR$/www/app/Http/Controllers/UserController.php" />
@@ -321,6 +332,7 @@
         <option value="$PROJECT_DIR$/www/app/Libs/GoDaddy.php" />
         <option value="$PROJECT_DIR$/www/resources/js/components/errors/ErrorComponent.js" />
         <option value="$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js" />
+        <option value="$PROJECT_DIR$/www/resources/js/components/ServerMonitors.js" />
       </list>
     </option>
   </component>
@@ -714,12 +726,12 @@
       <workItem from="1572832040674" duration="55152000" />
       <workItem from="1573091545231" duration="52803000" />
       <workItem from="1573245456911" duration="62319000" />
-      <workItem from="1573698305506" duration="35950000" />
+      <workItem from="1573698305506" duration="36377000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="206224000" />
+    <option name="totallyTimeSpent" value="206651000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1440" height="877" extended-state="6" />
@@ -923,16 +935,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="310">
           <caret line="17" column="47" lean-forward="false" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/resources/js/components/ServerMonitors.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="64" column="59" lean-forward="false" selection-start-line="64" selection-start-column="59" selection-end-line="64" selection-end-column="59" />
-          <folding>
-            <element signature="e#452#1107#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1277,6 +1279,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="72" column="29" lean-forward="false" selection-start-line="72" selection-start-column="29" selection-end-line="72" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/resources/js/components/errors/ErrorComponent.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
@@ -1285,12 +1297,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js">
+    <entry file="file://$PROJECT_DIR$/www/resources/js/components/ServerMonitors.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13">
-          <caret line="48" column="35" lean-forward="true" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
+        <state relative-caret-position="262">
+          <caret line="139" column="13" lean-forward="true" selection-start-line="139" selection-start-column="13" selection-end-line="139" selection-end-column="13" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#506#1161#0" expanded="false" />
           </folding>
         </state>
       </provider>

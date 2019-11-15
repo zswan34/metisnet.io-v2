@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import ErrorComponent from "./errors/ErrorComponent";
 
 const SERVER_SERVICE_URL = '/api/v1/servers';
 
@@ -134,11 +135,7 @@ export default class ServerMonitors extends Component {
                 );
             } else {
                 return (
-                    <div className="row">
-                        <div className="bg-danger">
-                            <p>Unable to connect</p>
-                        </div>
-                    </div>
+                    <ErrorComponent/>
                 );
             }
     }

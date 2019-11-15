@@ -16,6 +16,7 @@ export default class DomainAccounts extends Component {
             hasError: false,
             isLoaded: false,
             authUser: [],
+            permissions: [],
             domains: [],
             domain: []
         };
@@ -61,13 +62,15 @@ export default class DomainAccounts extends Component {
             // ...then we update the users state
             .then(result =>
                 this.setState({
-                    authUser: result.auth
+                    authUser: result.auth,
+                    permissions: result.auth.permissions
                 })
             )
             .catch(error => this.setState({error, isLoaded: false, hasError: true}));
     }
 
     componentDidMount() {
+        this.fetchAuthUser();
         this.fetchDomains();
 
         $('.modal').on('hidden.bs.modal', function () {
@@ -93,10 +96,9 @@ export default class DomainAccounts extends Component {
     }
 
     userHasPermission(permission) {
-        const auth = this.state.authUser;
          let match = false;
-            for (let i = 0; i < auth.permissions.length; i++) {
-                if (auth.permissions[i].name === permission) {
+            for (let i = 0; i < this.state.permissions.length; i++) {
+                if (this.state.permissions[i].name === permission) {
                     match = true;
                 }
             }
