@@ -55961,7 +55961,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 var AUTH_USER_URL = '/api/v1/auth/';
-var SERVER_SERVICE_URL = '/api/v1/domains';
+var SERVER_SERVICE_URL = '/api/v1/domains/';
 
 var DomainAccounts =
 /*#__PURE__*/
@@ -55978,8 +55978,9 @@ function (_Component) {
       error: null,
       hasError: false,
       isLoaded: false,
-      authuser: [],
-      dnsItems: []
+      authUser: [],
+      domains: [],
+      domain: []
     };
     return _this;
   }
@@ -56010,18 +56011,42 @@ function (_Component) {
       });
     }
   }, {
-    key: "fetchAuthUser",
-    value: function fetchAuthUser() {
+    key: "fetchDomainById",
+    value: function fetchDomainById(uid) {
       var _this3 = this;
 
-      fetch(AUTH_USER_URL).then(function (response) {
+      fetch(SERVER_SERVICE_URL + uid) // We get the API response and receive data in JSON format...
+      .then(function (response) {
+        return response.json();
+      }) // ...then we update the users state
+      .then(function (result) {
+        return _this3.setState({
+          isLoaded: true,
+          domain: result,
+          hasError: false
+        });
+      }) // Catch any errors we hit and update the app
+      ["catch"](function (error) {
+        return _this3.setState({
+          error: error,
+          isLoaded: false,
+          hasError: true
+        });
+      });
+    }
+  }, {
+    key: "fetchAuthUser",
+    value: function fetchAuthUser() {
+      var _this4 = this;
+
+      axios.get(AUTH_USER_URL).then(function (response) {
         return response.json();
       }).then(function (result) {
-        return _this3.setState({
+        return _this4.setState({
           authUser: result.auth
         });
       })["catch"](function (error) {
-        return _this3.setState({
+        return _this4.setState({
           error: error,
           isLoaded: false,
           hasError: true
@@ -56031,7 +56056,7 @@ function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.fetchAuthUser();
       this.fetchDomains();
@@ -56047,7 +56072,7 @@ function (_Component) {
           if (data.success) {
             modal.modal('hide');
 
-            _this4.fetchDomains();
+            _this5.fetchDomains();
           }
         });
       });
@@ -56069,7 +56094,46 @@ function (_Component) {
   }, {
     key: "editAccount",
     value: function editAccount(uid) {
+      this.fetchDomainById(uid);
+
       if (this.userHasPermission('edit domain account')) {}
+    }
+  }, {
+    key: "editAccountModal",
+    value: function editAccountModal() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal",
+        id: "edit-domain-account-modal",
+        tabIndex: "-1",
+        role: "dialog"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-dialog",
+        role: "document"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        className: "modal-title"
+      }, "Modal title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        "data-dismiss": "modal",
+        "aria-label": "Close"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Modal body text goes here.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-primary"
+      }, "Save changes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-secondary",
+        "data-dismiss": "modal"
+      }, "Close"))))));
     }
   }, {
     key: "deleteAccount",
@@ -56086,7 +56150,9 @@ function (_Component) {
       }, canEdit ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.editAccount(uid),
         type: "button",
-        className: "btn px-2 btn-xs btn-warning mx-1"
+        className: "btn px-2 btn-xs btn-warning mx-1",
+        "data-toggle": "modal",
+        "data-target": "#edit-domain-account-modal"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "ion ion-md-eye"
       }), " Edit") : null, canDelete ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -56100,7 +56166,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
 
       if (this.state.isLoaded) {
         console.log(this.state);
@@ -56148,7 +56214,7 @@ function (_Component) {
             className: "m-0 mr-2"
           }, "".concat(domain.nickname)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "card-title-elements ml-md-auto"
-          }, _this5.accountOptions(domain.uid))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          }, _this6.accountOptions(domain.uid))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "d-flex justify-content-start"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
             src: "".concat(logo),
@@ -56171,7 +56237,7 @@ function (_Component) {
           }, "View"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
             className: "card-text"
           }, "Lorem ipsum dolor sit amet, idque nostro eirmod qui at."))));
-        })));
+        })), this.editAccountModal());
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loading..."));
       }

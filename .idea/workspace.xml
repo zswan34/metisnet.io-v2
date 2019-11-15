@@ -76,10 +76,23 @@
       <file leaf-file-name="DomainAccounts.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="122" column="54" lean-forward="true" selection-start-line="122" selection-start-column="54" selection-end-line="122" selection-end-column="54" />
+            <state relative-caret-position="195">
+              <caret line="54" column="20" lean-forward="false" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EditDomainsAccountsModal.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/resources/js/components/modals/EditDomainsAccountsModal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="13" column="12" lean-forward="false" selection-start-line="13" selection-start-column="12" selection-end-line="74" selection-end-column="18" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+                <element signature="e#312#4401#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -98,8 +111,8 @@
       <file leaf-file-name="main.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/resources/views/pages/domains/main.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+            <state relative-caret-position="1495">
+              <caret line="65" column="22" lean-forward="false" selection-start-line="65" selection-start-column="22" selection-end-line="65" selection-end-column="22" />
               <folding>
                 <element signature="e#731#738#1#HTML" expanded="true" />
                 <element signature="e#2670#2692#0#HTML" expanded="true" />
@@ -149,16 +162,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AuthUser.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/resources/js/components/AuthUser.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="30" column="4" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -170,7 +173,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>rtl</find>
       <find>href-material</find>
       <find>static</find>
       <find>/settings/layout/navbar-fixed</find>
@@ -192,23 +194,25 @@
       <find>Aloha\Twilio</find>
       <find>datat</find>
       <find>select2</find>
-      <find>domain</find>
       <find>class</find>
-      <find>class=</find>
       <find>tabindex=</find>
       <find>timezon</find>
       <find>dns</find>
       <find>getDomainDnsItemsApi</find>
       <find>className</find>
+      <find>for=</find>
+      <find>domain</find>
+      <find>class=</find>
     </findStrings>
     <replaceStrings>
       <replace>', '</replace>
       <replace>href_material</replace>
       <replace>'. $element.'</replace>
       <replace>className</replace>
-      <replace>className=</replace>
       <replace>tabIndex=</replace>
+      <replace>htmlFor=</replace>
       <replace>class</replace>
+      <replace>className=</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/appworks</dir>
@@ -220,7 +224,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/www/resources/js/moment-with-locales.js" />
         <option value="$PROJECT_DIR$/www/webpack.mix.js" />
         <option value="$PROJECT_DIR$/www/public/assets/js/moment-timezone.min.js" />
         <option value="$PROJECT_DIR$/www/app/Observers/UserObserver.php" />
@@ -270,6 +273,7 @@
         <option value="$PROJECT_DIR$/www/resources/js/utils/Utils.js" />
         <option value="$PROJECT_DIR$/www/database/seeds/RolesAndPermissionsSeeder.php" />
         <option value="$PROJECT_DIR$/www/resources/js/components/DnsItems.js" />
+        <option value="$PROJECT_DIR$/www/resources/js/components/modals/EditDomainsAccountsModal.js" />
         <option value="$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js" />
       </list>
     </option>
@@ -528,6 +532,14 @@
               <item name="metisnet.io-v2" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="www" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="components" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="metisnet.io-v2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="metisnet.io-v2" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="www" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -640,12 +652,12 @@
       <workItem from="1572832040674" duration="55152000" />
       <workItem from="1573091545231" duration="52803000" />
       <workItem from="1573245456911" duration="62319000" />
-      <workItem from="1573698305506" duration="8021000" />
+      <workItem from="1573698305506" duration="13122000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="178295000" />
+    <option name="totallyTimeSpent" value="183396000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
@@ -709,14 +721,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/AccountController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="19" column="29" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/resources/sass/app.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1055,6 +1059,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/resources/js/utils/Utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="966">
+          <caret line="42" column="21" lean-forward="false" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/resources/js/components/DnsItems.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="123" column="70" lean-forward="false" selection-start-line="123" selection-start-column="70" selection-end-line="123" selection-end-column="70" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#861#1684#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/database/seeds/RolesAndPermissionsSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="32" column="36" lean-forward="false" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/resources/views/layouts/includes/sidenav.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
@@ -1079,8 +1110,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/resources/views/pages/domains/main.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+        <state relative-caret-position="1495">
+          <caret line="65" column="22" lean-forward="false" selection-start-line="65" selection-start-column="22" selection-end-line="65" selection-end-column="22" />
           <folding>
             <element signature="e#731#738#1#HTML" expanded="true" />
             <element signature="e#2670#2692#0#HTML" expanded="true" />
@@ -1095,37 +1126,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/resources/js/utils/Utils.js">
+    <entry file="file://$PROJECT_DIR$/www/resources/js/components/modals/EditDomainsAccountsModal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="966">
-          <caret line="42" column="21" lean-forward="false" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/database/seeds/RolesAndPermissionsSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="32" column="36" lean-forward="false" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/resources/js/components/DnsItems.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="123" column="70" lean-forward="false" selection-start-line="123" selection-start-column="70" selection-end-line="123" selection-end-column="70" />
+        <state relative-caret-position="299">
+          <caret line="13" column="12" lean-forward="false" selection-start-line="13" selection-start-column="12" selection-end-line="74" selection-end-column="18" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#861#1684#0" expanded="false" />
+            <element signature="e#312#4401#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="122" column="54" lean-forward="true" selection-start-line="122" selection-start-column="54" selection-end-line="122" selection-end-column="54" />
+        <state relative-caret-position="195">
+          <caret line="54" column="20" lean-forward="false" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

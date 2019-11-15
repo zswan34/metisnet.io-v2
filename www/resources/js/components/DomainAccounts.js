@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 const AUTH_USER_URL = '/api/v1/auth/';
-const SERVER_SERVICE_URL = '/api/v1/domains';
+const SERVER_SERVICE_URL = '/api/v1/domains/';
 
 export default class DomainAccounts extends Component {
     constructor(props) {
@@ -11,8 +11,9 @@ export default class DomainAccounts extends Component {
             error: null,
             hasError: false,
             isLoaded: false,
-            authuser: [],
-            dnsItems: []
+            authUser: [],
+            domains: [],
+            domain: []
         };
     }
 
@@ -33,8 +34,24 @@ export default class DomainAccounts extends Component {
             .catch(error => this.setState({ error, isLoaded: false, hasError: true }));
     }
 
+    fetchDomainById(uid) {
+        fetch(SERVER_SERVICE_URL + uid)
+            // We get the API response and receive data in JSON format...
+            .then(response => response.json())
+            // ...then we update the users state
+            .then(result =>
+                this.setState({
+                    isLoaded: true,
+                    domain: result,
+                    hasError: false
+                })
+            )
+            // Catch any errors we hit and update the app
+            .catch(error => this.setState({ error, isLoaded: false, hasError: true }));
+    }
+
     fetchAuthUser() {
-        fetch(AUTH_USER_URL)
+        axios.get(AUTH_USER_URL)
             .then(response => response.json())
             .then(result =>
                 this.setState({
@@ -79,9 +96,36 @@ export default class DomainAccounts extends Component {
     }
 
     editAccount(uid) {
+        this.fetchDomainById(uid);
         if (this.userHasPermission('edit domain account')) {
 
         }
+    }
+
+    editAccountModal() {
+        return (
+            <div>
+                <div className="modal" id={"edit-domain-account-modal"} tabIndex="-1" role="dialog">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">Modal title</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <p>Modal body text goes here.</p>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-primary">Save changes</button>
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
     }
 
     deleteAccount(uid) {
@@ -98,7 +142,9 @@ export default class DomainAccounts extends Component {
         return (
             <div className={"d-block"}>
                 { canEdit ? (
-                    <button onClick={this.editAccount(uid)} type={"button"} className={"btn px-2 btn-xs btn-warning mx-1"}>
+                    <button onClick={this.editAccount(uid)} type={"button"}
+                            className={"btn px-2 btn-xs btn-warning mx-1"} data-toggle="modal"
+                            data-target="#edit-domain-account-modal">
                         <span className="ion ion-md-eye"></span> Edit</button>
                 ) : null }
                 { canDelete ? (
@@ -128,6 +174,7 @@ export default class DomainAccounts extends Component {
                         </button>
                         ): null}
                     </h4>
+
                     <div className={"row"}>
                         {this.state.domains.map((domain, index) => {
                             let name = '';
@@ -170,9 +217,11 @@ export default class DomainAccounts extends Component {
                                     </div>
                                 </div>
                             )
-
                         })}
+
                     </div>
+
+                    {this.editAccountModal()}
 
                 </div>
 
