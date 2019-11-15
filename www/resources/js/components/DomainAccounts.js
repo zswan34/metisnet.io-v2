@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import EditDomainsAccountsModal from "./modals/EditDomainsAccountsModal";
 import DeleteDomainsAccountsModal from "./modals/DeleteDomainsAccountsModal";
+import ErrorComponent from "./errors/ErrorComponent";
 
 const AUTH_USER_URL = '/api/v1/auth/';
 const SERVER_SERVICE_URL = '/api/v1/domains/';
@@ -38,6 +39,7 @@ export default class DomainAccounts extends Component {
     }
 
     fetchDomainById(uid) {
+        this.fetchAuthUser();
         fetch(SERVER_SERVICE_URL + uid)
             // We get the API response and receive data in JSON format...
             .then(response => response.json())
@@ -66,7 +68,6 @@ export default class DomainAccounts extends Component {
     }
 
     componentDidMount() {
-        this.fetchAuthUser();
         this.fetchDomains();
 
         $('.modal').on('hidden.bs.modal', function () {
@@ -89,10 +90,6 @@ export default class DomainAccounts extends Component {
                     }
                 })
         });
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextState !== this.state;
     }
 
     userHasPermission(permission) {
@@ -133,6 +130,11 @@ export default class DomainAccounts extends Component {
     }
 
     render() {
+        if (this.state.hasError) {
+            return (
+                <ErrorComponent/>
+            )
+        }
         if (this.state.isLoaded) {
             return (
                 <div>
