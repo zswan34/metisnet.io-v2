@@ -79,7 +79,6 @@ export default class DomainAccounts extends Component {
         form.submit((e) => {
             e.preventDefault();
             let data = form.serialize();
-            let path = form.attr('action');
             axios.post('/domains', data)
                 .then((res) => {
 
@@ -105,19 +104,6 @@ export default class DomainAccounts extends Component {
                 }
             }
             return match;
-    }
-
-    editAccount (uid) {
-        let elm = $("#edit-domain-account-form-" + uid);
-        if (this.userHasPermission('edit domain account')) {
-            console.log(elm);
-        }
-    };
-
-    deleteAccount(uid) {
-        if (this.userHasPermission('delete domain account')) {
-
-        }
     }
 
     accountOptions(uid) {

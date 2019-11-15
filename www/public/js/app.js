@@ -56075,7 +56075,6 @@ function (_Component) {
       form.submit(function (e) {
         e.preventDefault();
         var data = form.serialize();
-        var path = form.attr('action');
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/domains', data).then(function (res) {
           var data = res.data;
 
@@ -56105,20 +56104,6 @@ function (_Component) {
       }
 
       return match;
-    }
-  }, {
-    key: "editAccount",
-    value: function editAccount(uid) {
-      var elm = $("#edit-domain-account-form-" + uid);
-
-      if (this.userHasPermission('edit domain account')) {
-        console.log(elm);
-      }
-    }
-  }, {
-    key: "deleteAccount",
-    value: function deleteAccount(uid) {
-      if (this.userHasPermission('delete domain account')) {}
     }
   }, {
     key: "accountOptions",
