@@ -334,7 +334,7 @@ class AuthController extends Controller
             'auth' => [
                 'user' => $user,
                 'roles' => $user->getRoleNames(),
-                'permissions' => $user->getPermissionsViaRoles()
+                'permissions' => json_decode($user->getPermissionsViaRoles())
             ]
         ];
 

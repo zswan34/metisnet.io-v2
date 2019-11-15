@@ -26,10 +26,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DomainAccounts.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DomainAccounts.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
+            <state relative-caret-position="-216">
               <caret line="72" column="14" lean-forward="false" selection-start-line="72" selection-start-column="14" selection-end-line="72" selection-end-column="14" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -85,6 +85,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="362">
               <caret line="61" column="15" lean-forward="false" selection-start-line="61" selection-start-column="15" selection-end-line="61" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AuthController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/AuthController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="287">
+              <caret line="340" column="5" lean-forward="true" selection-start-line="340" selection-start-column="5" selection-end-line="340" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -248,8 +258,8 @@
       <find>edit-</find>
       <find>delete-account-nickname</find>
       <find>deleteDomainAccountApi</find>
-      <find>getDomainsA</find>
       <find>fetch</find>
+      <find>getDomainsA</find>
     </findStrings>
     <replaceStrings>
       <replace>', '</replace>
@@ -259,8 +269,8 @@
       <replace>tabIndex=</replace>
       <replace>class</replace>
       <replace>htmlFor=</replace>
-      <replace>className=</replace>
       <replace>delete-</replace>
+      <replace>className=</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/appworks</dir>
@@ -315,7 +325,6 @@
         <option value="$PROJECT_DIR$/www/database/seeds/RolesAndPermissionsSeeder.php" />
         <option value="$PROJECT_DIR$/www/resources/js/components/DnsItems.js" />
         <option value="$PROJECT_DIR$/www/resources/js/app.js" />
-        <option value="$PROJECT_DIR$/www/app/Http/Controllers/AuthController.php" />
         <option value="$PROJECT_DIR$/www/app/Libs/GoDaddy.php" />
         <option value="$PROJECT_DIR$/www/routes/web.php" />
         <option value="$PROJECT_DIR$/www/resources/views/pages/domains/main.blade.php" />
@@ -323,6 +332,7 @@
         <option value="$PROJECT_DIR$/www/resources/js/components/modals/DeleteDomainsAccountsModal.js" />
         <option value="$PROJECT_DIR$/www/resources/js/components/modals/EditDomainsAccountsModal.js" />
         <option value="$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js" />
+        <option value="$PROJECT_DIR$/www/app/Http/Controllers/AuthController.php" />
       </list>
     </option>
   </component>
@@ -716,12 +726,12 @@
       <workItem from="1572832040674" duration="55152000" />
       <workItem from="1573091545231" duration="52803000" />
       <workItem from="1573245456911" duration="62319000" />
-      <workItem from="1573698305506" duration="33603000" />
+      <workItem from="1573698305506" duration="34249000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="203877000" />
+    <option name="totallyTimeSpent" value="204523000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1440" height="877" extended-state="6" />
@@ -1108,14 +1118,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/AuthController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="337" column="13" lean-forward="false" selection-start-line="337" selection-start-column="13" selection-end-line="337" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/database/seeds/RolesAndPermissionsSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
@@ -1261,14 +1263,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/DomainController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="175" column="13" lean-forward="false" selection-start-line="175" selection-start-column="13" selection-end-line="175" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/resources/js/components/modals/EditDomainsAccountsModal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -1289,11 +1283,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
+        <state relative-caret-position="-216">
           <caret line="72" column="14" lean-forward="false" selection-start-line="72" selection-start-column="14" selection-end-line="72" selection-end-column="14" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/DomainController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="175" column="13" lean-forward="false" selection-start-line="175" selection-start-column="13" selection-end-line="175" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/AuthController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="340" column="5" lean-forward="true" selection-start-line="340" selection-start-column="5" selection-end-line="340" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
