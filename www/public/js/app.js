@@ -55940,6 +55940,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _modals_EditDomainsAccountsModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modals/EditDomainsAccountsModal */ "./resources/js/components/modals/EditDomainsAccountsModal.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55957,6 +55960,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
 
 
 
@@ -56039,9 +56044,10 @@ function (_Component) {
     value: function fetchAuthUser() {
       var _this4 = this;
 
-      axios.get(AUTH_USER_URL).then(function (response) {
+      fetch(AUTH_USER_URL).then(function (response) {
         return response.json();
-      }).then(function (result) {
+      }) // ...then we update the users state
+      .then(function (result) {
         return _this4.setState({
           authUser: result.auth
         });
@@ -56060,13 +56066,16 @@ function (_Component) {
 
       this.fetchAuthUser();
       this.fetchDomains();
+      $('.modal').on('hidden.bs.modal', function () {
+        this.fetchDomains();
+      });
       var form = $("#create-account-form");
       var modal = $("#create-domain-account");
       form.submit(function (e) {
         e.preventDefault();
         var data = form.serialize();
         var path = form.attr('action');
-        axios.post('/domains', data).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/domains', data).then(function (res) {
           var data = res.data;
 
           if (data.success) {
@@ -56078,13 +56087,18 @@ function (_Component) {
       });
     }
   }, {
+    key: "shouldComponentUpdate",
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      return nextState !== this.state;
+    }
+  }, {
     key: "userHasPermission",
     value: function userHasPermission(permission) {
-      var permissions = this.state.authUser.permissions;
+      var auth = this.state.authUser;
       var match = false;
 
-      for (var i = 0; i < permissions.length; i++) {
-        if (permissions[i].name === permission) {
+      for (var i = 0; i < auth.permissions.length; i++) {
+        if (auth.permissions[i].name === permission) {
           match = true;
         }
       }
@@ -56094,46 +56108,11 @@ function (_Component) {
   }, {
     key: "editAccount",
     value: function editAccount(uid) {
-      this.fetchDomainById(uid);
+      var elm = $("#edit-domain-account-form-" + uid);
 
-      if (this.userHasPermission('edit domain account')) {}
-    }
-  }, {
-    key: "editAccountModal",
-    value: function editAccountModal() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal",
-        id: "edit-domain-account-modal",
-        tabIndex: "-1",
-        role: "dialog"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-dialog",
-        role: "document"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-header"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-        className: "modal-title"
-      }, "Modal title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: "close",
-        "data-dismiss": "modal",
-        "aria-label": "Close"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        "aria-hidden": "true"
-      }, "\xD7"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Modal body text goes here.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-footer"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-primary"
-      }, "Save changes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-secondary",
-        "data-dismiss": "modal"
-      }, "Close"))))));
+      if (this.userHasPermission('edit domain account')) {
+        console.log(elm);
+      }
     }
   }, {
     key: "deleteAccount",
@@ -56148,15 +56127,13 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-block"
       }, canEdit ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.editAccount(uid),
         type: "button",
         className: "btn px-2 btn-xs btn-warning mx-1",
         "data-toggle": "modal",
-        "data-target": "#edit-domain-account-modal"
+        "data-target": "#edit-domain-account-modal-" + uid
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "ion ion-md-eye"
       }), " Edit") : null, canDelete ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.deleteAccount(uid),
         type: "button",
         className: "btn btn-danger btn-xs px-2 mx-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -56169,7 +56146,6 @@ function (_Component) {
       var _this6 = this;
 
       if (this.state.isLoaded) {
-        console.log(this.state);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
           className: "breadcrumb"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -56237,7 +56213,13 @@ function (_Component) {
           }, "View"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
             className: "card-text"
           }, "Lorem ipsum dolor sit amet, idque nostro eirmod qui at."))));
-        })), this.editAccountModal());
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.domains.map(function (domain, index) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_EditDomainsAccountsModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            fetchDomains: _this6.fetchDomains(),
+            domain: domain,
+            key: index
+          });
+        })));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loading..."));
       }
@@ -56707,6 +56689,187 @@ function (_Component) {
 if (document.getElementById('single-server-wrapper')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SingleServerMonitors, null), document.getElementById('single-server-wrapper'));
 }
+
+/***/ }),
+
+/***/ "./resources/js/components/modals/EditDomainsAccountsModal.js":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/modals/EditDomainsAccountsModal.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return EditDomainsAccountsModal; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var EditDomainsAccountsModal =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(EditDomainsAccountsModal, _Component);
+
+  function EditDomainsAccountsModal(props) {
+    var _this;
+
+    _classCallCheck(this, EditDomainsAccountsModal);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(EditDomainsAccountsModal).call(this, props));
+    _this.state = {
+      domain: []
+    };
+    return _this;
+  }
+
+  _createClass(EditDomainsAccountsModal, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        domain: this.props.domain,
+        callback: this.props.callback
+      });
+    }
+  }, {
+    key: "shouldComponentUpdate",
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      return nextState !== this.state;
+    }
+  }, {
+    key: "editAccount",
+    value: function editAccount(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      var elm = $(event.target);
+      var data = $(event.target).serialize();
+      axios.post('/api/v1' + $(event.target).attr('action'), data).then(function (res) {
+        if (res.data.success) {
+          elm.parent().parent().modal('hide');
+
+          _this2.props.fetchDomains();
+        }
+      })["catch"](function (err) {//
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal fade",
+        id: "edit-domain-account-modal-" + this.props.domain.uid,
+        tabIndex: "-1",
+        role: "dialog",
+        "aria-labelledby": "edit-exampleModalLabel",
+        "aria-hidden": "true"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-dialog",
+        role: "document"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        "data-uid": this.props.domain.uid,
+        id: "edit-domain-account-form" + this.props.domain.uid,
+        action: "/domains/" + this.props.domain.uid + "/edit",
+        method: "post",
+        onSubmit: this.editAccount.bind(this)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        className: "modal-title",
+        id: "edit-exampleModalLabel"
+      }, "Edit this account"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        "data-dismiss": "modal",
+        "aria-label": "Close"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "edit-account-nickname"
+      }, "Nickname"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        id: "edit-account-nickname",
+        name: "edit-account-nickname",
+        placeholder: "Nickname",
+        defaultValue: "".concat(this.props.domain.nickname)
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "edit-account-type",
+        className: "form-label"
+      }, "Type"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        disabled: true,
+        name: "edit-account-type",
+        value: "Godaddy"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "edit-godaddy-options"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "edit-godaddy-account-api-key",
+        className: "form-label"
+      }, "Api Key"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        id: "edit-godaddy-account-api-key",
+        name: "edit-godaddy-account-api-key",
+        className: "form-control",
+        placeholder: "Api Key",
+        defaultValue: "".concat(this.props.domain.api_key)
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "edit-godaddy-account-api-secret",
+        className: "form-label"
+      }, "Api Secret"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        id: "edit-godaddy-account-api-secret",
+        name: "edit-godaddy-account-api-secret",
+        className: "form-control",
+        placeholder: "Api Secret",
+        defaultValue: "".concat(this.props.domain.api_secret)
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-secondary",
+        "data-dismiss": "modal"
+      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-primary"
+      }, "Save changes")))))));
+    }
+  }]);
+
+  return EditDomainsAccountsModal;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
 
 /***/ }),
 

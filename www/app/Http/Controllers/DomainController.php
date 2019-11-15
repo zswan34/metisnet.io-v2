@@ -7,6 +7,7 @@ use App\DomainAccountItem;
 use App\Libs\GoDaddy;
 use DigitalOceanV2\Api\Domain;
 use Illuminate\Http\Request;
+use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 class DomainController extends Controller
 {
@@ -76,18 +77,20 @@ class DomainController extends Controller
             ->where('domain_account_items.uid', $uid)->first();
         if ($domain) {
             if ($domain->type === 'godaddy') {
-                $godaddy = new GoDaddy($domain->api_key, $domain->api_secret);
-
-                foreach($godaddy->getDomains() as $gd) {
-                    if ($gd->status === 'ACTIVE') {
-                        $dns = $godaddy->getDnsByType($gd->domain, 'a', false);
-                        $data = [
-                            'details' => $godaddy->getDomain($gd->domain),
-                            'domain_info' => $gd,
-                            'dns' => json_decode($dns)
-                        ];
-                        $response[] = ['domain' => $data];
+                if ($godaddy = new GoDaddy($domain->api_key, $domain->api_secret)) {
+                    foreach($godaddy->getDomains() as $gd) {
+                        if ($gd->status === 'ACTIVE') {
+                            $dns = $godaddy->getDnsByType($gd->domain, 'a', false);
+                            $data = [
+                                'details' => $godaddy->getDomain($gd->domain),
+                                'domain_info' => $gd,
+                                'dns' => json_decode($dns)
+                            ];
+                            $response[] = ['domain' => $data];
+                        }
                     }
+                } else {
+                        $response[] = ['domain' => ''];
                 }
 
             }
@@ -126,5 +129,33 @@ class DomainController extends Controller
                 }
              return $response;
         }
+    }
+
+    public function editDomainAccountApi($uid) {
+        $account = DomainAccount::leftJoin('domain_account_items', 'domain_accounts.id',
+            '=', 'domain_account_items.domain_account_id')
+            ->where('domain_account_items.uid', $uid)->first();
+        if ($account) {
+            $account->update([
+                'nickname' => request('edit-account-nickname'),
+                'api_key' => request('edit-godaddy-account-api-key'),
+                'api_secret' => request('edit-godaddy-account-api-secret')
+            ]);
+            if ($account->save()) {
+
+                $response = [
+                    'success' => true
+                ];
+            } else {
+                $response = [
+                    'success' => false
+                ];
+            }
+        } else {
+            $response = [
+                'success' => false
+            ];
+        }
+        return response()->json($response);
     }
 }

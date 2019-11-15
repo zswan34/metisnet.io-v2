@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
+import EditDomainsAccountsModal from "./modals/EditDomainsAccountsModal";
 
 const AUTH_USER_URL = '/api/v1/auth/';
 const SERVER_SERVICE_URL = '/api/v1/domains/';
@@ -51,8 +53,9 @@ export default class DomainAccounts extends Component {
     }
 
     fetchAuthUser() {
-        axios.get(AUTH_USER_URL)
+        fetch(AUTH_USER_URL)
             .then(response => response.json())
+            // ...then we update the users state
             .then(result =>
                 this.setState({
                     authUser: result.auth
@@ -64,6 +67,10 @@ export default class DomainAccounts extends Component {
     componentDidMount() {
         this.fetchAuthUser();
         this.fetchDomains();
+
+        $('.modal').on('hidden.bs.modal', function () {
+            this.fetchDomains();
+        });
 
         let form = $("#create-account-form");
         let modal = $("#create-domain-account");
@@ -84,49 +91,27 @@ export default class DomainAccounts extends Component {
         });
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextState !== this.state;
+    }
+
     userHasPermission(permission) {
-        const permissions = this.state.authUser.permissions;
-        let match = false;
-        for(let i = 0; i < permissions.length; i++) {
-            if (permissions[i].name === permission) {
-                match = true;
+        const auth = this.state.authUser;
+         let match = false;
+            for (let i = 0; i < auth.permissions.length; i++) {
+                if (auth.permissions[i].name === permission) {
+                    match = true;
+                }
             }
-        }
-        return match;
+            return match;
     }
 
-    editAccount(uid) {
-        this.fetchDomainById(uid);
+    editAccount (uid) {
+        let elm = $("#edit-domain-account-form-" + uid);
         if (this.userHasPermission('edit domain account')) {
-
+            console.log(elm);
         }
-    }
-
-    editAccountModal() {
-        return (
-            <div>
-                <div className="modal" id={"edit-domain-account-modal"} tabIndex="-1" role="dialog">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title">Modal title</h5>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div className="modal-body">
-                                <p>Modal body text goes here.</p>
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-primary">Save changes</button>
-                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
+    };
 
     deleteAccount(uid) {
         if (this.userHasPermission('delete domain account')) {
@@ -142,22 +127,21 @@ export default class DomainAccounts extends Component {
         return (
             <div className={"d-block"}>
                 { canEdit ? (
-                    <button onClick={this.editAccount(uid)} type={"button"}
+                    <button type={"button"}
                             className={"btn px-2 btn-xs btn-warning mx-1"} data-toggle="modal"
-                            data-target="#edit-domain-account-modal">
+                            data-target={"#edit-domain-account-modal-" + uid}>
                         <span className="ion ion-md-eye"></span> Edit</button>
-                ) : null }
-                { canDelete ? (
-                    <button onClick={this.deleteAccount(uid)} type={"button"} className={"btn btn-danger btn-xs px-2 mx-1"}>
+                ): null }
+                { canDelete ?  (
+                    <button type={"button"} className={"btn btn-danger btn-xs px-2 mx-1"}>
                         <span className="lnr lnr-trash"></span> Delete</button>
-                ) : null}
+                ): null}
             </div>
         )
     }
 
     render() {
         if (this.state.isLoaded) {
-            console.log(this.state);
             return (
                 <div>
                     <ol className="breadcrumb">
@@ -172,7 +156,7 @@ export default class DomainAccounts extends Component {
                                 data-toggle="modal" data-target="#create-domain-account">
                             <span className="ion ion-md-add"></span>&nbsp; Add Account
                         </button>
-                        ): null}
+                            ): null}
                     </h4>
 
                     <div className={"row"}>
@@ -211,17 +195,23 @@ export default class DomainAccounts extends Component {
                                                        style={{fontSize: ".8rem"}}>View</a>
                                                 </div>
                                             </div>
-
                                             <p className="card-text">Lorem ipsum dolor sit amet, idque nostro eirmod qui at.</p>
                                         </div>
                                     </div>
+
+
                                 </div>
                             )
                         })}
 
                     </div>
-
-                    {this.editAccountModal()}
+                    <div>
+                        {this.state.domains.map((domain, index) => {
+                            return (
+                                <EditDomainsAccountsModal fetchDomains={this.fetchDomains()} domain={domain} key={index}/>
+                            )
+                        })}
+                    </div>
 
                 </div>
 

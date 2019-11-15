@@ -70,7 +70,8 @@ Route::middleware('auth')->group(function() {
             Route::get('/auth', ['uses' => 'AuthController@getAuthUserApi'])->name('get-auth-user-api');
 
             Route::get('/domains', ['uses' => 'DomainController@getDomainAccountsApi'])->name('get-domains-api');
-            Route::get('/domains/{dns_id}/', ['uses' => 'DomainController@getDomainsApi'])->name('get-domain-api');
+            Route::get('/domains/{domain_account_uid}/', ['uses' => 'DomainController@getDomainsApi'])->name('get-domain-api');
+            Route::post('/domains/{domain_account_uid}/edit', ['uses' => 'DomainController@editDomainAccountApi'])->name('edit-domain-account-api');
             Route::get('/domains/{domain_account_uid}/{domain_name}/', ['uses' => 'DomainController@getDomainDnsItemsApi'])->name('get-domain-dns-items-api');
 
             Route::get('/users', ['uses' => 'UserController@getUsersApi'])->name('get-users-api');

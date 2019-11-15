@@ -20,7 +20,13 @@ class GoDaddy {
     }
 
     public function connected() {
-        //
+        $connected = true;
+        try {
+            $this->godaddyClient->connectDomains();
+        } catch (\Exception $e) {
+            $connected = false;
+        }
+        return $connected;
     }
 
     public function getDomains() {
