@@ -82,6 +82,7 @@ class DomainController extends Controller
                         if ($gd->status === 'ACTIVE') {
                             $dns = $godaddy->getDnsByType($gd->domain, 'a', false);
                             $data = [
+                                'account' => $domain,
                                 'details' => $godaddy->getDomain($gd->domain),
                                 'domain_info' => $gd,
                                 'dns' => json_decode($dns)

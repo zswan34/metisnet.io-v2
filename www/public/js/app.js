@@ -55310,9 +55310,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  */
 
 
-__webpack_require__(/*! ./components/DomainAccount */ "./resources/js/components/DomainAccount.js");
+__webpack_require__(/*! ./components/domain_components/DomainAccount */ "./resources/js/components/domain_components/DomainAccount.js");
 
-__webpack_require__(/*! ./components/DomainAccounts */ "./resources/js/components/DomainAccounts.js");
+__webpack_require__(/*! ./components/domain_components/DomainAccounts */ "./resources/js/components/domain_components/DomainAccounts.js");
 
 __webpack_require__(/*! ./components/ServerMonitors */ "./resources/js/components/ServerMonitors.js");
 
@@ -55320,7 +55320,7 @@ __webpack_require__(/*! ./components/SingleServerMonitor */ "./resources/js/comp
 
 __webpack_require__(/*! ./components/GodaddyDomainAccounts */ "./resources/js/components/GodaddyDomainAccounts.js");
 
-__webpack_require__(/*! ./components/DnsItems */ "./resources/js/components/DnsItems.js");
+__webpack_require__(/*! ./components/domain_components/DomainRecords */ "./resources/js/components/domain_components/DomainRecords.js");
 
 __webpack_require__(/*! ./components/AuthUser */ "./resources/js/components/AuthUser.js");
 
@@ -55453,16 +55453,16 @@ function (_Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/DnsItems.js":
-/*!*********************************************!*\
-  !*** ./resources/js/components/DnsItems.js ***!
-  \*********************************************/
+/***/ "./resources/js/components/GodaddyDomainAccounts.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/GodaddyDomainAccounts.js ***!
+  \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DnsItems; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GodaddyDomainAccounts; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
@@ -55487,226 +55487,437 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var AUTH_USER_URL = '/api/v1/auth/';
-var DNS_ITEMS_SERVICE_URL = '/api/v1/domains/';
 
-var DnsItems =
+var GodaddyDomainAccounts =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(DnsItems, _Component);
+  _inherits(GodaddyDomainAccounts, _Component);
 
-  function DnsItems(props) {
+  function GodaddyDomainAccounts(props) {
     var _this;
 
-    _classCallCheck(this, DnsItems);
+    _classCallCheck(this, GodaddyDomainAccounts);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DnsItems).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GodaddyDomainAccounts).call(this, props));
     _this.state = {
       error: null,
       hasError: false,
-      isLoaded: false,
-      authUser: [],
-      dnsItems: [],
-      account: [],
-      timezone: [],
-      details: []
+      isLoading: true
     };
     return _this;
   }
 
-  _createClass(DnsItems, [{
-    key: "fetchAuthUser",
-    value: function fetchAuthUser() {
-      var _this2 = this;
-
-      fetch(AUTH_USER_URL).then(function (response) {
-        return response.json();
-      }).then(function (result) {
-        return _this2.setState({
-          authUser: result.auth
-        });
-      })["catch"](function (error) {
-        return _this2.setState({
-          error: error,
-          isLoaded: false,
-          hasError: true
-        });
-      });
-    }
-  }, {
-    key: "fetchDnsItems",
-    value: function fetchDnsItems() {
-      var _this3 = this;
-
-      // Where we're fetching data from
-      fetch(DNS_ITEMS_SERVICE_URL + this.domainUid() + '/' + this.domainName()) // We get the API response and receive data in JSON format...
-      .then(function (response) {
-        return response.json();
-      }) // ...then we update the users state
-      .then(function (result) {
-        return _this3.setState({
-          isLoaded: true,
-          dnsItems: result[0].domain,
-          account: result[0].domain.account,
-          timezone: result[0].domain.timezone,
-          details: result[0].domain.details,
-          hasError: false
-        });
-      }) // Catch any errors we hit and update the app
-      ["catch"](function (error) {
-        return _this3.setState({
-          error: error,
-          isLoaded: false,
-          hasError: true
-        });
-      });
-    }
-  }, {
-    key: "domainUid",
-    value: function domainUid() {
-      var url = window.location.pathname;
-      url = url.split('/')[2];
-      return url;
-    }
-  }, {
-    key: "domainName",
-    value: function domainName() {
-      var url = window.location.pathname;
-      url = url.split('/')[3];
-      return url;
-    }
-  }, {
+  _createClass(GodaddyDomainAccounts, [{
     key: "componentDidMount",
-    value: function componentDidMount() {
-      this.fetchAuthUser();
-      this.fetchDnsItems();
-    }
-  }, {
-    key: "errorHasOccurred",
-    value: function errorHasOccurred() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "text-danger"
-      }, "Oops.. An error occurred..."));
-    }
-  }, {
-    key: "addSubdomainButton",
-    value: function addSubdomainButton() {
-      if (this.state.authUser.roles.includes('member')) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          type: "button",
-          className: "btn d-block btn-primary rounded-pill waves-effect",
-          "data-toggle": "modal",
-          "data-target": "#add-record-button"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "ion ion-md-add"
-        }), "\xA0 Add Record"));
-      } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Oops"));
-      }
-    }
-  }, {
-    key: "userHasPermission",
-    value: function userHasPermission(permission) {
-      var permissions = this.state.authUser.permissions;
-      var match = false;
-
-      for (var i = 0; i < permissions.length; i++) {
-        if (permissions[i].name === permission) {
-          match = true;
-        }
-      }
-
-      return match;
-    }
-  }, {
-    key: "displayControls",
-    value: function displayControls() {
-      var canEdit = this.userHasPermission('edit domain records');
-      var canDelete = this.userHasPermission('delete domain records');
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "d-block"
-      }, canEdit ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-warning btn-sm px-2 mx-1"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "lnr lnr-pencil"
-      }), " Edit") : null, canDelete ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-danger btn-sm px-2 mx-1"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "lnr lnr-trash"
-      }), " Delete") : null);
-    }
+    value: function componentDidMount() {}
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
-
-      if (this.state.hasError) {
-        return this.errorHasOccurred();
-      } else {
-        if (this.state.isLoaded) {
-          console.log(this.state);
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
-            className: "breadcrumb"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            className: "breadcrumb-item"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-            href: "/domains/"
-          }, "Domains")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            className: "breadcrumb-item"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-            href: "/domains/" + this.domainUid()
-          }, this.domainUid())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            className: "breadcrumb-item active"
-          }, "".concat(this.domainName()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-            className: "d-flex justify-content-between align-items-center w-100 font-weight-bold pt-3 mb-0"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "".concat(this.state.account.nickname)), this.addSubdomainButton()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-            className: "text-muted mb-4"
-          }, "Company: Godaddy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "row"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "card-body"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "font-weight-semibold mb-3"
-          }, "Subdomains"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "list-group"
-          }, this.state.dnsItems.dns.map(function (dns, index) {
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "list-group-item list-group-item-action flex-column align-items-start",
-              key: index
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "d-flex justify-content-between w-100"
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-              className: "mb-1"
-            }, "".concat(dns.name)), _this4.displayControls()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "small"
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Host: ")), "  ", "".concat(dns.data)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "small"
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Type: ")), " ", "".concat(dns.type)));
-          })))));
-        } else {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loading..."));
-        }
-      }
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Godaddy domains");
     }
   }]);
 
-  return DnsItems;
+  return GodaddyDomainAccounts;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
 
-if (document.getElementById('godaddy-domain-dns-items')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DnsItems, null), document.getElementById('godaddy-domain-dns-items'));
+if (document.getElementById('godaddy-account-wrapper')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(GodaddyDomainAccounts, null), document.getElementById('godaddy-account-wrapper'));
 }
 
 /***/ }),
 
-/***/ "./resources/js/components/DomainAccount.js":
-/*!**************************************************!*\
-  !*** ./resources/js/components/DomainAccount.js ***!
-  \**************************************************/
+/***/ "./resources/js/components/ServerMonitors.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/ServerMonitors.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ServerMonitors; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./errors/ErrorComponent */ "./resources/js/components/errors/ErrorComponent.js");
+/* harmony import */ var _loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./loading/StandardLoadingComponent */ "./resources/js/components/loading/StandardLoadingComponent.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var SERVER_SERVICE_URL = '/api/v1/servers';
+
+var ServerMonitors =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ServerMonitors, _Component);
+
+  function ServerMonitors(props) {
+    var _this;
+
+    _classCallCheck(this, ServerMonitors);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ServerMonitors).call(this, props));
+    _this.state = {
+      errors: null,
+      isFetching: false,
+      hasError: false,
+      isLoaded: false,
+      monitors: [],
+      timezone: []
+    };
+    return _this;
+  }
+
+  _createClass(ServerMonitors, [{
+    key: "fetchServers",
+    value: function fetchServers() {
+      var _this2 = this;
+
+      // Where we're fetching data from
+      fetch(SERVER_SERVICE_URL) // We get the API response and receive data in JSON format...
+      .then(function (response) {
+        return response.json();
+      }) // ...then we update the users state
+      .then(function (result) {
+        return _this2.setState({
+          isLoaded: true,
+          monitors: result.monitors,
+          timezone: result.timezone,
+          hasError: false
+        });
+      }) // Catch any errors we hit and update the app
+      ["catch"](function (error) {
+        return _this2.setState({
+          errors: error,
+          isLoading: false,
+          hasError: true
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.fetchServers();
+    }
+  }, {
+    key: "refreshData",
+    value: function refreshData() {
+      this.fetchServers();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (!this.state.hasError) {
+        if (this.state.isLoaded) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "h-100"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "d-flex justify-content-between align-items-center mb-5"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+            className: "font-weight-light mb-2"
+          }, "Server Statistics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "badge badge-success font-weight-bold"
+          }, "RUNNING")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            className: "btn btn-lg btn-default",
+            onClick: this.refreshData()
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "ion ion-md-refresh text-primary"
+          }), " Refresh")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "row"
+          }, this.state.monitors.map(function (monitor, index) {
+            var time = moment.unix(monitor.create_datetime).format("dddd, MMMM Do YYYY");
+            var downTime = 100 - Math.floor(monitor.all_time_uptime_ratio);
+            var iconStyle = 'ion ion-ios-trending-up';
+            var textColor = 'text-success';
+
+            if (monitor.status !== 2) {
+              backgroundColor = 'bg-danger';
+              iconStyle = 'ion ion-ios-trending-down';
+            }
+
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "col-sm-6 col-md-4 col-lg-6 col-xl-4",
+              key: index
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+              href: '/servers/' + monitor.id
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "server-item border-light ui-bordered p-3 mt-2 bg-light shadow-sm"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "media align-items-center"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "media-body small mr-3"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "font-weight-semibold"
+            }, "".concat(monitor.friendly_name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "text-xs text-muted"
+            }, "".concat(monitor.url)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "text-xs text-muted mb-3"
+            }, "".concat(time)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "mb-1"
+            }, "Up time: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+              className: "d-inline text-success"
+            }, "%", "".concat(Math.floor(monitor.all_time_uptime_ratio)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "pe-7s-angle-up text-success font-weight-bold"
+            }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "mb-1"
+            }, "Down time: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+              className: "d-inline text-danger"
+            }, "%", "".concat(downTime), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "pe-7s-angle-down text-danger font-weight-bold"
+            })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "d-flex align-items-center position-relative",
+              style: {
+                height: '60px',
+                width: '60px'
+              }
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "w-100 position-absolute",
+              style: {
+                height: '60px',
+                top: '0'
+              }
+            }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "w-100 text-center font-weight-bold text-center " + textColor
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "p-3 d-block bg-success",
+              style: {
+                borderRadius: '100%',
+                width: '40px',
+                height: '40px'
+              }
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "text-white d-block " + iconStyle,
+              style: {
+                fontSize: '24px',
+                margin: '-8px'
+              }
+            }))))))));
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "col-sm-6 col-md-4 col-lg-6 col-xl-4"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "server-item border-light ui-bordered p-3 mt-2 bg-light shadow-sm",
+            style: {
+              border: '3px dashed #cdcdcd'
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "media align-items-center"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "media-body small mr-3"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "d-flex justify-content-center"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "text-center m-3",
+            style: {
+              width: '45px',
+              height: '45px',
+              borderRadius: '100%',
+              border: '1px dashed #cdcdcd'
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "ion ion-md-add",
+            style: {
+              fontSize: '18px',
+              color: '#888',
+              marginTop: '13px'
+            }
+          }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "d-flex justify-content-center"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "text-center"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            className: "m-1"
+          }, "Add Server")))))))));
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+        }
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          errorDetails: this.state.errors
+        });
+      }
+    }
+  }]);
+
+  return ServerMonitors;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+if (document.getElementById('server-wrapper')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ServerMonitors, null), document.getElementById('server-wrapper'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/SingleServerMonitor.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/SingleServerMonitor.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SingleServerMonitors; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var uri = window.location.pathname.split('/').pop();
+var SERVER_SERVICE_URL = '/api/v1/servers/' + uri;
+
+var SingleServerMonitors =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(SingleServerMonitors, _Component);
+
+  function SingleServerMonitors(props) {
+    var _this;
+
+    _classCallCheck(this, SingleServerMonitors);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SingleServerMonitors).call(this, props));
+    _this.state = {
+      error: null,
+      isFetching: false,
+      hasError: false,
+      isLoaded: false,
+      monitors: [],
+      timezone: []
+    };
+    return _this;
+  }
+
+  _createClass(SingleServerMonitors, [{
+    key: "fetchServers",
+    value: function fetchServers() {
+      var _this2 = this;
+
+      // Where we're fetching data from
+      fetch(SERVER_SERVICE_URL) // We get the API response and receive data in JSON format...
+      .then(function (response) {
+        return response.json();
+      }) // ...then we update the users state
+      .then(function (result) {
+        return _this2.setState({
+          isLoaded: true,
+          monitors: result.monitors,
+          timezone: result.timezone,
+          hasError: false
+        });
+      }) // Catch any errors we hit and update the app
+      ["catch"](function (error) {
+        return _this2.setState({
+          error: error,
+          isLoaded: false,
+          hasError: true
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.fetchServers();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (!this.state.hasError) {
+        if (!this.state.isLoaded) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            className: "italics"
+          }, "Loading...");
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+            href: "/servers"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "lnr lnr-arrow-left"
+          }), " Go Back"), this.state.monitors.map(function (monitor, index) {
+            var time = moment.unix(monitor.create_datetime).format("dddd, MMMM Do YYYY");
+            var downTime = 100 - Math.floor(monitor.all_time_uptime_ratio);
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "h-100 mt-3",
+              key: index
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "d-flex justify-content-between align-items-center mb-5"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+              className: "font-weight-light mb-0"
+            }, "".concat(monitor.friendly_name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "text-muted mb-2"
+            }, "".concat(monitor.url)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "badge badge-success font-weight-bold"
+            }, "RUNNING"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "font-weight-semibold"
+            }, "Up since: ", "".concat(time)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "TODO: add chart.jsx`"));
+          }));
+        }
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "row"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "bg-danger"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unable to connect")));
+      }
+    }
+  }]);
+
+  return SingleServerMonitors;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+if (document.getElementById('single-server-wrapper')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SingleServerMonitors, null), document.getElementById('single-server-wrapper'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/domain_components/DomainAccount.js":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/domain_components/DomainAccount.js ***!
+  \********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -55717,7 +55928,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./errors/ErrorComponent */ "./resources/js/components/errors/ErrorComponent.js");
+/* harmony import */ var _errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../errors/ErrorComponent */ "./resources/js/components/errors/ErrorComponent.js");
+/* harmony import */ var _loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../loading/StandardLoadingComponent */ "./resources/js/components/loading/StandardLoadingComponent.js");
+/* harmony import */ var _DomainAccountItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DomainAccountItem */ "./resources/js/components/domain_components/DomainAccountItem.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55735,6 +55948,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
 
 
 
@@ -55760,6 +55975,8 @@ function (_Component) {
       timezone: [],
       domains: [],
       authUser: [],
+      permissions: [],
+      roles: [],
       records: []
     };
     return _this;
@@ -55781,7 +55998,9 @@ function (_Component) {
         return response.json();
       }).then(function (result) {
         return _this2.setState({
-          authUser: result.auth
+          authUser: result.auth,
+          permissions: result.auth.permissions,
+          roles: result.auth.roles
         });
       })["catch"](function (error) {
         return _this2.setState({
@@ -55825,14 +56044,9 @@ function (_Component) {
       this.fetchDomain();
     }
   }, {
-    key: "errorHasOccurred",
-    value: function errorHasOccurred() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null);
-    }
-  }, {
     key: "buyDomainButton",
     value: function buyDomainButton() {
-      if (this.state.authUser.roles.includes('member')) {
+      if (this.state.roles.includes('member')) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
           className: "btn d-block btn-primary rounded-pill waves-effect",
@@ -55848,10 +56062,8 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
-
       if (this.state.hasError) {
-        return this.errorHasOccurred();
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null);
       } else {
         if (this.state.isLoaded) {
           console.log(this.state.authUser);
@@ -55870,46 +56082,14 @@ function (_Component) {
           }, "Company: Godaddy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "row"
           }, this.state.domains.map(function (d, index) {
-            var renewDeadlineColor = '';
-            var domain = d.domain;
-            console.log(domain);
-            var now = moment.tz(_this4.state.timezone);
-            var renewDeadline = moment.tz(domain.details.renewDeadline, _this4.state.timezone);
-
-            if (now > renewDeadline.subtract(3, 'months')) {
-              renewDeadlineColor = 'text-info';
-            }
-
-            if (now > renewDeadline.subtract(1, 'month')) {
-              renewDeadlineColor = 'text-danger';
-            }
-
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "col-sm-6 col-md-4 col-lg-6 col-xl-4",
+            console.log(d.domain);
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DomainAccountItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              domain: d.domain,
               key: index
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "border-light ui-bordered bg-white p-3 mt-2"
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "media align-items-center"
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "media-body small mr-3"
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "font-weight-semibold mb-3",
-              style: {
-                fontSize: '1rem'
-              }
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-              href: "/domains/" + _this4.domainUid() + '/' + domain.domain_info.domain
-            }, "".concat(domain.domain_info.domain))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: ""
-            }, "Subdomains: ", "".concat(domain.dns.length - 1)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Purchased: ", "".concat(moment.tz(domain.details.createdAt, _this4.state.timezone).format('LL'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "mb-2"
-            }, "IP Address: ", "".concat(domain.dns[0].data)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: renewDeadlineColor
-            }, "Renewal Date: ", "".concat(renewDeadline.format('LL')))))));
+            });
           })));
         } else {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loading..."));
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null);
         }
       }
     }
@@ -55926,25 +56106,18 @@ if (document.getElementById('godaddy-domain-account-wrapper')) {
 
 /***/ }),
 
-/***/ "./resources/js/components/DomainAccounts.js":
-/*!***************************************************!*\
-  !*** ./resources/js/components/DomainAccounts.js ***!
-  \***************************************************/
+/***/ "./resources/js/components/domain_components/DomainAccountItem.js":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/domain_components/DomainAccountItem.js ***!
+  \************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DomainAccounts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DomainAccountItem; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _modals_EditDomainsAccountsModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modals/EditDomainsAccountsModal */ "./resources/js/components/modals/EditDomainsAccountsModal.js");
-/* harmony import */ var _modals_DeleteDomainsAccountsModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modals/DeleteDomainsAccountsModal */ "./resources/js/components/modals/DeleteDomainsAccountsModal.js");
-/* harmony import */ var _errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./errors/ErrorComponent */ "./resources/js/components/errors/ErrorComponent.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55962,6 +56135,121 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var DomainAccountItem =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(DomainAccountItem, _Component);
+
+  function DomainAccountItem(props) {
+    var _this;
+
+    _classCallCheck(this, DomainAccountItem);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DomainAccountItem).call(this, props));
+    _this.state = {
+      domain: _this.props.domain
+    };
+    return _this;
+  }
+
+  _createClass(DomainAccountItem, [{
+    key: "redirectTo",
+    value: function redirectTo(path) {
+      window.location.href = path;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var domain = this.props.domain;
+      var renewDeadlineColor = '';
+      var now = moment.tz(this.state.timezone);
+      var renewDeadline = moment.tz(domain.details.renewDeadline, this.state.timezone);
+
+      if (now > renewDeadline.subtract(3, 'months')) {
+        renewDeadlineColor = 'text-info';
+      }
+
+      if (now > renewDeadline.subtract(1, 'month')) {
+        renewDeadlineColor = 'text-danger';
+      }
+
+      var path = "/domains/" + domain.account.uid + '/' + domain.domain_info.domain;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-6 col-md-4 col-lg-6 col-xl-4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "domain-account-item border-light ui-bordered bg-white p-3 mt-2",
+        onClick: function onClick() {
+          return _this2.redirectTo(path);
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "media align-items-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "media-body small mr-3"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "font-weight-semibold mb-3 text-primary",
+        style: {
+          fontSize: '1rem'
+        }
+      }, "".concat(domain.domain_info.domain)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: ""
+      }, "Subdomains: ", "".concat(domain.dns.length - 1)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Purchased: ", "".concat(moment.tz(domain.details.createdAt, this.state.timezone).format('LL'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "mb-2"
+      }, "IP Address: ", "".concat(domain.dns[0].data)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: renewDeadlineColor
+      }, "Renewal Date: ", "".concat(renewDeadline.format('LL')))))));
+    }
+  }]);
+
+  return DomainAccountItem;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/domain_components/DomainAccounts.js":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/domain_components/DomainAccounts.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DomainAccounts; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _modals_EditDomainsAccountsModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modals/EditDomainsAccountsModal */ "./resources/js/components/modals/EditDomainsAccountsModal.js");
+/* harmony import */ var _modals_DeleteDomainsAccountsModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modals/DeleteDomainsAccountsModal */ "./resources/js/components/modals/DeleteDomainsAccountsModal.js");
+/* harmony import */ var _errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../errors/ErrorComponent */ "./resources/js/components/errors/ErrorComponent.js");
+/* harmony import */ var _loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../loading/StandardLoadingComponent */ "./resources/js/components/loading/StandardLoadingComponent.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -56220,7 +56508,7 @@ function (_Component) {
             });
           })));
         } else {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loading..."));
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], null);
         }
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null);
@@ -56239,20 +56527,18 @@ if (document.getElementById('domain-account-wrapper')) {
 
 /***/ }),
 
-/***/ "./resources/js/components/GodaddyDomainAccounts.js":
-/*!**********************************************************!*\
-  !*** ./resources/js/components/GodaddyDomainAccounts.js ***!
-  \**********************************************************/
+/***/ "./resources/js/components/domain_components/DomainRecordItem.js":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/domain_components/DomainRecordItem.js ***!
+  \***********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GodaddyDomainAccounts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DomainRecordItem; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -56273,302 +56559,119 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
-var GodaddyDomainAccounts =
+var DomainRecordItem =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(GodaddyDomainAccounts, _Component);
+  _inherits(DomainRecordItem, _Component);
 
-  function GodaddyDomainAccounts(props) {
+  function DomainRecordItem(props) {
     var _this;
 
-    _classCallCheck(this, GodaddyDomainAccounts);
+    _classCallCheck(this, DomainRecordItem);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(GodaddyDomainAccounts).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DomainRecordItem).call(this, props));
     _this.state = {
-      error: null,
-      hasError: false,
-      isLoading: true
+      record: _this.props.record,
+      authUser: _this.props.user,
+      permissions: _this.props.user.permissions
     };
     return _this;
   }
 
-  _createClass(GodaddyDomainAccounts, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {}
-  }, {
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Godaddy domains");
-    }
-  }]);
+  _createClass(DomainRecordItem, [{
+    key: "userHasPermission",
+    value: function userHasPermission(permission) {
+      var permissions = this.state.permissions;
+      var match = false;
 
-  return GodaddyDomainAccounts;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-
-
-if (document.getElementById('godaddy-account-wrapper')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(GodaddyDomainAccounts, null), document.getElementById('godaddy-account-wrapper'));
-}
-
-/***/ }),
-
-/***/ "./resources/js/components/ServerMonitors.js":
-/*!***************************************************!*\
-  !*** ./resources/js/components/ServerMonitors.js ***!
-  \***************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ServerMonitors; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./errors/ErrorComponent */ "./resources/js/components/errors/ErrorComponent.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-var SERVER_SERVICE_URL = '/api/v1/servers';
-
-var ServerMonitors =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(ServerMonitors, _Component);
-
-  function ServerMonitors(props) {
-    var _this;
-
-    _classCallCheck(this, ServerMonitors);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ServerMonitors).call(this, props));
-    _this.state = {
-      errors: null,
-      isFetching: false,
-      hasError: false,
-      isLoaded: false,
-      monitors: [],
-      timezone: []
-    };
-    return _this;
-  }
-
-  _createClass(ServerMonitors, [{
-    key: "fetchServers",
-    value: function fetchServers() {
-      var _this2 = this;
-
-      // Where we're fetching data from
-      fetch(SERVER_SERVICE_URL) // We get the API response and receive data in JSON format...
-      .then(function (response) {
-        return response.json();
-      }) // ...then we update the users state
-      .then(function (result) {
-        return _this2.setState({
-          isLoaded: true,
-          monitors: result.monitors,
-          timezone: result.timezone,
-          hasError: false
-        });
-      }) // Catch any errors we hit and update the app
-      ["catch"](function (error) {
-        return _this2.setState({
-          errors: error,
-          isLoading: false,
-          hasError: true
-        });
-      });
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.fetchServers();
-    }
-  }, {
-    key: "refreshData",
-    value: function refreshData() {
-      this.fetchServers();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      if (!this.state.hasError) {
-        if (this.state.isLoaded) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "h-100"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "d-flex justify-content-between align-items-center mb-5"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-            className: "font-weight-light mb-2"
-          }, "Server Statistics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "badge badge-success font-weight-bold"
-          }, "RUNNING")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-            className: "btn btn-lg btn-default",
-            onClick: this.refreshData()
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-            className: "ion ion-md-refresh text-primary"
-          }), " Refresh")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "row"
-          }, this.state.monitors.map(function (monitor, index) {
-            var time = moment.unix(monitor.create_datetime).format("dddd, MMMM Do YYYY");
-            var downTime = 100 - Math.floor(monitor.all_time_uptime_ratio);
-            var iconStyle = 'ion ion-ios-trending-up';
-            var textColor = 'text-success';
-
-            if (monitor.status !== 2) {
-              backgroundColor = 'bg-danger';
-              iconStyle = 'ion ion-ios-trending-down';
-            }
-
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "col-sm-6 col-md-4 col-lg-6 col-xl-4",
-              key: index
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-              href: '/servers/' + monitor.id
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "server-item border-light ui-bordered p-3 mt-2 bg-light shadow-sm"
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "media align-items-center"
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "media-body small mr-3"
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "font-weight-semibold"
-            }, "".concat(monitor.friendly_name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "text-xs text-muted"
-            }, "".concat(monitor.url)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "text-xs text-muted mb-3"
-            }, "".concat(time)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "mb-1"
-            }, "Up time: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-              className: "d-inline text-success"
-            }, "%", "".concat(Math.floor(monitor.all_time_uptime_ratio)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-              className: "pe-7s-angle-up text-success font-weight-bold"
-            }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "mb-1"
-            }, "Down time: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-              className: "d-inline text-danger"
-            }, "%", "".concat(downTime), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-              className: "pe-7s-angle-down text-danger font-weight-bold"
-            })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "d-flex align-items-center position-relative",
-              style: {
-                height: '60px',
-                width: '60px'
-              }
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "w-100 position-absolute",
-              style: {
-                height: '60px',
-                top: '0'
-              }
-            }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "w-100 text-center font-weight-bold text-center " + textColor
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "p-3 d-block bg-success",
-              style: {
-                borderRadius: '100%',
-                width: '40px',
-                height: '40px'
-              }
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-              className: "text-white d-block " + iconStyle,
-              style: {
-                fontSize: '24px',
-                margin: '-8px'
-              }
-            }))))))));
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "col-sm-6 col-md-4 col-lg-6 col-xl-4"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "server-item border-light ui-bordered p-3 mt-2 bg-light shadow-sm",
-            style: {
-              border: '3px dashed #cdcdcd'
-            }
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "media align-items-center"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "media-body small mr-3"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "d-flex justify-content-center"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "text-center m-3",
-            style: {
-              width: '45px',
-              height: '45px',
-              borderRadius: '100%',
-              border: '1px dashed #cdcdcd'
-            }
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-            className: "ion ion-md-add",
-            style: {
-              fontSize: '18px',
-              color: '#888',
-              marginTop: '13px'
-            }
-          }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "d-flex justify-content-center"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "text-center"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-            className: "m-1"
-          }, "Add Server")))))))));
-        } else {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loading..."));
+      for (var i = 0; i < permissions.length; i++) {
+        if (permissions[i].name === permission) {
+          match = true;
         }
-      } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          errorDetails: this.state.errors
-        });
       }
+
+      return match;
+    }
+  }, {
+    key: "displayControls",
+    value: function displayControls() {
+      var canEdit = this.userHasPermission('edit domain records');
+      var canDelete = this.userHasPermission('delete domain records');
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "d-block"
+      }, canEdit ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        "data-record-name": this.props.record.name,
+        onClick: this.editRecord.bind(this),
+        type: "button",
+        className: "btn btn-warning btn-sm px-2 mx-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "lnr lnr-pencil"
+      }), " Edit") : null, canDelete && this.props.record.name !== '@' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        "data-record-name": this.props.record.name,
+        onClick: this.deleteRecord.bind(this),
+        type: "button",
+        className: "btn btn-danger btn-sm px-2 mx-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "lnr lnr-trash"
+      }), " Delete") : null);
+    }
+  }, {
+    key: "editRecord",
+    value: function editRecord(event) {
+      alert($(event.target).data('record-name'));
+    }
+  }, {
+    key: "deleteRecord",
+    value: function deleteRecord(event) {
+      alert($(event.target).data('record-name'));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var name = this.props.record.name === '*' ? this.props.record.name + ' (wildcard)' : this.props.record.name;
+
+      if (name === '@') {
+        name = this.props.record.name + ' (Parked)';
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "list-group-item list-group-item-action flex-column align-items-start"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "d-flex justify-content-between w-100"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        className: "mb-1"
+      }, "".concat(name)), this.displayControls()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "small"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Host: ")), " ", "".concat(this.props.record.data)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "small"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Type: ")), " ", "".concat(this.props.record.type)));
     }
   }]);
 
-  return ServerMonitors;
+  return DomainRecordItem;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
 
-if (document.getElementById('server-wrapper')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ServerMonitors, null), document.getElementById('server-wrapper'));
-}
-
 /***/ }),
 
-/***/ "./resources/js/components/SingleServerMonitor.js":
-/*!********************************************************!*\
-  !*** ./resources/js/components/SingleServerMonitor.js ***!
-  \********************************************************/
+/***/ "./resources/js/components/domain_components/DomainRecords.js":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/domain_components/DomainRecords.js ***!
+  \********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SingleServerMonitors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DomainRecords; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../errors/ErrorComponent */ "./resources/js/components/errors/ErrorComponent.js");
+/* harmony import */ var _loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../loading/StandardLoadingComponent */ "./resources/js/components/loading/StandardLoadingComponent.js");
+/* harmony import */ var _DomainRecordItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DomainRecordItem */ "./resources/js/components/domain_components/DomainRecordItem.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -56589,50 +56692,52 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var uri = window.location.pathname.split('/').pop();
-var SERVER_SERVICE_URL = '/api/v1/servers/' + uri;
 
-var SingleServerMonitors =
+
+
+var AUTH_USER_URL = '/api/v1/auth/';
+var DNS_ITEMS_SERVICE_URL = '/api/v1/domains/';
+
+var DomainRecords =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(SingleServerMonitors, _Component);
+  _inherits(DomainRecords, _Component);
 
-  function SingleServerMonitors(props) {
+  function DomainRecords(props) {
     var _this;
 
-    _classCallCheck(this, SingleServerMonitors);
+    _classCallCheck(this, DomainRecords);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SingleServerMonitors).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DomainRecords).call(this, props));
     _this.state = {
       error: null,
-      isFetching: false,
       hasError: false,
       isLoaded: false,
-      monitors: [],
-      timezone: []
+      authUser: [],
+      permissions: [],
+      roles: [],
+      records: [],
+      account: [],
+      timezone: [],
+      details: []
     };
     return _this;
   }
 
-  _createClass(SingleServerMonitors, [{
-    key: "fetchServers",
-    value: function fetchServers() {
+  _createClass(DomainRecords, [{
+    key: "fetchAuthUser",
+    value: function fetchAuthUser() {
       var _this2 = this;
 
-      // Where we're fetching data from
-      fetch(SERVER_SERVICE_URL) // We get the API response and receive data in JSON format...
-      .then(function (response) {
+      fetch(AUTH_USER_URL).then(function (response) {
         return response.json();
-      }) // ...then we update the users state
-      .then(function (result) {
+      }).then(function (result) {
         return _this2.setState({
-          isLoaded: true,
-          monitors: result.monitors,
-          timezone: result.timezone,
-          hasError: false
+          authUser: result.auth,
+          permissions: result.auth.permissions,
+          roles: result.auth.roles
         });
-      }) // Catch any errors we hit and update the app
-      ["catch"](function (error) {
+      })["catch"](function (error) {
         return _this2.setState({
           error: error,
           isLoaded: false,
@@ -56641,59 +56746,144 @@ function (_Component) {
       });
     }
   }, {
+    key: "fetchrecords",
+    value: function fetchrecords() {
+      var _this3 = this;
+
+      // Where we're fetching data from
+      fetch(DNS_ITEMS_SERVICE_URL + this.domainUid() + '/' + this.domainName()) // We get the API response and receive data in JSON format...
+      .then(function (response) {
+        return response.json();
+      }) // ...then we update the users state
+      .then(function (result) {
+        return _this3.setState({
+          isLoaded: true,
+          records: result[0].domain,
+          account: result[0].domain.account,
+          timezone: result[0].domain.timezone,
+          details: result[0].domain.details,
+          hasError: false
+        });
+      }) // Catch any errors we hit and update the app
+      ["catch"](function (error) {
+        return _this3.setState({
+          error: error,
+          isLoaded: false,
+          hasError: true
+        });
+      });
+    }
+  }, {
+    key: "domainUid",
+    value: function domainUid() {
+      var url = window.location.pathname;
+      url = url.split('/')[2];
+      return url;
+    }
+  }, {
+    key: "domainName",
+    value: function domainName() {
+      var url = window.location.pathname;
+      url = url.split('/')[3];
+      return url;
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.fetchServers();
+      this.fetchAuthUser();
+      this.fetchrecords();
+    }
+  }, {
+    key: "addSubdomainButton",
+    value: function addSubdomainButton() {
+      if (this.state.roles.includes('member')) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          className: "btn d-block btn-primary rounded-pill waves-effect",
+          "data-toggle": "modal",
+          "data-target": "#add-record-button"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "ion ion-md-add"
+        }), "\xA0 Add Record"));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Oops"));
+      }
+    }
+  }, {
+    key: "userHasPermission",
+    value: function userHasPermission(permission) {
+      var permissions = this.state.permissions;
+      var match = false;
+
+      for (var i = 0; i < permissions.length; i++) {
+        if (permissions[i].name === permission) {
+          match = true;
+        }
+      }
+
+      return match;
+    }
+  }, {
+    key: "updateRecords",
+    value: function updateRecords() {
+      this.fetchrecords();
     }
   }, {
     key: "render",
     value: function render() {
-      if (!this.state.hasError) {
-        if (!this.state.isLoaded) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-            className: "italics"
-          }, "Loading...");
-        } else {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-            href: "/servers"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-            className: "lnr lnr-arrow-left"
-          }), " Go Back"), this.state.monitors.map(function (monitor, index) {
-            var time = moment.unix(monitor.create_datetime).format("dddd, MMMM Do YYYY");
-            var downTime = 100 - Math.floor(monitor.all_time_uptime_ratio);
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "h-100 mt-3",
-              key: index
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "d-flex justify-content-between align-items-center mb-5"
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-              className: "font-weight-light mb-0"
-            }, "".concat(monitor.friendly_name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "text-muted mb-2"
-            }, "".concat(monitor.url)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "badge badge-success font-weight-bold"
-            }, "RUNNING"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "font-weight-semibold"
-            }, "Up since: ", "".concat(time)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "TODO: add chart.jsx`"));
-          }));
-        }
+      var _this4 = this;
+
+      if (this.state.hasError) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null);
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "row"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "bg-danger"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Unable to connect")));
+        if (this.state.isLoaded) {
+          console.log(this.state);
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ol", {
+            className: "breadcrumb"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            className: "breadcrumb-item"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+            href: "/domains/"
+          }, "Domains")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            className: "breadcrumb-item"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+            href: "/domains/" + this.domainUid()
+          }, this.domainUid())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            className: "breadcrumb-item active"
+          }, "".concat(this.domainName()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+            className: "d-flex justify-content-between align-items-center w-100 font-weight-bold pt-3 mb-0"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "".concat(this.state.account.nickname)), this.addSubdomainButton()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+            className: "text-muted mb-4"
+          }, "Company: Godaddy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "row"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "card-body"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "font-weight-semibold mb-3"
+          }, "Subdomains"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "list-group"
+          }, this.state.records.dns.map(function (dns, index) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DomainRecordItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              updateRecords: _this4.updateRecords.bind(_this4),
+              user: _this4.state.authUser,
+              record: dns,
+              key: index
+            });
+          })))));
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+        }
       }
     }
   }]);
 
-  return SingleServerMonitors;
+  return DomainRecords;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
 
-if (document.getElementById('single-server-wrapper')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SingleServerMonitors, null), document.getElementById('single-server-wrapper'));
+if (document.getElementById('godaddy-domain-dns-items')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DomainRecords, null), document.getElementById('godaddy-domain-dns-items'));
 }
 
 /***/ }),
@@ -56757,6 +56947,74 @@ function (_Component) {
   }]);
 
   return ErrorComponent;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/loading/StandardLoadingComponent.js":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/loading/StandardLoadingComponent.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return StandardLoadingComponent; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var StandardLoadingComponent =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(StandardLoadingComponent, _Component);
+
+  function StandardLoadingComponent(props) {
+    _classCallCheck(this, StandardLoadingComponent);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(StandardLoadingComponent).call(this, props));
+  }
+
+  _createClass(StandardLoadingComponent, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "d-flex justify-content-center mt-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sk-rotating-plane sk-primary"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "text-primary mt-0",
+        style: {
+          fontStyle: 'italic'
+        }
+      }, "Loading..."))));
+    }
+  }]);
+
+  return StandardLoadingComponent;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ErrorComponent from "./errors/ErrorComponent";
+import StandardLoadingComponent from "./loading/StandardLoadingComponent";
 
 const SERVER_SERVICE_URL = '/api/v1/servers';
 
@@ -145,9 +146,7 @@ export default class ServerMonitors extends Component {
                     );
                 } else {
                     return (
-                        <div>
-                            <p>Loading...</p>
-                        </div>
+                        <StandardLoadingComponent/>
                     )
                 }
             } else {

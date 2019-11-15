@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/linearicons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/open-iconic.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/pe-icon-7-stroke.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/spinkit/spinkit.css') }}">
     @php
         $theme = \App\ColorTheme::find(auth()->user()->setting->color_theme_id);
     @endphp

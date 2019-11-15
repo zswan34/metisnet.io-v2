@@ -6,3 +6,11 @@
   background: #e0e0e0 !important;
 }
 
+.domain-account-item {
+  cursor: pointer;
+}
+
+.domain-account-item:hover {
+  background: #e0e0e0 !important;
+}
+

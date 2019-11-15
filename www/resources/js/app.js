@@ -14,10 +14,10 @@ require('./bootstrap');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-require('./components/DomainAccount');
-require('./components/DomainAccounts');
+require('./components/domain_components/DomainAccount');
+require('./components/domain_components/DomainAccounts');
 require('./components/ServerMonitors');
 require('./components/SingleServerMonitor');
 require('./components/GodaddyDomainAccounts');
-require('./components/DnsItems');
+require('./components/domain_components/DomainRecords');
 require('./components/AuthUser');
