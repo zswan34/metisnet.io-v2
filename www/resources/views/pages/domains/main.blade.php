@@ -18,9 +18,9 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="account-nickname">Nickname</label>
+                            <label for="account-nickname">Name</label>
                             <input class="form-control" type="text" id="account-nickname"
-                                   name="account-nickname" placeholder="Nickname"/>
+                                   name="account-nickname" placeholder="Name"/>
                         </div>
                         <div class="form-group">
                             <label for="account-type" class="form-label">Type</label>

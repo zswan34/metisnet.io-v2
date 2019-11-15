@@ -26,21 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RolesAndPermissionsSeeder.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/database/seeds/RolesAndPermissionsSeeder.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="32" column="36" lean-forward="false" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DomainAccounts.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DomainAccounts.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
+            <state relative-caret-position="81">
+              <caret line="72" column="14" lean-forward="false" selection-start-line="72" selection-start-column="14" selection-end-line="72" selection-end-column="14" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -48,21 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-117">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DomainController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/DomainController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="924">
-              <caret line="142" column="15" lean-forward="false" selection-start-line="142" selection-start-column="15" selection-end-line="142" selection-end-column="15" />
+            <state relative-caret-position="451">
+              <caret line="175" column="13" lean-forward="false" selection-start-line="175" selection-start-column="13" selection-end-line="175" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -80,11 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EditDomainsAccountsModal.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EditDomainsAccountsModal.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/resources/js/components/modals/EditDomainsAccountsModal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="552">
-              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state relative-caret-position="165">
+              <caret line="35" column="39" lean-forward="false" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -93,9 +73,31 @@
       <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="73" column="141" lean-forward="false" selection-start-line="73" selection-start-column="141" selection-end-line="73" selection-end-column="141" />
+            <state relative-caret-position="165">
+              <caret line="74" column="110" lean-forward="false" selection-start-line="74" selection-start-column="88" selection-end-line="74" selection-end-column="110" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".env" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/.env">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="362">
+              <caret line="61" column="15" lean-forward="false" selection-start-line="61" selection-start-column="15" selection-end-line="61" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DeleteDomainsAccountsModal.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/resources/js/components/modals/DeleteDomainsAccountsModal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="75" column="80" lean-forward="false" selection-start-line="75" selection-start-column="80" selection-end-line="75" selection-end-column="80" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -103,17 +105,17 @@
       <file leaf-file-name="main.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/resources/views/pages/domains/main.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-372">
-              <caret line="52" column="83" lean-forward="false" selection-start-line="52" selection-start-column="83" selection-end-line="52" selection-end-column="83" />
+            <state relative-caret-position="212">
+              <caret line="20" column="70" lean-forward="false" selection-start-line="20" selection-start-column="70" selection-end-line="20" selection-end-column="70" />
               <folding>
                 <element signature="e#731#738#1#HTML" expanded="true" />
-                <element signature="e#2670#2692#0#HTML" expanded="true" />
-                <marker date="1573803246837" expanded="true" signature="9:22" ph="..." />
-                <marker date="1573803246837" expanded="true" signature="33:42" ph="..." />
-                <marker date="1573803246837" expanded="true" signature="3609:4177" ph="..." />
-                <marker date="1573803246837" expanded="true" signature="3642:3651" ph="..." />
-                <marker date="1573803246837" expanded="true" signature="3903:3993" ph="..." />
-                <marker date="1573803246837" expanded="true" signature="4045:4135" ph="..." />
+                <element signature="e#2662#2684#0#HTML" expanded="true" />
+                <marker date="1573835554761" expanded="true" signature="9:22" ph="..." />
+                <marker date="1573835554761" expanded="true" signature="33:42" ph="..." />
+                <marker date="1573835554761" expanded="true" signature="3601:4169" ph="..." />
+                <marker date="1573835554761" expanded="true" signature="3634:3643" ph="..." />
+                <marker date="1573835554761" expanded="true" signature="3895:3985" ph="..." />
+                <marker date="1573835554761" expanded="true" signature="4037:4127" ph="..." />
               </folding>
             </state>
           </provider>
@@ -207,16 +209,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AuthController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/AuthController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="337" column="13" lean-forward="false" selection-start-line="337" selection-start-column="13" selection-end-line="337" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -228,10 +220,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>static</find>
-      <find>/settings/layout/navbar-fixed</find>
-      <find>navbarFixed</find>
-      <find>navbar_fixed</find>
       <find>sidenav</find>
       <find>today</find>
       <find>locked</find>
@@ -257,7 +245,11 @@
       <find>domain</find>
       <find>class=</find>
       <find>for=</find>
+      <find>edit-</find>
+      <find>delete-account-nickname</find>
+      <find>deleteDomainAccountApi</find>
       <find>getDomainsA</find>
+      <find>fetch</find>
     </findStrings>
     <replaceStrings>
       <replace>', '</replace>
@@ -268,6 +260,7 @@
       <replace>class</replace>
       <replace>htmlFor=</replace>
       <replace>className=</replace>
+      <replace>delete-</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/appworks</dir>
@@ -279,7 +272,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/www/webpack.mix.js" />
         <option value="$PROJECT_DIR$/www/public/assets/js/moment-timezone.min.js" />
         <option value="$PROJECT_DIR$/www/app/Observers/UserObserver.php" />
         <option value="$PROJECT_DIR$/www/config/digitalocean.php" />
@@ -325,11 +317,12 @@
         <option value="$PROJECT_DIR$/www/resources/js/app.js" />
         <option value="$PROJECT_DIR$/www/app/Http/Controllers/AuthController.php" />
         <option value="$PROJECT_DIR$/www/app/Libs/GoDaddy.php" />
-        <option value="$PROJECT_DIR$/www/resources/views/pages/domains/main.blade.php" />
         <option value="$PROJECT_DIR$/www/routes/web.php" />
+        <option value="$PROJECT_DIR$/www/resources/views/pages/domains/main.blade.php" />
         <option value="$PROJECT_DIR$/www/app/Http/Controllers/DomainController.php" />
-        <option value="$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js" />
+        <option value="$PROJECT_DIR$/www/resources/js/components/modals/DeleteDomainsAccountsModal.js" />
         <option value="$PROJECT_DIR$/www/resources/js/components/modals/EditDomainsAccountsModal.js" />
+        <option value="$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js" />
       </list>
     </option>
   </component>
@@ -602,6 +595,15 @@
               <item name="metisnet.io-v2" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="www" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="components" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modals" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="metisnet.io-v2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="metisnet.io-v2" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="www" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -714,12 +716,12 @@
       <workItem from="1572832040674" duration="55152000" />
       <workItem from="1573091545231" duration="52803000" />
       <workItem from="1573245456911" duration="62319000" />
-      <workItem from="1573698305506" duration="27302000" />
+      <workItem from="1573698305506" duration="33603000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="197576000" />
+    <option name="totallyTimeSpent" value="203877000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1440" height="877" extended-state="6" />
@@ -778,18 +780,11 @@
           <url>file://$PROJECT_DIR$/www/resources/js/components/ServerMonitors.js</url>
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/www/resources/sass/style.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="1" lean-forward="false" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/ApplicationController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
@@ -1062,14 +1057,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="42" column="38" lean-forward="false" selection-start-line="42" selection-start-column="38" selection-end-line="42" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/resources/js/utils/Utils.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="966">
@@ -1143,23 +1130,6 @@
           <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding>
             <element signature="e#29#55#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/resources/views/pages/domains/main.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-372">
-          <caret line="52" column="83" lean-forward="false" selection-start-line="52" selection-start-column="83" selection-end-line="52" selection-end-column="83" />
-          <folding>
-            <element signature="e#731#738#1#HTML" expanded="true" />
-            <element signature="e#2670#2692#0#HTML" expanded="true" />
-            <marker date="1573803246837" expanded="true" signature="9:22" ph="..." />
-            <marker date="1573803246837" expanded="true" signature="33:42" ph="..." />
-            <marker date="1573803246837" expanded="true" signature="3609:4177" ph="..." />
-            <marker date="1573803246837" expanded="true" signature="3642:3651" ph="..." />
-            <marker date="1573803246837" expanded="true" signature="3903:3993" ph="..." />
-            <marker date="1573803246837" expanded="true" signature="4045:4135" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1258,37 +1228,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="61" column="15" lean-forward="false" selection-start-line="61" selection-start-column="15" selection-end-line="61" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/resources/views/pages/domains/main.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="20" column="70" lean-forward="false" selection-start-line="20" selection-start-column="70" selection-end-line="20" selection-end-column="70" />
+          <folding>
+            <element signature="e#731#738#1#HTML" expanded="true" />
+            <element signature="e#2662#2684#0#HTML" expanded="true" />
+            <marker date="1573835554761" expanded="true" signature="9:22" ph="..." />
+            <marker date="1573835554761" expanded="true" signature="33:42" ph="..." />
+            <marker date="1573835554761" expanded="true" signature="3601:4169" ph="..." />
+            <marker date="1573835554761" expanded="true" signature="3634:3643" ph="..." />
+            <marker date="1573835554761" expanded="true" signature="3895:3985" ph="..." />
+            <marker date="1573835554761" expanded="true" signature="4037:4127" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="73" column="141" lean-forward="false" selection-start-line="73" selection-start-column="141" selection-end-line="73" selection-end-column="141" />
+        <state relative-caret-position="165">
+          <caret line="74" column="110" lean-forward="false" selection-start-line="74" selection-start-column="88" selection-end-line="74" selection-end-column="110" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/DomainController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="924">
-          <caret line="142" column="15" lean-forward="false" selection-start-line="142" selection-start-column="15" selection-end-line="142" selection-end-column="15" />
+        <state relative-caret-position="451">
+          <caret line="175" column="13" lean-forward="false" selection-start-line="175" selection-start-column="13" selection-end-line="175" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js">
+    <entry file="file://$PROJECT_DIR$/www/resources/js/components/modals/EditDomainsAccountsModal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
+        <state relative-caret-position="165">
+          <caret line="35" column="39" lean-forward="false" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/resources/js/components/modals/DeleteDomainsAccountsModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="75" column="80" lean-forward="false" selection-start-line="75" selection-start-column="80" selection-end-line="75" selection-end-column="80" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/resources/js/components/modals/EditDomainsAccountsModal.js">
+    <entry file="file://$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="81">
+          <caret line="72" column="14" lean-forward="false" selection-start-line="72" selection-start-column="14" selection-end-line="72" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

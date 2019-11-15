@@ -55943,6 +55943,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _modals_EditDomainsAccountsModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modals/EditDomainsAccountsModal */ "./resources/js/components/modals/EditDomainsAccountsModal.js");
+/* harmony import */ var _modals_DeleteDomainsAccountsModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modals/DeleteDomainsAccountsModal */ "./resources/js/components/modals/DeleteDomainsAccountsModal.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55960,6 +55961,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -56066,8 +56068,7 @@ function (_Component) {
 
       this.fetchAuthUser();
       this.fetchDomains();
-      $('.modal').on('hidden.bs.modal', function () {
-        this.fetchDomains();
+      $('.modal').on('hidden.bs.modal', function () {//this.fetchDomains();
       });
       var form = $("#create-account-form");
       var modal = $("#create-domain-account");
@@ -56135,10 +56136,17 @@ function (_Component) {
         className: "ion ion-md-eye"
       }), " Edit") : null, canDelete ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
-        className: "btn btn-danger btn-xs px-2 mx-1"
+        className: "btn btn-danger btn-xs px-2 mx-1",
+        "data-toggle": "modal",
+        "data-target": "#delete-domain-account-modal-" + uid
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "lnr lnr-trash"
-      }), " Delete") : null);
+      }), " Remove") : null);
+    }
+  }, {
+    key: "updateDomains",
+    value: function updateDomains() {
+      this.fetchDomains();
     }
   }, {
     key: "render",
@@ -56215,7 +56223,13 @@ function (_Component) {
           }, "Lorem ipsum dolor sit amet, idque nostro eirmod qui at."))));
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.domains.map(function (domain, index) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_EditDomainsAccountsModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            fetchDomains: _this6.fetchDomains(),
+            updateDomains: _this6.updateDomains.bind(_this6),
+            domain: domain,
+            key: index
+          });
+        }), this.state.domains.map(function (domain, index) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_DeleteDomainsAccountsModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            updateDomains: _this6.updateDomains.bind(_this6),
             domain: domain,
             key: index
           });
@@ -56692,6 +56706,171 @@ if (document.getElementById('single-server-wrapper')) {
 
 /***/ }),
 
+/***/ "./resources/js/components/modals/DeleteDomainsAccountsModal.js":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/modals/DeleteDomainsAccountsModal.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DeleteDomainsAccountsModal; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var DeleteDomainsAccountsModal =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(DeleteDomainsAccountsModal, _Component);
+
+  function DeleteDomainsAccountsModal(props) {
+    var _this;
+
+    _classCallCheck(this, DeleteDomainsAccountsModal);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DeleteDomainsAccountsModal).call(this, props));
+    _this.state = {
+      domain: [],
+      disabled: true
+    };
+    return _this;
+  }
+
+  _createClass(DeleteDomainsAccountsModal, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        domain: this.props.domain
+      });
+    }
+  }, {
+    key: "deleteAccount",
+    value: function deleteAccount(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      var elm = $(event.target);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]('/api/v1' + $(event.target).attr('action')).then(function (res) {
+        console.log(res.data);
+
+        if (res.data.success) {
+          elm.parent().parent().modal('hide');
+
+          _this2.props.updateDomains();
+        }
+      })["catch"](function (err) {//
+      });
+    }
+  }, {
+    key: "matchAccountName",
+    value: function matchAccountName(event) {
+      if ($(event.target).val() === this.props.domain.nickname) {
+        this.setState({
+          disabled: false
+        });
+      } else {
+        this.setState({
+          disabled: true
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal fade",
+        id: "delete-domain-account-modal-" + this.props.domain.uid,
+        tabIndex: "-1",
+        role: "dialog",
+        "aria-labelledby": "delete-exampleModalLabel",
+        "aria-hidden": "true"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-dialog",
+        role: "document"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        "data-uid": this.props.domain.uid,
+        id: "delete-domain-account-form" + this.props.domain.uid,
+        action: "/domains/" + this.props.domain.uid,
+        method: "delete",
+        autoComplete: "off",
+        onSubmit: this.deleteAccount.bind(this)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        className: "modal-title",
+        id: "delete-exampleModalLabel"
+      }, "Remove this account"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        "data-dismiss": "modal",
+        "aria-label": "Close"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "mt-2 mb-4 bg-info p-2 rounded-lg shadow-lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "text-white"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "ion ion-md-information-circle"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "sign-in-error-text",
+        className: "test-white"
+      }, "\xA0 Please type in the name of the account name to confirm."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "delete-account-nickname"
+      }, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        id: "delete-account-nickname",
+        name: "delete-account-nickname",
+        placeholder: "Name",
+        onKeyUp: this.matchAccountName.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        id: "remove-account-btn",
+        type: "submit",
+        className: "btn btn-danger waves-effect w-100",
+        disabled: this.state.disabled
+      }, "Remove Account")))))));
+    }
+  }]);
+
+  return DeleteDomainsAccountsModal;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/modals/EditDomainsAccountsModal.js":
 /*!********************************************************************!*\
   !*** ./resources/js/components/modals/EditDomainsAccountsModal.js ***!
@@ -56750,11 +56929,6 @@ function (_Component) {
       });
     }
   }, {
-    key: "shouldComponentUpdate",
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      return nextState !== this.state;
-    }
-  }, {
     key: "editAccount",
     value: function editAccount(event) {
       var _this2 = this;
@@ -56766,7 +56940,7 @@ function (_Component) {
         if (res.data.success) {
           elm.parent().parent().modal('hide');
 
-          _this2.props.fetchDomains();
+          _this2.props.updateDomains();
         }
       })["catch"](function (err) {//
       });
@@ -56810,12 +56984,12 @@ function (_Component) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "edit-account-nickname"
-      }, "Nickname"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
         type: "text",
         id: "edit-account-nickname",
         name: "edit-account-nickname",
-        placeholder: "Nickname",
+        placeholder: "Name",
         defaultValue: "".concat(this.props.domain.nickname)
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"

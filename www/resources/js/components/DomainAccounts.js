@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import EditDomainsAccountsModal from "./modals/EditDomainsAccountsModal";
+import DeleteDomainsAccountsModal from "./modals/DeleteDomainsAccountsModal";
 
 const AUTH_USER_URL = '/api/v1/auth/';
 const SERVER_SERVICE_URL = '/api/v1/domains/';
@@ -69,7 +70,7 @@ export default class DomainAccounts extends Component {
         this.fetchDomains();
 
         $('.modal').on('hidden.bs.modal', function () {
-            this.fetchDomains();
+            //this.fetchDomains();
         });
 
         let form = $("#create-account-form");
@@ -128,16 +129,21 @@ export default class DomainAccounts extends Component {
             <div className={"d-block"}>
                 { canEdit ? (
                     <button type={"button"}
-                            className={"btn px-2 btn-xs btn-warning mx-1"} data-toggle="modal"
-                            data-target={"#edit-domain-account-modal-" + uid}>
+                            className={"btn px-2 btn-xs btn-warning mx-1"}
+                            data-toggle="modal" data-target={"#edit-domain-account-modal-" + uid}>
                         <span className="ion ion-md-eye"></span> Edit</button>
                 ): null }
                 { canDelete ?  (
-                    <button type={"button"} className={"btn btn-danger btn-xs px-2 mx-1"}>
-                        <span className="lnr lnr-trash"></span> Delete</button>
+                    <button type={"button"} className={"btn btn-danger btn-xs px-2 mx-1"}
+                            data-toggle="modal" data-target={"#delete-domain-account-modal-" + uid}>
+                        <span className="lnr lnr-trash"></span> Remove</button>
                 ): null}
             </div>
         )
+    }
+
+    updateDomains() {
+        this.fetchDomains();
     }
 
     render() {
@@ -208,9 +214,15 @@ export default class DomainAccounts extends Component {
                     <div>
                         {this.state.domains.map((domain, index) => {
                             return (
-                                <EditDomainsAccountsModal fetchDomains={this.fetchDomains()} domain={domain} key={index}/>
-                            )
+                                <EditDomainsAccountsModal updateDomains={this.updateDomains.bind(this)} domain={domain} key={index}/>
+                            );
                         })}
+                        {this.state.domains.map((domain, index) => {
+                            return (
+                                <DeleteDomainsAccountsModal updateDomains={this.updateDomains.bind(this)} domain={domain} key={index}/>
+                            );
+                        })}
+
                     </div>
 
                 </div>

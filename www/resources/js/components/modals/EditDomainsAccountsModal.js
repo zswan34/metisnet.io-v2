@@ -15,10 +15,6 @@ export default class EditDomainsAccountsModal extends Component {
         })
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextState !== this.state;
-    }
-
     editAccount(event) {
         event.preventDefault();
         const elm = $(event.target);
@@ -27,7 +23,7 @@ export default class EditDomainsAccountsModal extends Component {
             .then((res) => {
                 if (res.data.success) {
                     elm.parent().parent().modal('hide');
-                    this.props.fetchDomains();
+                    this.props.updateDomains();
                 }
             }).catch((err) => {
                 //
@@ -52,9 +48,9 @@ export default class EditDomainsAccountsModal extends Component {
                                 </div>
                                 <div className="modal-body">
                                     <div className="form-group">
-                                        <label htmlFor="edit-account-nickname">Nickname</label>
+                                        <label htmlFor="edit-account-nickname">Name</label>
                                         <input className="form-control" type="text" id="edit-account-nickname"
-                                               name="edit-account-nickname" placeholder="Nickname"
+                                               name="edit-account-nickname" placeholder="Name"
                                         defaultValue={`${this.props.domain.nickname}`}/>
                                     </div>
                                     <div className="form-group">

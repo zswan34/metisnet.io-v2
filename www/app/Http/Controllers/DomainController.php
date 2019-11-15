@@ -158,4 +158,22 @@ class DomainController extends Controller
         }
         return response()->json($response);
     }
+
+    public function deleteDomainAccountApi($uid) {
+       $account = DomainAccount::leftJoin('domain_account_items', 'domain_accounts.id',
+           '=', 'domain_account_items.domain_account_id')
+           ->where('domain_account_items.uid', $uid)->first();
+
+       if ($account) {
+           $account->delete();
+
+           return [
+               'success' => true
+           ];
+       } else {
+           return [
+               'success' => false
+           ];
+       }
+    }
 }
