@@ -115,12 +115,12 @@ export default class DomainAccounts extends Component {
             <div className={"d-block"}>
                 { canEdit ? (
                     <button type={"button"}
-                            className={"btn px-2 btn-xs btn-warning mx-1"}
+                            className={"btn px-2 btn-sm btn-warning mx-1"}
                             data-toggle="modal" data-target={"#edit-domain-account-modal-" + uid}>
                         <span className="ion ion-md-eye"></span> Edit</button>
                 ): null }
                 { canDelete ?  (
-                    <button type={"button"} className={"btn btn-danger btn-xs px-2 mx-1"}
+                    <button type={"button"} className={"btn btn-danger btn-sm px-2 mx-1"}
                             data-toggle="modal" data-target={"#delete-domain-account-modal-" + uid}>
                         <span className="lnr lnr-trash"></span> Remove</button>
                 ): null}

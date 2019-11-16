@@ -56401,14 +56401,14 @@ function (_Component) {
         className: "d-block"
       }, canEdit ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
-        className: "btn px-2 btn-xs btn-warning mx-1",
+        className: "btn px-2 btn-sm btn-warning mx-1",
         "data-toggle": "modal",
         "data-target": "#edit-domain-account-modal-" + uid
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "ion ion-md-eye"
       }), " Edit") : null, canDelete ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
-        className: "btn btn-danger btn-xs px-2 mx-1",
+        className: "btn btn-danger btn-sm px-2 mx-1",
         "data-toggle": "modal",
         "data-target": "#delete-domain-account-modal-" + uid
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -56539,6 +56539,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DomainRecordItem; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _modals_EditRecordItemModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modals/EditRecordItemModal */ "./resources/js/components/modals/EditRecordItemModal.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -56556,6 +56557,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -56597,15 +56599,25 @@ function (_Component) {
     value: function displayControls() {
       var canEdit = this.userHasPermission('edit domain records');
       var canDelete = this.userHasPermission('delete domain records');
+      var name = this.props.record.name;
+
+      if (name === '@') {
+        name = 'aws';
+      }
+
+      if (name === '*') {
+        name = 'apb';
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-block"
       }, canEdit ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        "data-record-name": this.props.record.name,
+        className: "btn px-2 btn-sm btn-warning mx-1",
         onClick: this.editRecord.bind(this),
-        type: "button",
-        className: "btn btn-warning btn-sm px-2 mx-1"
+        "data-toggle": "modal",
+        "data-target": "#edit-record-item-modal-" + name
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "lnr lnr-pencil"
+        className: "ion ion-md-eye"
       }), " Edit") : null, canDelete && this.props.record.name !== '@' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         "data-record-name": this.props.record.name,
         onClick: this.deleteRecord.bind(this),
@@ -56618,7 +56630,8 @@ function (_Component) {
   }, {
     key: "editRecord",
     value: function editRecord(event) {
-      alert($(event.target).data('record-name'));
+      var target = $(event.target).attr('data-target');
+      $(target).modal('show'); //alert($(event.target).data('record-name'))
     }
   }, {
     key: "deleteRecord",
@@ -56672,6 +56685,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../errors/ErrorComponent */ "./resources/js/components/errors/ErrorComponent.js");
 /* harmony import */ var _loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../loading/StandardLoadingComponent */ "./resources/js/components/loading/StandardLoadingComponent.js");
 /* harmony import */ var _DomainRecordItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DomainRecordItem */ "./resources/js/components/domain_components/DomainRecordItem.js");
+/* harmony import */ var _modals_EditRecordItemModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../modals/EditRecordItemModal */ "./resources/js/components/modals/EditRecordItemModal.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -56689,6 +56703,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -56869,7 +56884,13 @@ function (_Component) {
               record: dns,
               key: index
             });
-          })))));
+          })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.records.dns.map(function (dns, index) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_EditRecordItemModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
+              updateRecords: _this4.updateRecords.bind(_this4),
+              record: dns,
+              key: index
+            });
+          })));
         } else {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null);
         }
@@ -57002,12 +57023,21 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-flex justify-content-center mt-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col text-center"
+        className: "lds-css col-6",
+        style: {
+          marginLeft: '25%'
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "sk-rotating-plane sk-primary"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        style: {
+          width: '100%',
+          height: '100%'
+        },
+        className: "lds-ripple"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-primary mt-0",
         style: {
+          marginLeft: '15%',
+          fontSize: '24px',
           fontStyle: 'italic'
         }
       }, "Loading..."))));
@@ -57356,6 +57386,166 @@ function (_Component) {
   }]);
 
   return EditDomainsAccountsModal;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/modals/EditRecordItemModal.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/modals/EditRecordItemModal.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return EditRecordItemModal; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var EditRecordItemModal =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(EditRecordItemModal, _Component);
+
+  function EditRecordItemModal(props) {
+    var _this;
+
+    _classCallCheck(this, EditRecordItemModal);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(EditRecordItemModal).call(this, props));
+    _this.state = {
+      record: _this.props.record,
+      disabled: false
+    };
+    return _this;
+  }
+
+  _createClass(EditRecordItemModal, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        record: this.props.record
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var name = this.props.record.name;
+      var disabled = false;
+
+      if (name === '@') {
+        name = 'aws';
+        disabled = true;
+      }
+
+      if (name === '*') {
+        name = 'apb';
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal fade",
+        id: "edit-record-item-modal-" + name,
+        tabIndex: "-1",
+        role: "dialog",
+        "aria-labelledby": "edit-record-exampleModalLabel",
+        "aria-hidden": "true"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-dialog modal-sm",
+        role: "document"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        "data-uid": this.state.record.name,
+        id: "edit-record-item-form-" + this.state.record.name,
+        action: "/domains/edit",
+        method: "post"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        className: "modal-title",
+        id: "edit-record-exampleModalLabel"
+      }, "Edit this record"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        "data-dismiss": "modal",
+        "aria-label": "Close"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "edit-account-nickname"
+      }, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        id: "edit-record-item-name",
+        name: "edit-record-item-name",
+        placeholder: "Name",
+        defaultValue: "".concat(this.state.record.name),
+        disabled: disabled
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group-prepend"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group-text"
+      }, ".metisnet.io")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "edit-record-item-data",
+        className: "form-label"
+      }, "Host"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        name: "edit-record-item-data",
+        defaultValue: this.state.record.data
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "edit-record-item-type",
+        className: "form-label"
+      }, "Type"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        disabled: true,
+        name: "edit-record-item-type",
+        defaultValue: this.state.record.type
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-default",
+        "data-dismiss": "modal"
+      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-primary"
+      }, "Save changes")))))));
+    }
+  }]);
+
+  return EditRecordItemModal;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 

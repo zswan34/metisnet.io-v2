@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import EditRecordItemModal from "../modals/EditRecordItemModal";
 
 export default class DomainRecordItem extends Component {
     constructor(props) {
@@ -26,12 +27,21 @@ export default class DomainRecordItem extends Component {
         const canEdit = this.userHasPermission('edit domain records');
         const canDelete = this.userHasPermission('delete domain records');
 
+        let name = this.props.record.name;
+        if (name === '@') {
+            name = 'aws'
+        }
+
+        if (name === '*') {
+            name = 'apb'
+        }
         return (
             <div className={"d-block"}>
+
                 {canEdit ? (
-                    <button data-record-name={this.props.record.name} onClick={this.editRecord.bind(this)}
-                            type={"button"} className={"btn btn-warning btn-sm px-2 mx-1"}>
-                        <span className="lnr lnr-pencil"></span> Edit</button>
+                    <button className={"btn px-2 btn-sm btn-warning mx-1"} onClick={this.editRecord.bind(this)}
+                            data-toggle="modal" data-target={"#edit-record-item-modal-" + name}>
+                        <span className="ion ion-md-eye"></span> Edit</button>
                 ) : null}
                 {canDelete && this.props.record.name !== '@' ? (
                     <button data-record-name={this.props.record.name} onClick={this.deleteRecord.bind(this)}
@@ -43,7 +53,9 @@ export default class DomainRecordItem extends Component {
     }
 
     editRecord(event) {
-        alert($(event.target).data('record-name'));
+        let target = $(event.target).attr('data-target');
+        $(target).modal('show');
+        //alert($(event.target).data('record-name'))
     }
 
     deleteRecord(event) {

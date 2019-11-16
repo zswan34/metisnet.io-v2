@@ -29,8 +29,8 @@
       <file leaf-file-name="DomainAccount.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/resources/js/components/domain_components/DomainAccount.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="37" column="42" lean-forward="false" selection-start-line="37" selection-start-column="42" selection-end-line="39" selection-end-column="44" />
+            <state relative-caret-position="1383">
+              <caret line="108" column="46" lean-forward="false" selection-start-line="108" selection-start-column="46" selection-end-line="108" selection-end-column="46" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
                 <marker date="1573851997018" expanded="true" signature="2321:2514" ph="..." />
@@ -43,18 +43,50 @@
       <file leaf-file-name="DomainRecords.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/resources/js/components/domain_components/DomainRecords.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="143" column="77" lean-forward="false" selection-start-line="143" selection-start-column="77" selection-end-line="143" selection-end-column="77" />
+            <state relative-caret-position="1410">
+              <caret line="158" column="17" lean-forward="false" selection-start-line="158" selection-start-column="17" selection-end-line="158" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DomainRecordItem.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DomainRecordItem.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/resources/js/components/domain_components/DomainRecordItem.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="41" column="9" lean-forward="false" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
+            <state relative-caret-position="144">
+              <caret line="41" column="55" lean-forward="false" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EditRecordItemModal.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/resources/js/components/modals/EditRecordItemModal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="851">
+              <caret line="37" column="115" lean-forward="false" selection-start-line="37" selection-start-column="115" selection-end-line="37" selection-end-column="115" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DomainAccounts.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/resources/js/components/domain_components/DomainAccounts.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="117" column="55" lean-forward="false" selection-start-line="117" selection-start-column="55" selection-end-line="117" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EditDomainsAccountsModal.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/resources/js/components/modals/EditDomainsAccountsModal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="797">
+              <caret line="35" column="16" lean-forward="false" selection-start-line="35" selection-start-column="16" selection-end-line="87" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -80,50 +112,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GoDaddy.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/app/Libs/GoDaddy.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="32" column="57" lean-forward="false" selection-start-line="32" selection-start-column="57" selection-end-line="32" selection-end-column="57" />
-              <folding>
-                <element signature="e#29#55#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/routes/web.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="74" column="110" lean-forward="false" selection-start-line="74" selection-start-column="88" selection-end-line="74" selection-end-column="110" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AuthController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/AuthController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="341" column="0" lean-forward="false" selection-start-line="341" selection-start-column="0" selection-end-line="341" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/resources/js/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="21" column="53" lean-forward="false" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
-              <folding>
-                <marker date="1573852386174" expanded="true" signature="24:114" ph="/** First we will load all of this project's JavaScript dependencies which ...*/" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -135,7 +123,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>phone</find>
       <find>forgot</find>
       <find>type</find>
       <find>networ</find>
@@ -165,6 +152,7 @@
       <find>getDomainsA</find>
       <find>domainU</find>
       <find>dnsItems</find>
+      <find>record.</find>
     </findStrings>
     <replaceStrings>
       <replace>', '</replace>
@@ -188,11 +176,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/www/resources/sass/app.scss" />
-        <option value="$PROJECT_DIR$/www/app/Http/Controllers/ServerController.php" />
-        <option value="$PROJECT_DIR$/www/resources/views/server.blade.php" />
-        <option value="$PROJECT_DIR$/www/resources/views/servers.blade.php" />
-        <option value="$PROJECT_DIR$/www/app/Libs/ServerStatus.php" />
         <option value="$PROJECT_DIR$/www/resources/js/components/SingleServerMonitor.js" />
         <option value="$PROJECT_DIR$/www/app/Http/Controllers/UserController.php" />
         <option value="$PROJECT_DIR$/www/resources/views/users.blade.php" />
@@ -232,13 +215,18 @@
         <option value="$PROJECT_DIR$/www/resources/js/components/DomainAccounts.js" />
         <option value="$PROJECT_DIR$/www/resources/js/components/ServerMonitors.js" />
         <option value="$PROJECT_DIR$/www/app/Http/Controllers/DomainController.php" />
-        <option value="$PROJECT_DIR$/www/resources/sass/style.scss" />
         <option value="$PROJECT_DIR$/www/resources/js/components/domain_components/DomainAccountItem.js" />
-        <option value="$PROJECT_DIR$/www/resources/js/components/domain_components/DomainAccount.js" />
         <option value="$PROJECT_DIR$/www/resources/js/components/domain_components/DnsItems.js" />
         <option value="$PROJECT_DIR$/www/resources/js/app.js" />
+        <option value="$PROJECT_DIR$/www/resources/sass/style.scss" />
+        <option value="$PROJECT_DIR$/www/resources/sass/app.scss" />
+        <option value="$PROJECT_DIR$/www/resources/sass/components/loading.scss" />
+        <option value="$PROJECT_DIR$/www/resources/js/components/loading/StandardLoadingComponent.js" />
+        <option value="$PROJECT_DIR$/www/resources/js/components/domain_components/DomainAccount.js" />
         <option value="$PROJECT_DIR$/www/resources/js/components/domain_components/DomainRecords.js" />
+        <option value="$PROJECT_DIR$/www/resources/js/components/modals/EditRecordItemModal.js" />
         <option value="$PROJECT_DIR$/www/resources/js/components/domain_components/DomainRecordItem.js" />
+        <option value="$PROJECT_DIR$/www/resources/js/components/domain_components/DomainAccounts.js" />
       </list>
     </option>
   </component>
@@ -520,6 +508,24 @@
               <item name="metisnet.io-v2" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="www" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="components" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="loading" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="metisnet.io-v2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="metisnet.io-v2" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="www" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="components" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modals" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="metisnet.io-v2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="metisnet.io-v2" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="www" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="sass" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -641,12 +647,12 @@
       <workItem from="1572832040674" duration="55152000" />
       <workItem from="1573091545231" duration="52803000" />
       <workItem from="1573245456911" duration="62319000" />
-      <workItem from="1573698305506" duration="43867000" />
+      <workItem from="1573698305506" duration="49148000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="214141000" />
+    <option name="totallyTimeSpent" value="219422000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1440" height="877" extended-state="6" />
@@ -705,36 +711,11 @@
           <url>file://$PROJECT_DIR$/www/resources/js/components/ServerMonitors.js</url>
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="4" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/www/resources/js/components/SingleServerMonitor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="66" column="56" lean-forward="false" selection-start-line="66" selection-start-column="56" selection-end-line="66" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/app/Libs/ServerStatus.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="31" column="32" lean-forward="false" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appworks/html-demo/pages_users_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="1210" column="27" lean-forward="true" selection-start-line="1210" selection-start-column="0" selection-end-line="1279" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="317">
@@ -976,14 +957,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/resources/js/components/modals/EditDomainsAccountsModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="35" column="39" lean-forward="false" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/resources/js/components/modals/DeleteDomainsAccountsModal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -999,7 +972,7 @@
         <state relative-caret-position="484">
           <caret line="32" column="57" lean-forward="false" selection-start-line="32" selection-start-column="57" selection-end-line="32" selection-end-column="57" />
           <folding>
-            <element signature="e#29#55#0#PHP" expanded="true" />
+            <element signature="e#29#55#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1028,29 +1001,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/resources/js/components/loading/StandardLoadingComponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="29" lean-forward="false" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/resources/js/components/ServerMonitors.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="335">
           <caret line="152" column="24" lean-forward="true" selection-start-line="152" selection-start-column="24" selection-end-line="152" selection-end-column="24" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/resources/js/components/domain_components/DomainAccounts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="222" column="47" lean-forward="false" selection-start-line="222" selection-start-column="47" selection-end-line="222" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1166,34 +1121,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/resources/sass/style.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="11" column="3" lean-forward="false" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/resources/js/components/domain_components/DomainAccountItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-603">
-          <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/resources/js/components/domain_components/DomainAccount.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="37" column="42" lean-forward="false" selection-start-line="37" selection-start-column="42" selection-end-line="39" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-            <marker date="1573851997018" expanded="true" signature="2321:2514" ph="..." />
-            <marker date="1573851997018" expanded="false" signature="2468:2474" ph=" " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/resources/js/components/domain_components/DnsItems.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3588">
@@ -1212,18 +1139,96 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/resources/sass/style.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/resources/sass/app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="29" lean-forward="false" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/resources/sass/components/loading.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="49" column="23" lean-forward="false" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/resources/js/components/loading/StandardLoadingComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="17" column="99" lean-forward="false" selection-start-line="17" selection-start-column="99" selection-end-line="17" selection-end-column="99" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/resources/js/components/domain_components/DomainAccountItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-603">
+          <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/resources/js/components/modals/EditDomainsAccountsModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="797">
+          <caret line="35" column="16" lean-forward="false" selection-start-line="35" selection-start-column="16" selection-end-line="87" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/resources/js/components/domain_components/DomainRecords.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="143" column="77" lean-forward="false" selection-start-line="143" selection-start-column="77" selection-end-line="143" selection-end-column="77" />
+        <state relative-caret-position="1410">
+          <caret line="158" column="17" lean-forward="false" selection-start-line="158" selection-start-column="17" selection-end-line="158" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/resources/js/components/modals/EditRecordItemModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="851">
+          <caret line="37" column="115" lean-forward="false" selection-start-line="37" selection-start-column="115" selection-end-line="37" selection-end-column="115" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/resources/js/components/domain_components/DomainRecordItem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="41" column="9" lean-forward="false" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
+        <state relative-caret-position="144">
+          <caret line="41" column="55" lean-forward="false" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/resources/js/components/domain_components/DomainAccount.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1383">
+          <caret line="108" column="46" lean-forward="false" selection-start-line="108" selection-start-column="46" selection-end-line="108" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <marker date="1573851997018" expanded="true" signature="2321:2514" ph="..." />
+            <marker date="1573851997018" expanded="false" signature="2468:2474" ph=" " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/resources/js/components/domain_components/DomainAccounts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="117" column="55" lean-forward="false" selection-start-line="117" selection-start-column="55" selection-end-line="117" selection-end-column="55" />
           <folding />
         </state>
       </provider>

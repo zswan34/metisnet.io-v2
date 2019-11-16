@@ -7,11 +7,18 @@ export default class StandardLoadingComponent extends Component {
     
     render() {
         return (
+
             <div>
                 <div className="d-flex justify-content-center mt-5">
-                    <div className="col text-center">
-                        <div className="sk-rotating-plane sk-primary"></div>
-                        <h4 className={"text-primary mt-0"} style={{fontStyle: 'italic'}}>Loading...</h4>
+                    <div className="lds-css col-6" style={{marginLeft: '25%'}}>
+                        <div style={{width: '100%', height: '100%'}} className="lds-ripple">
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <p className={"text-primary mt-0"} style={{marginLeft: '15%', fontSize: '24px', fontStyle: 'italic'}}>
+                            Loading...
+                        </p>
+
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ErrorComponent from "../errors/ErrorComponent";
 import StandardLoadingComponent from "../loading/StandardLoadingComponent";
 import DomainRecordItem from "./DomainRecordItem";
+import EditRecordItemModal from "../modals/EditRecordItemModal";
 
 const AUTH_USER_URL = '/api/v1/auth/';
 const DNS_ITEMS_SERVICE_URL = '/api/v1/domains/';
@@ -146,6 +147,13 @@ export default class DomainRecords extends Component {
                                     })}
                                 </div>
                             </div>
+                        </div>
+                        <div>
+                            { this.state.records.dns.map((dns, index) => {
+                                return (
+                                    <EditRecordItemModal updateRecords={this.updateRecords.bind(this)} record={dns} key={index}/>
+                                )
+                            })}
                         </div>
                     </div>
                 )
