@@ -215,11 +215,9 @@
         submitHandler: (form) => {
             let data = $(form).serialize();
             signInError.hide();
-            console.log(data);
             axios.post($(form).attr('action'), data)
                 .then((res) => {
                     const data = res.data;
-                    //console.log(data);
                     if (data.success) {
                         window.location.href = data.redirect;
                     } else {
@@ -227,7 +225,6 @@
                         signInErrorText.text(data.message)
                     }
                 }).catch((err) => {
-                console.log(err.request);
                 if (err.request.status === 500) {
                     signInError.show();
                     signInErrorText.text('An unexpected error occurred. Try refreshing the page.');

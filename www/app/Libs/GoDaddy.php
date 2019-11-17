@@ -66,4 +66,21 @@ class GoDaddy {
         return $domain;
     }
 
+    public function editDnsRecordByTypeAndName($domain, $subdomain, $host) {
+        return [
+            'domain' => $domain,
+            'subdomain' => $subdomain,
+            'host' => $host
+        ];
+        $DNSParams4 = new \GoDaddy\Helper\GoDaddyDNSRecordParams(\GoDaddy\Helper\GoDaddyDNSRecordParams::DNS_KEY_CNAME);
+        $DNSParams4->setName($subdomain);
+        $DNSParams4->setData($host);
+
+        $response = $this->godaddyClient->connectDomains()->editDnsRecordByTypeAndName(
+            $domain,
+            \GoDaddy\Helper\GoDaddyDNSRecordParams::DNS_KEY_CNAME,
+            $subdomain,
+            $DNSParams4
+        );
+    }
 }

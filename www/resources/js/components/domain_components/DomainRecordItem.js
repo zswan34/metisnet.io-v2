@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import EditRecordItemModal from "../modals/EditRecordItemModal";
 
 export default class DomainRecordItem extends Component {
     constructor(props) {
@@ -35,6 +34,9 @@ export default class DomainRecordItem extends Component {
         if (name === '*') {
             name = 'apb'
         }
+
+        name = name.split('.');
+        name = name.join('--');
         return (
             <div className={"d-block"}>
 

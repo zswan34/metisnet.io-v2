@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import ErrorComponent from "../errors/ErrorComponent";
 import StandardLoadingComponent from "../loading/StandardLoadingComponent";
 import DomainRecordItem from "./DomainRecordItem";
@@ -151,7 +152,10 @@ export default class DomainRecords extends Component {
                         <div>
                             { this.state.records.dns.map((dns, index) => {
                                 return (
-                                    <EditRecordItemModal updateRecords={this.updateRecords.bind(this)} record={dns} key={index}/>
+                                    <EditRecordItemModal updateRecords={this.updateRecords.bind(this)}
+                                                         details={this.state.details} account={this.state.account}
+                                                         records={this.state.records} record={dns} key={index}
+                                                         axios={axios}/>
                                 )
                             })}
                         </div>

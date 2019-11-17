@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class EditRecordItemModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
             record: this.props.record,
+            records: this.props.records,
+            account: this.props.account,
+            details: this.props.details,
             disabled: false
         }
     }
@@ -13,6 +17,22 @@ export default class EditRecordItemModal extends Component {
         this.setState({
             record: this.props.record
         })
+    }
+
+    saveRecordItemChanges (event) {
+        event.preventDefault();
+        const uid = this.state.account.uid;
+        const name = $(event.target).data('name');
+        const domain = this.state.details.domain;
+        const string = '&name=' + name + '&uid=' + uid + '&domain=' + domain;
+        const data = $(event.target).serialize() + string;
+
+        axios.post('/api/v1/domains/' + uid + '/' + domain + '/edit-record', data)
+            .then((res) => {
+                console.log(res);
+            }).catch((err) => {
+                console.log(err);
+        });
     }
 
     render() {
@@ -26,13 +46,18 @@ export default class EditRecordItemModal extends Component {
         if (name === '*') {
             name = 'apb'
         }
+
+        name = name.split('.');
+        name = name.join('--');
+        console.log(name);
         return (
             <div>
                 <div className="modal fade" id={"edit-record-item-modal-" + name} tabIndex="-1" role="dialog"
                      aria-labelledby="edit-record-exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-sm" role="document">
-                        <form data-uid={this.state.record.name} id={"edit-record-item-form-" + this.state.record.name}
-                              action={"/domains/edit"} method="post">
+                        <form data-name={this.state.record.name} id={"edit-record-item-form-" + this.state.record.name}
+                              onSubmit={ this.saveRecordItemChanges.bind(this)} action={"/domains/" +
+                        this.state.records.account.uid + "/edit/" + name} method="post">
                             <div className="modal-content">
                                 <div className="modal-header">
                                     <h5 className="modal-title" id="edit-record-exampleModalLabel">Edit this record</h5>
@@ -48,7 +73,7 @@ export default class EditRecordItemModal extends Component {
                                                    name="edit-record-item-name" placeholder="Name"
                                                    defaultValue={`${this.state.record.name}`} disabled={disabled}/>
                                         <div className="input-group-prepend">
-                                            <div className="input-group-text">.metisnet.io</div>
+                                            <div className="input-group-text">.{`${this.state.details.domain}`}</div>
                                         </div>
                                     </div>
 

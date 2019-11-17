@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function() {
             Route::post('/domains/{domain_account_uid}/edit', ['uses' => 'DomainController@editDomainAccountApi'])->name('edit-domain-account-api');
             Route::delete('/domains/{domain_account_uid}', ['uses' => 'DomainController@deleteDomainAccountApi'])->name('delete-domain-account-api');
             Route::get('/domains/{domain_account_uid}/{domain_name}/', ['uses' => 'DomainController@getDomainDnsItemsApi'])->name('get-domain-dns-items-api');
-
+            Route::post('domains/{domain_account_id}/{domain_name}/edit-record', ['uses' => 'DomainController@editDnsRecordByName'])->name('post-edit-dns-record');
             Route::get('/users', ['uses' => 'UserController@getUsersApi'])->name('get-users-api');
 
             Route::get('/servers', ['uses' => 'ServerController@getServerApi'])->name('get-servers-api');

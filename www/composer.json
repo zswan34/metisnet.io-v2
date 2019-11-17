@@ -14,7 +14,6 @@
         "ingria/laravel-x509-auth": "^1.1",
         "pragmarx/google2fa-laravel": "^1.0",
         "projectstage/godaddy-api-wrapper": "^1.0",
-
         "adldap2/adldap2-laravel": "^6.0",
         "fideloper/proxy": "^4.0",
         "forxer/laravel-gravatar": "^1.3",

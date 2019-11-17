@@ -56539,7 +56539,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DomainRecordItem; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _modals_EditRecordItemModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modals/EditRecordItemModal */ "./resources/js/components/modals/EditRecordItemModal.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -56557,7 +56556,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -56609,6 +56607,8 @@ function (_Component) {
         name = 'apb';
       }
 
+      name = name.split('.');
+      name = name.join('--');
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-block"
       }, canEdit ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -56682,10 +56682,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../errors/ErrorComponent */ "./resources/js/components/errors/ErrorComponent.js");
-/* harmony import */ var _loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../loading/StandardLoadingComponent */ "./resources/js/components/loading/StandardLoadingComponent.js");
-/* harmony import */ var _DomainRecordItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DomainRecordItem */ "./resources/js/components/domain_components/DomainRecordItem.js");
-/* harmony import */ var _modals_EditRecordItemModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../modals/EditRecordItemModal */ "./resources/js/components/modals/EditRecordItemModal.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../errors/ErrorComponent */ "./resources/js/components/errors/ErrorComponent.js");
+/* harmony import */ var _loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../loading/StandardLoadingComponent */ "./resources/js/components/loading/StandardLoadingComponent.js");
+/* harmony import */ var _DomainRecordItem__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DomainRecordItem */ "./resources/js/components/domain_components/DomainRecordItem.js");
+/* harmony import */ var _modals_EditRecordItemModal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../modals/EditRecordItemModal */ "./resources/js/components/modals/EditRecordItemModal.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -56703,6 +56705,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -56849,7 +56852,7 @@ function (_Component) {
       var _this4 = this;
 
       if (this.state.hasError) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null);
       } else {
         if (this.state.isLoaded) {
           console.log(this.state);
@@ -56878,21 +56881,25 @@ function (_Component) {
           }, "Subdomains"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "list-group"
           }, this.state.records.dns.map(function (dns, index) {
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DomainRecordItem__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DomainRecordItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
               updateRecords: _this4.updateRecords.bind(_this4),
               user: _this4.state.authUser,
               record: dns,
               key: index
             });
           })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.records.dns.map(function (dns, index) {
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_EditRecordItemModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_EditRecordItemModal__WEBPACK_IMPORTED_MODULE_6__["default"], {
               updateRecords: _this4.updateRecords.bind(_this4),
+              details: _this4.state.details,
+              account: _this4.state.account,
+              records: _this4.state.records,
               record: dns,
-              key: index
+              key: index,
+              axios: axios__WEBPACK_IMPORTED_MODULE_2___default.a
             });
           })));
         } else {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null);
         }
       }
     }
@@ -57404,6 +57411,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return EditRecordItemModal; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -57424,6 +57433,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var EditRecordItemModal =
 /*#__PURE__*/
 function (_Component) {
@@ -57437,6 +57447,9 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(EditRecordItemModal).call(this, props));
     _this.state = {
       record: _this.props.record,
+      records: _this.props.records,
+      account: _this.props.account,
+      details: _this.props.details,
       disabled: false
     };
     return _this;
@@ -57447,6 +57460,21 @@ function (_Component) {
     value: function componentDidMount() {
       this.setState({
         record: this.props.record
+      });
+    }
+  }, {
+    key: "saveRecordItemChanges",
+    value: function saveRecordItemChanges(event) {
+      event.preventDefault();
+      var uid = this.state.account.uid;
+      var name = $(event.target).data('name');
+      var domain = this.state.details.domain;
+      var string = '&name=' + name + '&uid=' + uid + '&domain=' + domain;
+      var data = $(event.target).serialize() + string;
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/v1/domains/' + uid + '/' + domain + '/edit-record', data).then(function (res) {
+        console.log(res);
+      })["catch"](function (err) {
+        console.log(err);
       });
     }
   }, {
@@ -57464,6 +57492,9 @@ function (_Component) {
         name = 'apb';
       }
 
+      name = name.split('.');
+      name = name.join('--');
+      console.log(name);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "modal fade",
         id: "edit-record-item-modal-" + name,
@@ -57475,9 +57506,10 @@ function (_Component) {
         className: "modal-dialog modal-sm",
         role: "document"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        "data-uid": this.state.record.name,
+        "data-name": this.state.record.name,
         id: "edit-record-item-form-" + this.state.record.name,
-        action: "/domains/edit",
+        onSubmit: this.saveRecordItemChanges.bind(this),
+        action: "/domains/" + this.state.records.account.uid + "/edit/" + name,
         method: "post"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "modal-content"
@@ -57513,7 +57545,7 @@ function (_Component) {
         className: "input-group-prepend"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group-text"
-      }, ".metisnet.io")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, ".", "".concat(this.state.details.domain))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "edit-record-item-data",
