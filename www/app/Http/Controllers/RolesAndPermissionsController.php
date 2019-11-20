@@ -84,4 +84,31 @@ class RolesAndPermissionsController extends Controller
 
         return $role->permissions;
     }
+
+    public function createRolesApi() {
+        $name = request('role-name');
+        $desc = request('role-desc');
+        $permissions = [];
+        foreach(request()->all() as $key => $value)
+        {
+
+            $permission = explode('-', $key);
+            if ($permission[0] === 'permission') {
+                unset($permission[0]);
+                $permission = implode(' ', $permission);
+
+                array_push($permissions, $permission);
+            }
+        }
+        $role = Role::create(['name' => $name, 'description' => $desc]);
+
+        foreach($permissions as $permission) {
+            $role->givePermissionTo($permission);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Role created successfully'
+        ]);
+    }
 }

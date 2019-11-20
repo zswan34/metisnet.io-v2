@@ -79,6 +79,7 @@ Route::middleware('auth')->group(function() {
             Route::post('domains/{domain_account_id}/{domain_name}/edit-record', ['uses' => 'DomainController@editDnsRecordByName'])->name('post-edit-dns-record');
 
             Route::get('/roles', ['uses' => 'RolesAndPermissionsController@getRolesApi'])->name('get-roles-api');
+            Route::post('/roles/create', ['uses' => 'RolesAndPermissionsController@createRolesApi'])->name('create-roles-api');
             Route::get('/roles/{uid}', ['uses' => 'RolesAndPermissionsController@getRolesByUidApi'])->name('get-roles-by-uid-api');
             Route::get('/roles/{name}/permissions', ['uses' => 'RolesAndPermissionsController@getPermissionsFromRoleName'])->name('get-permissions-from-role-name');
 

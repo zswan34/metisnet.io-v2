@@ -6,6 +6,7 @@ export default class CreateRoleModal extends Component {
         this.state = {
             isLoaded: false,
             categories: [],
+            updateComponents: this.props.updateComponents,
             allPermissionsByCategory: this.props.allPermissionsByCategory,
         }
     }
@@ -25,7 +26,16 @@ export default class CreateRoleModal extends Component {
 
     createNewRole(event) {
         event.preventDefault();
+        let modal = $('#create-role-modal');
         console.log($(event.target).serialize());
+        axios.post($(event.target).attr('action'), $(event.target).serialize())
+            .then((res) => {
+                if (res.data.success) {
+                    modal.modal('hide');
+                    modal.find('form')[0].reset();
+                    this.state.updateComponents();
+                }
+            })
     }
 
     render() {
@@ -35,7 +45,8 @@ export default class CreateRoleModal extends Component {
                      aria-labelledby="create-role-modal" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
-                            <form onSubmit={this.createNewRole.bind(this)} action={"/api/v1/roles/create"} method={"post"}>
+                            <form onSubmit={this.createNewRole.bind(this)} action={"/api/v1/roles/create"} method={"post"}
+                            autoComplete={"off"}>
                                 <div className="modal-header">
                                     <h5 className="modal-title" id="create-role-modal">Create Role</h5>
                                     <button type="button" className="close" data-dismiss="modal" aria-label="Close">
@@ -67,7 +78,7 @@ export default class CreateRoleModal extends Component {
                                                             return (
                                                                 <div className={"col-6"} key={index}>
                                                                     <label className="custom-control custom-checkbox">
-                                                                        <input type="checkbox" className="custom-control-input" name={"role-" + name}/>
+                                                                        <input type="checkbox" className="custom-control-input" name={"permission-" + name}/>
                                                                             <span className="custom-control-label" style={{fontSize: '.8rem'}}>
                                                                                 {permission.name.toProperCase()}
                                                                             </span>

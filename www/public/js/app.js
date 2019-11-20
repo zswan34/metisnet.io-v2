@@ -55657,7 +55657,6 @@ function (_Component) {
             var textColor = 'text-success';
 
             if (monitor.status !== 2) {
-              backgroundColor = 'bg-danger';
               iconStyle = 'ion ion-ios-trending-down';
             }
 
@@ -57098,6 +57097,7 @@ function (_Component) {
     _this.state = {
       isLoaded: false,
       categories: [],
+      updateComponents: _this.props.updateComponents,
       allPermissionsByCategory: _this.props.allPermissionsByCategory
     };
     return _this;
@@ -57120,13 +57120,24 @@ function (_Component) {
   }, {
     key: "createNewRole",
     value: function createNewRole(event) {
+      var _this2 = this;
+
       event.preventDefault();
+      var modal = $('#create-role-modal');
       console.log($(event.target).serialize());
+      axios.post($(event.target).attr('action'), $(event.target).serialize()).then(function (res) {
+        if (res.data.success) {
+          modal.modal('hide');
+          modal.find('form')[0].reset();
+
+          _this2.state.updateComponents();
+        }
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.state.isLoaded) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -57144,7 +57155,8 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
           onSubmit: this.createNewRole.bind(this),
           action: "/api/v1/roles/create",
-          method: "post"
+          method: "post",
+          autoComplete: "off"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "modal-header"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
@@ -57190,7 +57202,7 @@ function (_Component) {
             key: index
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, category.toProperCase()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "row mb-3"
-          }, _this2.state.allPermissionsByCategory[category].map(function (permission, index) {
+          }, _this3.state.allPermissionsByCategory[category].map(function (permission, index) {
             var name = permission.name.split(' ').join('-');
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "col-6",
@@ -57200,7 +57212,7 @@ function (_Component) {
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
               type: "checkbox",
               className: "custom-control-input",
-              name: "role-" + name
+              name: "permission-" + name
             }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
               className: "custom-control-label",
               style: {
@@ -58204,6 +58216,12 @@ function (_Component) {
       this.fetchRoles();
     }
   }, {
+    key: "updateComponents",
+    value: function updateComponents() {
+      this.allPermissionsByCategory();
+      this.fetchRoles();
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this4 = this;
@@ -58254,7 +58272,17 @@ function (_Component) {
               className: "tab-pane fade " + active,
               id: "role-" + name,
               key: index
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Description", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+              type: 'button',
+              className: "btn btn-outline-danger btn-sm pull-right mx-2"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "lnr lnr-trash"
+            }), " \xA0 Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+              type: 'button',
+              className: "btn btn-warning btn-sm pull-right"
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+              className: "lnr lnr-pencil"
+            }), " \xA0 Edit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
               className: "bg-light"
             }), role.description, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
               className: "mt-5"
@@ -58265,6 +58293,7 @@ function (_Component) {
             }));
           }
         })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_CreateRoleModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          updateComponents: this.updateComponents.bind(this),
           allPermissionsByCategory: this.state.allPermissionsByCategory
         }));
       } else {

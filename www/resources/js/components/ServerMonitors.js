@@ -65,7 +65,6 @@ export default class ServerMonitors extends Component {
                                     let iconStyle = 'ion ion-ios-trending-up';
                                     let textColor = 'text-success';
                                     if (monitor.status !== 2) {
-                                        backgroundColor = 'bg-danger';
                                         iconStyle = 'ion ion-ios-trending-down';
                                     }
                                     return <div className="col-sm-6 col-md-4 col-lg-6 col-xl-4" key={index}>

@@ -47,6 +47,11 @@ export default class RolesAndPermissions extends Component {
         this.fetchRoles();
     }
 
+    updateComponents() {
+        this.allPermissionsByCategory();
+        this.fetchRoles();
+    }
+
     render() {
         if (this.state.isLoaded) {
             return (
@@ -89,7 +94,18 @@ export default class RolesAndPermissions extends Component {
                                     if (this.state.componentIsLoaded) {
                                         return (
                                             <div className={"tab-pane fade " + active} id={"role-" + name} key={index}>
-                                                <h5>Description</h5>
+                                                <h5>Description
+                                                    <button type={'button'} className={"btn btn-outline-danger btn-sm pull-right mx-2"}>
+                                                        <i className="lnr lnr-trash"></i> &nbsp;
+                                                        Delete
+                                                    </button>
+
+                                                    <button type={'button'} className={"btn btn-warning btn-sm pull-right"}>
+                                                        <i className="lnr lnr-pencil"></i> &nbsp;
+                                                        Edit
+                                                    </button>
+                                                </h5>
+
                                                 <hr className={"bg-light"}/>
                                                 {role.description}
                                                 <h5 className={"mt-5"}>Permissions</h5>
@@ -103,7 +119,7 @@ export default class RolesAndPermissions extends Component {
                             </div>
                         </div>
                     </div>
-                    <CreateRoleModal allPermissionsByCategory={this.state.allPermissionsByCategory}/>
+                    <CreateRoleModal updateComponents={this.updateComponents.bind(this)} allPermissionsByCategory={this.state.allPermissionsByCategory}/>
                 </div>
             )
         } else {
