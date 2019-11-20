@@ -30,6 +30,7 @@ export default class EditRecordItemModal extends Component {
         axios.post('/api/v1/domains/' + uid + '/' + domain + '/edit-record', data)
             .then((res) => {
                 console.log(res);
+
             }).catch((err) => {
                 console.log(err);
         });

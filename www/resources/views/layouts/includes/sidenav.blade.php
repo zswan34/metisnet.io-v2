@@ -54,8 +54,9 @@
             </a>
         </li>
 
-        <li class="sidenav-item ">
-            <a href="#" class="sidenav-link"><i class="sidenav-icon pe-7s-lock"></i>
+        <li class="sidenav-item {{ Request::is('roles-and-permissions') ? ' active' : '' }}">
+            <a href="{{ route('get-roles-and-permissions') }}" class="sidenav-link">
+                <i class="sidenav-icon pe-7s-lock"></i>
                 <div>Roles & Permissions</div>
             </a>
         </li>

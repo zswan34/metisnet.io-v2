@@ -178,11 +178,10 @@ class DomainController extends Controller
        }
     }
 
-    public function editDnsRecordByName($uid, $name) {
+    public function editDnsRecordByName($uid, $domain) {
         $response = [];
         $host = request('edit-record-item-data');
         $name = request('name');
-        $uid = request('uid');
         $domain = request('domain');
 
         $account = DomainAccount::leftJoin('domain_account_items', 'domain_accounts.id',
@@ -193,11 +192,10 @@ class DomainController extends Controller
             if ($account->type === 'godaddy') {
                 $godaddy = new GoDaddy($account->api_key, $account->api_secret);
 
-                $dns = $godaddy->editDnsRecordByTypeAndName($domain, $name, $host);
+                $record = $godaddy->editDnsRecordByTypeAndName($domain, $name, $host);
 
-                $response[] = ['domain' => $dns];
             }
-            return request()->json($response);
+            return response()->json($record);
         }
     }
 }

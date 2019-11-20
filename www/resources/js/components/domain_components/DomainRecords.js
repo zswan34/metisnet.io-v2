@@ -150,14 +150,14 @@ export default class DomainRecords extends Component {
                             </div>
                         </div>
                         <div>
-                            { this.state.records.dns.map((dns, index) => {
+                            { /* this.state.records.dns.map((dns, index) => {
                                 return (
                                     <EditRecordItemModal updateRecords={this.updateRecords.bind(this)}
                                                          details={this.state.details} account={this.state.account}
                                                          records={this.state.records} record={dns} key={index}
                                                          axios={axios}/>
                                 )
-                            })}
+                            }) */}
                         </div>
                     </div>
                 )

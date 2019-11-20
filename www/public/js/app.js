@@ -55303,6 +55303,8 @@ __webpack_require__(/*! url-parse */ "./node_modules/url-parse/index.js");
 
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+__webpack_require__(/*! ./prototypes */ "./resources/js/prototypes.js");
 /**
  * Next, we will create a fresh React component instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -55323,6 +55325,8 @@ __webpack_require__(/*! ./components/GodaddyDomainAccounts */ "./resources/js/co
 __webpack_require__(/*! ./components/domain_components/DomainRecords */ "./resources/js/components/domain_components/DomainRecords.js");
 
 __webpack_require__(/*! ./components/AuthUser */ "./resources/js/components/AuthUser.js");
+
+__webpack_require__(/*! ./components/security_components/RolesAndPermissions */ "./resources/js/components/security_components/RolesAndPermissions.js");
 
 /***/ }),
 
@@ -56653,7 +56657,7 @@ function (_Component) {
         className: "d-flex justify-content-between w-100"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         className: "mb-1"
-      }, "".concat(name)), this.displayControls()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "".concat(name))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "small"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Host: ")), " ", "".concat(this.props.record.data)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "small"
@@ -56887,17 +56891,7 @@ function (_Component) {
               record: dns,
               key: index
             });
-          })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.records.dns.map(function (dns, index) {
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_EditRecordItemModal__WEBPACK_IMPORTED_MODULE_6__["default"], {
-              updateRecords: _this4.updateRecords.bind(_this4),
-              details: _this4.state.details,
-              account: _this4.state.account,
-              records: _this4.state.records,
-              record: dns,
-              key: index,
-              axios: axios__WEBPACK_IMPORTED_MODULE_2___default.a
-            });
-          })));
+          })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null));
         } else {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null);
         }
@@ -57581,6 +57575,518 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/security_components/PermissionsFromNameCardItems.js":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/security_components/PermissionsFromNameCardItems.js ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PermissionsFromNameCardItems; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var PermissionsFromNameCardItems =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(PermissionsFromNameCardItems, _Component);
+
+  function PermissionsFromNameCardItems(props) {
+    var _this;
+
+    _classCallCheck(this, PermissionsFromNameCardItems);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PermissionsFromNameCardItems).call(this, props));
+    _this.state = {
+      category: _this.props.category,
+      permissions: _this.props.permissions
+    };
+    return _this;
+  }
+
+  _createClass(PermissionsFromNameCardItems, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, this.state.permissions[this.state.category].contains.map(function (contains, index) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-md-4",
+          key: index
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "lnr lnr-checkmark-circle text-success"
+        }), " \xA0", contains['name'].toProperCase()));
+      }), this.state.permissions[this.state.category].excludes.map(function (excludes, index) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-md-4",
+          key: index
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "lnr lnr-cross-circle text-danger"
+        }), " \xA0", excludes['name'].toProperCase()));
+      }));
+    }
+  }]);
+
+  return PermissionsFromNameCardItems;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/security_components/PermissionsFromRoleName.js":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/security_components/PermissionsFromRoleName.js ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PermissionsFromRoleName; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../loading/StandardLoadingComponent */ "./resources/js/components/loading/StandardLoadingComponent.js");
+/* harmony import */ var _errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../errors/ErrorComponent */ "./resources/js/components/errors/ErrorComponent.js");
+/* harmony import */ var _PermissionsFromRoleNameCards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PermissionsFromRoleNameCards */ "./resources/js/components/security_components/PermissionsFromRoleNameCards.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var PERMISSIONS_SERVICE_URL = '/api/v1/roles/';
+
+var PermissionsFromRoleName =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(PermissionsFromRoleName, _Component);
+
+  function PermissionsFromRoleName(props) {
+    var _this;
+
+    _classCallCheck(this, PermissionsFromRoleName);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PermissionsFromRoleName).call(this, props));
+    _this.state = {
+      hasError: false,
+      isLoaded: false,
+      roleName: _this.props.roleName,
+      categories: [],
+      allPermissionsByCategory: [],
+      permissionsFromRoleNameByCategory: []
+    };
+    return _this;
+  }
+
+  _createClass(PermissionsFromRoleName, [{
+    key: "fetchPermissionsFromRoleNameByCategory",
+    value: function fetchPermissionsFromRoleNameByCategory() {
+      var _this2 = this;
+
+      fetch(PERMISSIONS_SERVICE_URL + this.state.roleName + '/permissions?groupBy=category&filter=compare').then(function (response) {
+        return response.json();
+      }).then(function (result) {
+        return _this2.setState({
+          permissionsFromRoleNameByCategory: result,
+          isLoaded: true
+        });
+      })["catch"](function (error) {
+        return _this2.setState({
+          error: error,
+          isLoaded: false,
+          hasError: true
+        });
+      });
+    }
+  }, {
+    key: "fetchAllPermissionByCategory",
+    value: function fetchAllPermissionByCategory() {
+      var _this3 = this;
+
+      fetch('/api/v1/permissions?groupBy=category').then(function (response) {
+        return response.json();
+      }).then(function (result) {
+        return _this3.setState({
+          allPermissionsByCategory: result,
+          categories: Object.getOwnPropertyNames(result)
+        });
+      })["catch"](function (error) {
+        return _this3.setState({
+          error: error,
+          isLoaded: false,
+          hasError: true
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.fetchAllPermissionByCategory();
+      this.fetchPermissionsFromRoleNameByCategory();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      if (this.state.hasError) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+      } else {
+        if (this.state.isLoaded) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "row"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "w-100"
+          }, this.state.categories.map(function (category, index) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PermissionsFromRoleNameCards__WEBPACK_IMPORTED_MODULE_3__["default"], {
+              category: category,
+              roleName: _this4.state.roleName,
+              permissionsFromRoleNameByCategory: _this4.state.permissionsFromRoleNameByCategory,
+              key: index
+            });
+          })));
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_1__["default"], null);
+        }
+      }
+    }
+  }]);
+
+  return PermissionsFromRoleName;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/security_components/PermissionsFromRoleNameCards.js":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/security_components/PermissionsFromRoleNameCards.js ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PermissionsFromRoleNameCards; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../loading/StandardLoadingComponent */ "./resources/js/components/loading/StandardLoadingComponent.js");
+/* harmony import */ var _PermissionsFromNameCardItems__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PermissionsFromNameCardItems */ "./resources/js/components/security_components/PermissionsFromNameCardItems.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var PERMISSIONS_SERVICE_URL = '/api/v1/roles/';
+
+var PermissionsFromRoleNameCards =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(PermissionsFromRoleNameCards, _Component);
+
+  function PermissionsFromRoleNameCards(props) {
+    var _this;
+
+    _classCallCheck(this, PermissionsFromRoleNameCards);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PermissionsFromRoleNameCards).call(this, props));
+    _this.state = {
+      isLoaded: false,
+      category: _this.props.category,
+      roleName: _this.props.roleName,
+      permissionsFromRoleNameByCategory: _this.props.permissionsFromRoleNameByCategory
+    };
+    return _this;
+  }
+
+  _createClass(PermissionsFromRoleNameCards, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        isLoaded: true
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.state.isLoaded) {
+        var category = this.state.category.split(' ').join('_');
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card mb-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+          className: "card-header"
+        }, this.state.category.toProperCase()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card-body"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card-text"
+        }, this.state.permissionsFromRoleNameByCategory.map(function (permissions, index) {
+          if (permissions.hasOwnProperty(category)) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PermissionsFromNameCardItems__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              permissions: permissions,
+              category: category,
+              key: index
+            });
+          }
+        }))));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_1__["default"], null);
+      }
+    }
+  }]);
+
+  return PermissionsFromRoleNameCards;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/security_components/RolesAndPermissions.js":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/security_components/RolesAndPermissions.js ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RolesAndPermissions; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _PermissionsFromRoleName__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PermissionsFromRoleName */ "./resources/js/components/security_components/PermissionsFromRoleName.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var FETCH_ROLES_URL = '/api/v1/roles';
+
+var RolesAndPermissions =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(RolesAndPermissions, _Component);
+
+  function RolesAndPermissions(props) {
+    var _this;
+
+    _classCallCheck(this, RolesAndPermissions);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(RolesAndPermissions).call(this, props));
+    _this.state = {
+      roles: [],
+      componentIsLoaded: false,
+      allPermissionsNotGrouped: []
+    };
+    return _this;
+  }
+
+  _createClass(RolesAndPermissions, [{
+    key: "fetchAllPermissionsNoGroup",
+    value: function fetchAllPermissionsNoGroup() {
+      var _this2 = this;
+
+      fetch('/api/v1/permissions?only=name').then(function (response) {
+        return response.json();
+      }).then(function (result) {
+        return _this2.setState({
+          allPermissionsNotGrouped: result,
+          componentIsLoaded: true
+        });
+      })["catch"](function (error) {
+        return _this2.setState({
+          error: error,
+          componentIsLoaded: false,
+          hasError: true
+        });
+      });
+    }
+  }, {
+    key: "fetchRoles",
+    value: function fetchRoles() {
+      var _this3 = this;
+
+      fetch(FETCH_ROLES_URL).then(function (response) {
+        return response.json();
+      }).then(function (result) {
+        return _this3.setState({
+          roles: result,
+          isLoaded: true
+        });
+      })["catch"](function (error) {
+        return _this3.setState({
+          error: error,
+          isLoaded: false,
+          hasError: true
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.fetchAllPermissionsNoGroup();
+      this.fetchRoles();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "font-weight-bold py-3 mb-1"
+      }, "Roles & Permissions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-outline-primary mb-3"
+      }, "Create Role"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-3"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "list-group bg-white"
+      }, this.state.roles.map(function (role, index) {
+        var active = 'active';
+
+        if (index !== 0) {
+          active = '';
+        }
+
+        var name = role.name.split(' ').join('-');
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          className: "list-group-item list-group-item-action " + active,
+          id: "role-tab-" + name,
+          "data-toggle": "list",
+          href: "#role-" + name,
+          key: index
+        }, "".concat(role.name.toUpperCase()));
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "tab-content"
+      }, this.state.roles.map(function (role, index) {
+        var active = 'active show';
+
+        if (index !== 0) {
+          active = '';
+        }
+
+        var name = role.name.split(' ').join('-');
+
+        if (_this4.state.componentIsLoaded) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "tab-pane fade " + active,
+            id: "role-" + name,
+            key: index
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+            className: "bg-light"
+          }), role.description, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+            className: "mt-5"
+          }, "Permissions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+            className: "bg-light"
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PermissionsFromRoleName__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            roleName: role.name
+          }));
+        }
+      })))));
+    }
+  }]);
+
+  return RolesAndPermissions;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+if (document.getElementById('roles-and-permissions-wrapper')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RolesAndPermissions, null), document.getElementById('roles-and-permissions-wrapper'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/prototypes.js":
+/*!************************************!*\
+  !*** ./resources/js/prototypes.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+String.prototype.toProperCase = function () {
+  return this.replace(/\w\S*/g, function (txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+};
 
 /***/ }),
 

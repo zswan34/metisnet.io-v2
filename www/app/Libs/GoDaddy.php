@@ -67,20 +67,17 @@ class GoDaddy {
     }
 
     public function editDnsRecordByTypeAndName($domain, $subdomain, $host) {
-        return [
-            'domain' => $domain,
-            'subdomain' => $subdomain,
-            'host' => $host
-        ];
-        $DNSParams4 = new \GoDaddy\Helper\GoDaddyDNSRecordParams(\GoDaddy\Helper\GoDaddyDNSRecordParams::DNS_KEY_CNAME);
+        $DNSParams4 = new \GoDaddy\Helper\GoDaddyDNSRecordParams(\GoDaddy\Helper\GoDaddyDNSRecordParams::DNS_KEY_A);
         $DNSParams4->setName($subdomain);
         $DNSParams4->setData($host);
 
-        $response = $this->godaddyClient->connectDomains()->editDnsRecordByTypeAndName(
+        $response = $this->domains->editDnsRecordByTypeAndName(
             $domain,
-            \GoDaddy\Helper\GoDaddyDNSRecordParams::DNS_KEY_CNAME,
+            \GoDaddy\Helper\GoDaddyDNSRecordParams::DNS_KEY_A,
             $subdomain,
             $DNSParams4
         );
+
+        return response()->json(['response' => $response, 'DNSParams' => $DNSParams4]);
     }
 }

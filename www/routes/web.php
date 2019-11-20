@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function() {
         Route::get('/my-account', ['uses' => 'AccountController@getMyAccount'])->name('get-my-account');
         Route::post('/upload-my-account-avatar', ['uses' => 'UploadController@avatarUpload'])->name('post-avatar-upload');
 
+        Route::get('/roles-and-permissions', ['uses' => 'RolesAndPermissionsController@getRolesAndPermissions'])->name('get-roles-and-permissions');
+
         Route::post('/settings/layout/direction', ['uses' => 'SettingController@direction'])->name('post-settings-layout-direction');
         Route::post('/settings/style/material', ['uses' => 'SettingController@material'])->name('post-settings-style-material');
         Route::post('/settings/layout/style', ['uses' => 'SettingController@layoutStyle'])->name('post-settings-layout-style');
@@ -75,10 +77,18 @@ Route::middleware('auth')->group(function() {
             Route::delete('/domains/{domain_account_uid}', ['uses' => 'DomainController@deleteDomainAccountApi'])->name('delete-domain-account-api');
             Route::get('/domains/{domain_account_uid}/{domain_name}/', ['uses' => 'DomainController@getDomainDnsItemsApi'])->name('get-domain-dns-items-api');
             Route::post('domains/{domain_account_id}/{domain_name}/edit-record', ['uses' => 'DomainController@editDnsRecordByName'])->name('post-edit-dns-record');
-            Route::get('/users', ['uses' => 'UserController@getUsersApi'])->name('get-users-api');
+
+            Route::get('/roles', ['uses' => 'RolesAndPermissionsController@getRolesApi'])->name('get-roles-api');
+            Route::get('/roles/{uid}', ['uses' => 'RolesAndPermissionsController@getRolesByUidApi'])->name('get-roles-by-uid-api');
+            Route::get('/roles/{name}/permissions', ['uses' => 'RolesAndPermissionsController@getPermissionsFromRoleName'])->name('get-permissions-from-role-name');
+
+            Route::get('/permissions', ['uses' => 'RolesAndPermissionsController@getPermissionsApi'])->name('get-permissions-api');
 
             Route::get('/servers', ['uses' => 'ServerController@getServerApi'])->name('get-servers-api');
             Route::get('/servers/{server_id}', ['uses' => 'ServerController@getServerApiShow'])->name('get-servers-api-show');
+
+            Route::get('/users', ['uses' => 'UserController@getUsersApi'])->name('get-users-api');
+
         });
 
     });

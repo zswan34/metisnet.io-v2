@@ -73,7 +73,7 @@ export default class DomainRecordItem extends Component {
             <div className="list-group-item list-group-item-action flex-column align-items-start">
                 <div className="d-flex justify-content-between w-100">
                     <h5 className="mb-1">{`${name}`}</h5>
-                    {this.displayControls()}
+                    {/*this.displayControls()*/}
                 </div>
                 <div className={"small"}><b><i>Host: </i></b> {`${this.props.record.data}`}</div>
                 <div className={"small"}><b><i>Type: </i></b> {`${this.props.record.type}`}</div>

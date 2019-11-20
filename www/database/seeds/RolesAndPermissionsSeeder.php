@@ -25,62 +25,159 @@ class RolesAndPermissionsSeeder extends Seeder
         ];
 
         $permissions = [
-            'add domain records',
-            'edit domain records',
-            'delete domain records',
-            'add domain account',
-            'edit domain account',
-            'delete domain account',
-            'purchase domain',
-            'renew domain',
-            'cancel domain',
-            'purchase domain privacy policy',
-            'remove domain privacy policy',
-            'view files and folders',
-            'download files and folders',
-            'create folders',
-            'upload files and folders',
-            'move files and folders',
-            'copy files and folders',
-            'rename files and folders',
-            'delete files and folders',
-            'share folders',
-            'empty trash',
-            'lock and unlock folders',
-            'change folder settings',
-            'view usage statistics',
-            'change account name',
-            'edit account name',
-            'transfer account ownership',
-            'close account',
-            'invite new user',
-            'create user',
-            'remove user',
-            'appoint admins',
-            'demote admins',
-            'appoint owners',
-            'demote owners',
-            'view invoices',
-            'change billing plan',
-            'add and edit payment method',
-            'add and edit billing details',
-            'billing email alerts',
-            'give special access',
-            'remove special access',
-            'issue certificates',
-            'revoke certificates',
-            'view certificates',
-            'edit user',
-            'edit account',
-            'receive certificate'
+            [
+                'name' => 'add domain records',
+                'category' => 'domain'
+            ], [
+                'name' => 'edit domain records',
+                'category' => 'domain'
+            ], [
+                'name' => 'delete domain records',
+                'category' => 'domain'
+            ], [
+                'name' => 'add domain account',
+                'category' => 'domain'
+            ], [
+                'name' => 'edit domain account',
+                'category' => 'domain'
+            ], [
+                'name' => 'delete domain account',
+                'category' => 'domain'
+            ], [
+                'name' => 'purchase domain',
+                'category' => 'domain'
+            ], [
+                'name' => 'renew domain',
+                'category' => 'domain'
+            ], [
+                'name' => 'cancel domain',
+                'category' => 'domain'
+            ], [
+                'name' => 'purchase domain privacy policy',
+                'category' => 'domain'
+            ], [
+                'name' => 'remove domain privacy policy',
+                'category' => 'domain'
+            ], [
+                'name' => 'view files and folders',
+                'category' => 'files and folders'
+            ], [
+                'name' => 'download files and folders',
+                'category' => 'files and folders'
+            ], [
+                'name' => 'create folders',
+                'category' => 'files and folders'
+            ], [
+                'name' => 'upload files and folders',
+                'category' => 'files and folders'
+            ], [
+                'name' => 'move files and folders',
+                'category' => 'files and folders'
+            ], [
+                'name' => 'copy files and folders',
+                'category' => 'files and folders'
+            ], [
+                'name' => 'rename files and folders',
+                'category' => 'files and folders'
+            ], [
+                'name' => 'delete files and folders',
+                'category' => 'files and folders'
+            ], [
+                'name' => 'share folders',
+                'category' => 'files and folders'
+            ], [
+                'name' => 'empty trash',
+                'category' => 'files and folders'
+            ], [
+                'name' => 'lock and unlock folders',
+                'category' => 'files and folders'
+            ], [
+                'name' => 'change folder settings',
+                'category' => 'files and folders'
+            ], [
+                'name' => 'view usage statistics',
+                'category' => 'systems'
+            ], [
+                'name' => 'change account name',
+                'category' => 'accounts'
+            ], [
+                'name' => 'edit account name',
+                'category' => 'accounts'
+            ], [
+                'name' => 'transfer account ownership',
+                'category' => 'accounts'
+            ], [
+                'name' => 'close account',
+                'category' => 'accounts'
+            ], [
+                'name' => 'invite new user',
+                'category' => 'users'
+            ], [
+                'name' => 'create user',
+                'category' => 'users'
+            ], [
+                'name' => 'remove user',
+                'category' => 'users'
+            ], [
+                'name' => 'appoint admins',
+                'category' => 'users'
+            ], [
+                'name' => 'demote admins',
+                'category' => 'users'
+            ], [
+                'name' => 'appoint owners',
+                'category' => 'users'
+            ], [
+                'name' => 'demote owners',
+                'category' => 'users'
+            ], [
+                'name' => 'view invoices',
+                'category' => 'billing'
+            ], [
+                'name' => 'change billing plan',
+                'category' => 'billing'
+            ], [
+                'name' => 'add and edit payment method',
+                'category' => 'billing'
+            ], [
+                'name' => 'add and edit billing details',
+                'category' => 'billing'
+            ], [
+                'name' => 'billing email alerts',
+                'category' => 'billing'
+            ], [
+                'name' => 'give special access',
+                'category' => 'access'
+            ], [
+                'name' => 'remove special access',
+                'category' => 'access'
+            ], [
+                'name' => 'issue certificates',
+                'category' => 'security'
+            ], [
+                'name' => 'revoke certificates',
+                'category' => 'security'
+            ], [
+                'name' => 'view certificates',
+                'category' => 'security'
+            ], [
+                'name' => 'edit user',
+                'category' => 'users'
+            ], [
+                'name' => 'edit account',
+                'category' => 'accounts'
+            ], [
+                'name' => 'receive certificate',
+                'category' => 'security'
+            ]
         ];
 
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::create($permission);
         }
         foreach ($apps as $app)
         {
-            Permission::create(['name' => $app]);
+            Permission::create(['name' => $app, 'category' => 'extras']);
         }
 
         //$primary_owner = Role::create(['name' => 'primary-owner']);

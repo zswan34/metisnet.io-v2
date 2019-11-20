@@ -30,6 +30,7 @@
         "react-fade-in": "^0.1.6",
         "react-loading": "^2.0.3",
         "react-lottie": "^1.2.3",
+        "underscore": "^1.9.1",
         "url-parse": "^1.4.7",
         "vue": "^2.6.10",
         "which-browser": "^0.5.0"
