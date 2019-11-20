@@ -41,13 +41,12 @@ export default class PermissionsFromRoleNameCard extends Component {
             )
         } else {
             if (this.state.isLoaded) {
-                const categories = Object.getOwnPropertyNames(this.state.permissions);
                 return (
                     <div className={"row"}>
                         <div className={"w-100"}>
                             {this.state.permissions.map((permission, index) => {
                                 return (
-                                    <div className="col-4" key={index}>
+                                    <div className="col-lg-4 col-md-6" key={index}>
                                         <div className="card mb-4">
                                             <div className="card-body">
                                                 {permission.name.toProperCase()}

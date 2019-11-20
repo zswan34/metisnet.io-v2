@@ -48,7 +48,7 @@ export default class EditDomainsAccountsModal extends Component {
                                 </div>
                                 <div className="modal-body">
                                     <div className="form-group">
-                                        <label htmlFor="edit-account-nickname">Name</label>
+                                        <label className={"form-label"} htmlFor="edit-account-nickname">Name</label>
                                         <input className="form-control" type="text" id="edit-account-nickname"
                                                name="edit-account-nickname" placeholder="Name"
                                         defaultValue={`${this.props.domain.nickname}`}/>
