@@ -27,37 +27,37 @@ class RolesAndPermissionsSeeder extends Seeder
         $permissions = [
             [
                 'name' => 'add domain records',
-                'category' => 'domain'
+                'category' => 'domains'
             ], [
                 'name' => 'edit domain records',
-                'category' => 'domain'
+                'category' => 'domains'
             ], [
                 'name' => 'delete domain records',
-                'category' => 'domain'
+                'category' => 'domains'
             ], [
                 'name' => 'add domain account',
-                'category' => 'domain'
+                'category' => 'domains'
             ], [
                 'name' => 'edit domain account',
-                'category' => 'domain'
+                'category' => 'domains'
             ], [
                 'name' => 'delete domain account',
-                'category' => 'domain'
+                'category' => 'domains'
             ], [
                 'name' => 'purchase domain',
-                'category' => 'domain'
+                'category' => 'domains'
             ], [
                 'name' => 'renew domain',
-                'category' => 'domain'
+                'category' => 'domains'
             ], [
                 'name' => 'cancel domain',
-                'category' => 'domain'
+                'category' => 'domains'
             ], [
                 'name' => 'purchase domain privacy policy',
-                'category' => 'domain'
+                'category' => 'domains'
             ], [
                 'name' => 'remove domain privacy policy',
-                'category' => 'domain'
+                'category' => 'domains'
             ], [
                 'name' => 'view files and folders',
                 'category' => 'files and folders'
@@ -161,24 +161,45 @@ class RolesAndPermissionsSeeder extends Seeder
                 'name' => 'view certificates',
                 'category' => 'security'
             ], [
-                'name' => 'edit user',
+                'name' => 'edit users',
                 'category' => 'users'
             ], [
-                'name' => 'edit account',
+                'name' => 'edit accounts',
                 'category' => 'accounts'
             ], [
-                'name' => 'receive certificate',
+                'name' => 'receive certificates',
                 'category' => 'security'
+            ], [
+                'name' => 'edit roles',
+                'category' => 'roles and permissions'
+            ], [
+                'name' => 'delete roles',
+                'category' => 'roles and permissions'
+            ], [
+                'name' => 'add roles',
+                'category' => 'roles and permissions'
+            ],  [
+                'name' => 'assign roles',
+                'category' => 'roles and permissions'
+            ], [
+                'name' => 'revoke roles',
+                'category' => 'roles and permissions'
+            ], [
+                'name' => 'assign permissions',
+                'category' => 'roles and permissions'
+            ], [
+                'name' => 'revoke permissions',
+                'category' => 'roles and permissions'
             ]
         ];
 
         foreach ($permissions as $permission) {
             Permission::create($permission);
         }
-        foreach ($apps as $app)
+        /*foreach ($apps as $app)
         {
             Permission::create(['name' => $app, 'category' => 'extras']);
-        }
+        }*/
 
         //$primary_owner = Role::create(['name' => 'primary-owner']);
         //$primary_owner->givePermissionTo(Permission::all());

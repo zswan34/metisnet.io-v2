@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('otp_secret')->nullable();
             $table->boolean('otp_exemption')->default(0);
             $table->longText('google2fa_secret')->nullable();
-            $table->boolean('pkcs12')->default(0);
+            $table->timestamp('pkcs12')->nullable();
             $table->string('api_token')->nullable();
             $table->timestamp('last_login')->nullable();
             $table->boolean('locked')->default(false);
@@ -49,6 +49,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('timezone_id')->nullable();
             $table->unsignedBigInteger('avatar_file_id')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
 

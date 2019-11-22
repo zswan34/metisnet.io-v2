@@ -35,6 +35,11 @@ class RolesAndPermissionsController extends Controller
         return response()->json($user->getRoleNames());
     }
 
+    public function getRolesDetails($name) {
+        $role = Role::where('name', $name)->first();
+        return response()->json($role);
+    }
+
     public function getPermissionsFromRoleName($roleName) {
 
         $role = Role::where('name', $roleName)->first();
@@ -111,4 +116,48 @@ class RolesAndPermissionsController extends Controller
             'message' => 'Role created successfully'
         ]);
     }
+
+    public function editRolesApi($name) {
+        $name = request('edit-role-name');
+        $desc = request('edit-role-desc');
+        $permissions = [];
+
+        foreach(request()->all() as $key => $value)
+        {
+            $permission = explode('-', $key);
+            if ($permission[1] === 'permissions') {
+                unset($permission[0]);
+                unset($permission[1]);
+                $permission = implode(' ', $permission);
+
+                array_push($permissions, $permission);
+            }
+        }
+
+        $role = Role::where('name', $name)->first();
+        $role->update(['description' => $desc]);
+        $role->save();
+
+        foreach(Permission::all() as $permission) {
+            if ($role->hasPermissionTo($permission)) {
+                $role->revokePermissionTo($permission);
+            }
+        }
+
+        foreach($permissions as $permission) {
+            $role->givePermissionTo($permission);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Role created successfully'
+        ]);
+    }
+
+    public function deleteRolesApi($name) {
+        $role = Role::where('name', $name)->first();
+        $role->delete();
+        return ['success' => true, 'message' => "Role deleted"];
+    }
+
 }

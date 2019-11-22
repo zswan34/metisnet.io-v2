@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import StandardLoadingComponent from "../loading/StandardLoadingComponent";
 import ErrorComponent from "../errors/ErrorComponent";
 import PermissionsFromRoleNameCards from "./PermissionsFromRoleNameCards";
+import EditRoleModal from "../modals/EditRoleModal";
 
 const PERMISSIONS_SERVICE_URL = '/api/v1/roles/';
 
@@ -13,6 +14,7 @@ export default class PermissionsFromRoleName extends Component {
             hasError: false,
             isLoaded: false,
             roleName: this.props.roleName,
+            role: this.props.role,
             categories: [],
             allPermissionsByCategory: [],
             permissionsFromRoleNameByCategory: []
@@ -45,6 +47,11 @@ export default class PermissionsFromRoleName extends Component {
             )
             .catch(error => this.setState({error, isLoaded: false, hasError: true}));
     }
+    updateMainComponents() {
+        this.fetchAllPermissionByCategory();
+        this.fetchPermissionsFromRoleNameByCategory();
+        window.location.href = '/roles-and-permissions';
+    }
 
     componentDidMount() {
         this.fetchAllPermissionByCategory();
@@ -60,6 +67,7 @@ export default class PermissionsFromRoleName extends Component {
         } else {
             if (this.state.isLoaded) {
                 return (
+
                     <div className={"row"}>
                         <div className={"w-100"}>
                             {this.state.categories.map((category, index) => {

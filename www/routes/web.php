@@ -54,20 +54,17 @@ Route::middleware('auth')->group(function() {
         Route::post('/settings/layout/reversed', ['uses' => 'SettingController@reversed'])->name('post-settings-layout-reversed');
         Route::post('/settings/color/theme', ['uses' => 'SettingController@theme'])->name('post-settings-color-theme');
 
-        Route::get('/users', ['uses' => 'UserController@getUsers'])->name('get-users');
+        Route::get('/accounts', ['uses' => 'UserController@getUsers'])->name('get-users');
 
 
         Route::get('/servers', ['uses' => 'ServerController@getServers'])->name('get-servers');
         Route::get('/servers/{server_id}', ['uses' => 'ServerController@getServer'])->name('get-server');
 
-        Route::get('/users', ['uses' => 'UserController@getUsers'])->name('get-users');
-
         Route::get('/settings', ['uses' => 'ApplicationController@getApplicationSettings'])->name('get-application-settings');
-
-
         Route::get('/{account_uid}', ['uses' => 'AccountController@getAccount'])->name('get-account');
 
         Route::prefix('/api/v1')->group(function() {
+            Route::get('/users', ['uses' => 'UserController@getUsersApi'])->name('get-users-api');
 
             Route::get('/auth', ['uses' => 'AuthController@getAuthUserApi'])->name('get-auth-user-api');
 
@@ -80,6 +77,9 @@ Route::middleware('auth')->group(function() {
 
             Route::get('/roles', ['uses' => 'RolesAndPermissionsController@getRolesApi'])->name('get-roles-api');
             Route::post('/roles/create', ['uses' => 'RolesAndPermissionsController@createRolesApi'])->name('create-roles-api');
+            Route::post('/roles/{roles_name}/edit', ['uses' => 'RolesAndPermissionsController@editRolesApi'])->name('edit-roles-api');
+            Route::delete('/roles/{roles_name}/edit', ['uses' => 'RolesAndPermissionsController@deleteRolesApi'])->name('delete-roles-api');
+            Route::get('/roles/{role_name}/details', ['uses' => 'RolesAndPermissionsController@getRolesDetails'])->name('get-roles-details');
             Route::get('/roles/{uid}', ['uses' => 'RolesAndPermissionsController@getRolesByUidApi'])->name('get-roles-by-uid-api');
             Route::get('/roles/{name}/permissions', ['uses' => 'RolesAndPermissionsController@getPermissionsFromRoleName'])->name('get-permissions-from-role-name');
 
@@ -88,7 +88,6 @@ Route::middleware('auth')->group(function() {
             Route::get('/servers', ['uses' => 'ServerController@getServerApi'])->name('get-servers-api');
             Route::get('/servers/{server_id}', ['uses' => 'ServerController@getServerApiShow'])->name('get-servers-api-show');
 
-            Route::get('/users', ['uses' => 'UserController@getUsersApi'])->name('get-users-api');
 
         });
 

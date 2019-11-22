@@ -12,10 +12,14 @@ class UserTypeSeeder extends Seeder
     public function run()
     {
         $userTypes = [
-            'employee',
-            'user_internal',
-            'user_external',
-            'contractor'
+            'full time',
+            'part time',
+            'affiliate',
+            'contractor',
+            'temporary',
+            'seasonal',
+            'freelancer',
+            'consultant',
         ];
 
         foreach($userTypes as $type) {

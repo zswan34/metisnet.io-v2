@@ -4,7 +4,7 @@
             {{ (auth()->user()->setting->fixed_navbar) ? 'layout-navbar-fixed' : '' }}
             {{ (auth()->user()->setting->fixed_footer) ? 'layout-footer-fixed' : '' }}
             {{ (auth()->user()->setting->reversed) ? 'layout-reversed' : '' }}
-            {{ auth()->user()->setting->layout_style }}"
+            {{ 'layout-' . auth()->user()->setting->layout_style }}"
             dir="{{ (auth()->user()->setting->rtl_direction) ? 'rtl' : 'ltr' }}">
 
 <head>
@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/open-iconic.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/pe-icon-7-stroke.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/spinkit/spinkit.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css') }}">
     @php
         $theme = \App\ColorTheme::find(auth()->user()->setting->color_theme_id);
     @endphp
@@ -144,7 +145,10 @@
 <script src="{{ asset('assets/vendor/libs/bootstrap-select/bootstrap-select.js') }}"></script>
 <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
 <script src="{{ asset('assets/vendor/libs/bootstrap-tagsinput/bootstrap-tagsinput.js') }}"></script>
-
+<script src="{{ asset('assets/vendor/libs/tableexport/tableexport.js') }}"></script>
+<script src="{{ asset('assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
+<script src="{{ asset('assets/vendor/libs/bootstrap-table/bootstrap-table.js') }}"></script>
+<script src="{{ asset('assets/vendor/libs/bootstrap-table/extensions/export/export.js') }}"></script>
 <!-- Demo -->
 <script src="{{ asset('assets/js/demo.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>

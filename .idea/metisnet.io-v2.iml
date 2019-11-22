@@ -24,6 +24,7 @@
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/filp/whoops" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/forxer/gravatar" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/forxer/laravel-gravatar" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/freshbitsweb/laratables" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/fzaninotto/faker" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/gellu/godaddy-api-client" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/geoip/geoip" />
@@ -100,6 +101,7 @@
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/symfony/console" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/symfony/css-selector" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/symfony/debug" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/symfony/error-handler" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/symfony/event-dispatcher" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/symfony/event-dispatcher-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/symfony/finder" />
@@ -126,6 +128,7 @@
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/toin0u/digitalocean-v2" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/yajra/laravel-datatables-oracle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

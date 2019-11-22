@@ -124,6 +124,9 @@
       <path value="$PROJECT_DIR$/www/vendor/bacon/bacon-qr-code" />
       <path value="$PROJECT_DIR$/www/vendor/projectstage/godaddy-api-wrapper" />
       <path value="$PROJECT_DIR$/www/vendor/dasprid/enum" />
+      <path value="$PROJECT_DIR$/www/vendor/yajra/laravel-datatables-oracle" />
+      <path value="$PROJECT_DIR$/www/vendor/freshbitsweb/laratables" />
+      <path value="$PROJECT_DIR$/www/vendor/symfony/error-handler" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

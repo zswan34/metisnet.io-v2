@@ -30,7 +30,7 @@
         @role('member')
         <li class="sidenav-header small font-weight-semibold">METISNET</li>
 
-        <li class="sidenav-item {{ Request::is('users') ? ' active' : '' }}">
+        <li class="sidenav-item {{ Request::is('accounts') ? ' active' : '' }}">
             <a href="{{ route('get-users') }}" class="sidenav-link"><i class="sidenav-icon lnr lnr-users"></i>
                 <div>Accounts</div>
             </a>

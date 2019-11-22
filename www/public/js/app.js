@@ -57408,6 +57408,146 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/modals/DeleteRoleModal.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/modals/DeleteRoleModal.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DeleteRoleModal; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var ROLES_DETAILS = '/api/v1/roles/';
+
+var DeleteRoleModal =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(DeleteRoleModal, _Component);
+
+  function DeleteRoleModal(props) {
+    var _this;
+
+    _classCallCheck(this, DeleteRoleModal);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DeleteRoleModal).call(this, props));
+    _this.state = {
+      isLoaded: false,
+      role: _this.props.roleName,
+      roleDetails: []
+    };
+    return _this;
+  }
+
+  _createClass(DeleteRoleModal, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        isLoaded: true
+      });
+    }
+  }, {
+    key: "deleteRole",
+    value: function deleteRole(event) {
+      event.preventDefault();
+      var roleName = this.state.role.name.replaceChar(' ', '-');
+      var modal = $('#delete-role-modal-' + roleName);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]($(event.target).attr('action')).then(function (res) {
+        if (res.data.success) {
+          modal.modal('hide');
+          modal.find('form')[0].reset();
+          window.location.href = '/roles-and-permissions';
+        }
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.state.isLoaded) {
+        $("#delete-role-button-" + this.state.role.name.replaceChar(' ', '-')).show();
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "modal fade",
+          id: "delete-role-modal-" + this.state.role.name.replaceChar(' ', '-'),
+          tabIndex: "-1",
+          role: "dialog",
+          "aria-labelledby": "edit-role-modal",
+          "aria-hidden": "true"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "modal-dialog",
+          role: "document"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "modal-content"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+          onSubmit: this.deleteRole.bind(this),
+          action: "/api/v1/roles/" + this.state.role.name.replaceChar(' ', '-') + "/edit",
+          method: "post",
+          autoComplete: "off"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "modal-header"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+          className: "modal-title"
+        }, "Delete ", this.state.role.name.toProperCase(), " Role"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          className: "close",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          "aria-hidden": "true"
+        }, "\xD7"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "modal-body"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "form-group"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "form-label",
+          htmlFor: "delete-role-name"
+        }, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          className: "form-control",
+          type: 'text',
+          id: "delete-role-name",
+          name: "delete-role-name"
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "modal-footer mt-3"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "submit",
+          className: "btn btn-danger w-100"
+        }, "Delete Role Role"))))));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      }
+    }
+  }]);
+
+  return DeleteRoleModal;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/modals/EditDomainsAccountsModal.js":
 /*!********************************************************************!*\
   !*** ./resources/js/components/modals/EditDomainsAccountsModal.js ***!
@@ -57770,6 +57910,297 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/modals/EditRoleModal.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/modals/EditRoleModal.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return EditRoleModal; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _EditRoleModalItems__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditRoleModalItems */ "./resources/js/components/modals/EditRoleModalItems.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var ROLES_DETAILS = '/api/v1/roles/';
+
+var EditRoleModal =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(EditRoleModal, _Component);
+
+  function EditRoleModal(props) {
+    var _this;
+
+    _classCallCheck(this, EditRoleModal);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(EditRoleModal).call(this, props));
+    _this.state = {
+      isLoaded: false,
+      role: _this.props.roleName,
+      roleDetails: [],
+      categories: [],
+      permissionsFromRoleNameByCategory: [],
+      allPermissionsByCategory: _this.props.allPermissionsByCategory
+    };
+    return _this;
+  }
+
+  _createClass(EditRoleModal, [{
+    key: "fetchPermissionsFromRoleNameByCategory",
+    value: function fetchPermissionsFromRoleNameByCategory() {
+      var _this2 = this;
+
+      fetch(ROLES_DETAILS + this.state.role.name + '/permissions?groupBy=category&filter=compare').then(function (response) {
+        return response.json();
+      }).then(function (result) {
+        return _this2.setState({
+          permissionsFromRoleNameByCategory: result,
+          isLoaded: true
+        });
+      })["catch"](function (error) {
+        return _this2.setState({
+          error: error,
+          isLoaded: false,
+          hasError: true
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        categories: Object.getOwnPropertyNames(this.state.allPermissionsByCategory)
+      });
+      this.fetchPermissionsFromRoleNameByCategory();
+    }
+  }, {
+    key: "editRole",
+    value: function editRole(event) {
+      event.preventDefault();
+      var roleName = this.state.role.name.replaceChar(' ', '-');
+      var modal = $('#edit-role-modal-' + roleName);
+      axios.post($(event.target).attr('action'), $(event.target).serialize()).then(function (res) {
+        if (res.data.success) {
+          modal.modal('hide');
+          modal.find('form')[0].reset();
+          window.location.href = '/roles-and-permissions';
+        }
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      if (this.state.isLoaded) {
+        $("#edit-role-button-" + this.state.role.name.replaceChar(' ', '-')).show();
+        $("#delete-role-button-" + this.state.role.name.replaceChar(' ', '-')).show();
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "modal fade",
+          id: "edit-role-modal-" + this.state.role.name.replaceChar(' ', '-'),
+          tabIndex: "-1",
+          role: "dialog",
+          "aria-labelledby": "edit-role-modal",
+          "aria-hidden": "true"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "modal-dialog edit-modal-dialog",
+          role: "document"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "modal-content"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+          onSubmit: this.editRole.bind(this),
+          action: "/api/v1/roles/" + this.state.role.name.replaceChar(' ', '-') + "/edit",
+          method: "post",
+          autoComplete: "off"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "modal-header"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+          className: "modal-title"
+        }, "Edit ", this.state.role.name.toProperCase(), " Role"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          className: "close",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          "aria-hidden": "true"
+        }, "\xD7"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "modal-body edit-modal-body"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "hidden",
+          defaultValue: this.state.role.name,
+          name: 'edit-role-name'
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "form-group"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "form-label",
+          htmlFor: "edit-role-desc"
+        }, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+          className: "form-control",
+          id: "edit-role-desc",
+          name: "edit-role-desc",
+          style: {
+            resize: 'none'
+          },
+          rows: "7",
+          defaultValue: this.state.role.description
+        })), this.state.categories.map(function (category, index) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "row mx-1",
+            key: index
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group w-100"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, category.toProperCase()), _this3.state.permissionsFromRoleNameByCategory.map(function (permissions, index) {
+            if (permissions.hasOwnProperty(category.split(' ').join('_'))) {
+              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EditRoleModalItems__WEBPACK_IMPORTED_MODULE_1__["default"], {
+                category: category,
+                permissions: permissions,
+                key: index
+              });
+            }
+          })));
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "modal-footer mt-3"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          className: "btn btn-secondary",
+          "data-dismiss": "modal"
+        }, "Close"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "submit",
+          className: "btn btn-primary"
+        }, "Update Role"))))));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      }
+    }
+  }]);
+
+  return EditRoleModal;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/modals/EditRoleModalItems.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/modals/EditRoleModalItems.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return EditRoleModalItems; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var EditRoleModalItems =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(EditRoleModalItems, _Component);
+
+  function EditRoleModalItems(props) {
+    var _this;
+
+    _classCallCheck(this, EditRoleModalItems);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(EditRoleModalItems).call(this, props));
+    _this.state = {
+      permissions: _this.props.permissions,
+      category: _this.props.category
+    };
+    return _this;
+  }
+
+  _createClass(EditRoleModalItems, [{
+    key: "render",
+    value: function render() {
+      var category = this.state.category.split(' ').join('_');
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, this.state.permissions[category].contains.map(function (contains, index) {
+        var name = contains['name'].replaceChar(' ', '-');
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-md-6",
+          key: index
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "custom-control custom-checkbox"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "checkbox",
+          className: "custom-control-input",
+          id: "edit-permissions-" + name,
+          name: "edit-permissions-" + name,
+          defaultChecked: true
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "custom-control-label"
+        }, contains['name'].toProperCase())));
+      }), this.state.permissions[category].excludes.map(function (excludes, index) {
+        var name = excludes['name'].replaceChar(' ', '-');
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-md-6",
+          key: index
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "custom-control custom-checkbox"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "checkbox",
+          className: "custom-control-input",
+          id: "edit-permissions-" + name,
+          name: "edit-permissions-" + name
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "custom-control-label"
+        }, excludes['name'].toProperCase())));
+      }));
+    }
+  }]);
+
+  return EditRoleModalItems;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/security_components/PermissionsFromNameCardItems.js":
 /*!*************************************************************************************!*\
   !*** ./resources/js/components/security_components/PermissionsFromNameCardItems.js ***!
@@ -57881,6 +58312,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../loading/StandardLoadingComponent */ "./resources/js/components/loading/StandardLoadingComponent.js");
 /* harmony import */ var _errors_ErrorComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../errors/ErrorComponent */ "./resources/js/components/errors/ErrorComponent.js");
 /* harmony import */ var _PermissionsFromRoleNameCards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PermissionsFromRoleNameCards */ "./resources/js/components/security_components/PermissionsFromRoleNameCards.js");
+/* harmony import */ var _modals_EditRoleModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modals/EditRoleModal */ "./resources/js/components/modals/EditRoleModal.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -57903,6 +58335,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var PERMISSIONS_SERVICE_URL = '/api/v1/roles/';
 
 var PermissionsFromRoleName =
@@ -57920,6 +58353,7 @@ function (_Component) {
       hasError: false,
       isLoaded: false,
       roleName: _this.props.roleName,
+      role: _this.props.role,
       categories: [],
       allPermissionsByCategory: [],
       permissionsFromRoleNameByCategory: []
@@ -57966,6 +58400,13 @@ function (_Component) {
           hasError: true
         });
       });
+    }
+  }, {
+    key: "updateMainComponents",
+    value: function updateMainComponents() {
+      this.fetchAllPermissionByCategory();
+      this.fetchPermissionsFromRoleNameByCategory();
+      window.location.href = '/roles-and-permissions';
     }
   }, {
     key: "componentDidMount",
@@ -58124,6 +58565,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PermissionsFromRoleName__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PermissionsFromRoleName */ "./resources/js/components/security_components/PermissionsFromRoleName.js");
 /* harmony import */ var _modals_CreateRoleModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modals/CreateRoleModal */ "./resources/js/components/modals/CreateRoleModal.js");
 /* harmony import */ var _loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../loading/StandardLoadingComponent */ "./resources/js/components/loading/StandardLoadingComponent.js");
+/* harmony import */ var _modals_EditRoleModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../modals/EditRoleModal */ "./resources/js/components/modals/EditRoleModal.js");
+/* harmony import */ var _modals_DeleteRoleModal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../modals/DeleteRoleModal */ "./resources/js/components/modals/DeleteRoleModal.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58147,7 +58590,10 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 var FETCH_ROLES_URL = '/api/v1/roles';
+var AUTH_USER_URL = '/api/v1/auth/';
 
 var RolesAndPermissions =
 /*#__PURE__*/
@@ -58162,27 +58608,59 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(RolesAndPermissions).call(this, props));
     _this.state = {
       roles: [],
+      authUser: [],
+      permissions: [],
       isLoaded: false,
       componentIsLoaded: false,
       allPermissionsByCategory: []
     };
+    _this.permissionFromRole = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     return _this;
   }
 
   _createClass(RolesAndPermissions, [{
+    key: "fetchAuthUser",
+    value: function fetchAuthUser() {
+      var _this2 = this;
+
+      fetch(AUTH_USER_URL).then(function (response) {
+        return response.json();
+      }).then(function (result) {
+        return _this2.setState({
+          authUser: result.auth,
+          permissions: result.auth.permissions
+        });
+      })["catch"](function (error) {
+        return error;
+      });
+    }
+  }, {
+    key: "userHasPermission",
+    value: function userHasPermission(permission) {
+      var match = false;
+
+      for (var i = 0; i < this.state.permissions.length; i++) {
+        if (this.state.permissions[i].name === permission) {
+          match = true;
+        }
+      }
+
+      return match;
+    }
+  }, {
     key: "allPermissionsByCategory",
     value: function allPermissionsByCategory() {
-      var _this2 = this;
+      var _this3 = this;
 
       fetch('/api/v1/permissions?groupBy=category').then(function (response) {
         return response.json();
       }).then(function (result) {
-        return _this2.setState({
+        return _this3.setState({
           allPermissionsByCategory: result,
           componentIsLoaded: true
         });
       })["catch"](function (error) {
-        return _this2.setState({
+        return _this3.setState({
           error: error,
           componentIsLoaded: false,
           hasError: true
@@ -58192,17 +58670,17 @@ function (_Component) {
   }, {
     key: "fetchRoles",
     value: function fetchRoles() {
-      var _this3 = this;
+      var _this4 = this;
 
       fetch(FETCH_ROLES_URL).then(function (response) {
         return response.json();
       }).then(function (result) {
-        return _this3.setState({
+        return _this4.setState({
           roles: result,
           isLoaded: true
         });
       })["catch"](function (error) {
-        return _this3.setState({
+        return _this4.setState({
           error: error,
           isLoaded: false,
           hasError: true
@@ -58212,6 +58690,7 @@ function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.fetchAuthUser();
       this.allPermissionsByCategory();
       this.fetchRoles();
     }
@@ -58222,23 +58701,59 @@ function (_Component) {
       this.fetchRoles();
     }
   }, {
+    key: "displayEditButton",
+    value: function displayEditButton(role) {
+      if (this.userHasPermission('edit roles')) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          id: "edit-role-button-" + role,
+          style: {
+            display: 'none'
+          },
+          type: 'button',
+          className: "btn btn-warning btn-sm pull-right",
+          "data-toggle": "modal",
+          "data-target": "#edit-role-modal-" + role
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "lnr lnr-pencil"
+        }), " \xA0 Edit");
+      }
+    }
+  }, {
+    key: "displayDeleteButton",
+    value: function displayDeleteButton(role) {
+      if (this.userHasPermission('delete roles')) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          id: "delete-role-button-" + role,
+          style: {
+            display: 'none'
+          },
+          type: 'button',
+          className: "btn btn-outline-danger btn-sm pull-right mx-2",
+          "data-toggle": "modal",
+          "data-target": "#delete-role-modal-" + role
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "lnr lnr-trash"
+        }), " \xA0 Delete");
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       if (this.state.isLoaded) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
           className: "font-weight-bold py-3 mb-1"
-        }, "Roles & Permissions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, "Roles & Permissions"), this.userHasPermission('add roles') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: "btn btn-outline-primary mb-3",
           "data-toggle": "modal",
           "data-target": "#create-role-modal"
-        }, "Create Role"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "Create Role") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-3"
+          className: "col-md-3 col-sm-12"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "list-group bg-white"
+          className: "list-group bg-white mb-4"
         }, this.state.roles.map(function (role, index) {
           var active = 'active';
 
@@ -58255,7 +58770,7 @@ function (_Component) {
             key: index
           }, "".concat(role.name.toUpperCase()));
         }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-9"
+          className: "col-md-9 col-sm-12"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "tab-content"
         }, this.state.roles.map(function (role, index) {
@@ -58267,29 +58782,28 @@ function (_Component) {
 
           var name = role.name.split(' ').join('-');
 
-          if (_this4.state.componentIsLoaded) {
+          if (_this5.state.componentIsLoaded) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "tab-pane fade " + active,
               id: "role-" + name,
               key: index
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Description", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-              type: 'button',
-              className: "btn btn-outline-danger btn-sm pull-right mx-2"
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-              className: "lnr lnr-trash"
-            }), " \xA0 Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-              type: 'button',
-              className: "btn btn-warning btn-sm pull-right"
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-              className: "lnr lnr-pencil"
-            }), " \xA0 Edit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Description", _this5.displayDeleteButton(name), _this5.displayEditButton(name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
               className: "bg-light"
             }), role.description, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
               className: "mt-5"
             }, "Permissions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
               className: "bg-light"
             }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PermissionsFromRoleName__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              updateComponents: _this5.updateComponents.bind(_this5),
+              allPermissionsByCategory: _this5.state.allPermissionsByCategory,
+              role: role,
               roleName: role.name
+            }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_EditRoleModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
+              allPermissionsByCategory: _this5.state.allPermissionsByCategory,
+              roleName: role
+            }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_DeleteRoleModal__WEBPACK_IMPORTED_MODULE_6__["default"], {
+              allPermissionsByCategory: _this5.state.allPermissionsByCategory,
+              roleName: role
             }));
           }
         })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_CreateRoleModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -58324,6 +58838,10 @@ String.prototype.toProperCase = function () {
   return this.replace(/\w\S*/g, function (txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
+};
+
+String.prototype.replaceChar = function (search, replace) {
+  return this.split(search).join(replace);
 };
 
 /***/ }),
