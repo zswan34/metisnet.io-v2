@@ -20,4 +20,14 @@ class UserController extends Controller
             ->get();
         return datatables($query)->toJson();
     }
+
+    public function getUserApi($uid)
+    {
+        $query = DB::table('users')
+            ->leftJoin('user_types as ut', 'users.user_type_id', '=', 'ut.id')
+            ->where('users.uid', $uid)
+            ->select('*', 'ut.name as user_type_name', 'users.name as name')
+            ->get();
+        return datatables($query)->toJson();
+    }
 }

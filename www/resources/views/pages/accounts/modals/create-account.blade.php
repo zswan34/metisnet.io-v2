@@ -46,8 +46,32 @@
                             </select>
                         </div>
                         <div class="form-group col-6">
-                            <label for="user-secondary-phone" class="form-label">Secondary Phone</label>
-                            <input class="form-control" type="tel" id="user-secondary-phone" name="user-secondary-phone" />
+                            <label for="user-roles" class="form-label">Roles</label>
+                            <select class="form-contol select2" name="user-roles" id="user-roles" multiple>
+                                @foreach(\Spatie\Permission\Models\Role::all() as $role)
+                                    <option value="{{ str_replace(' ', '_', $role->name) }}">{{ ucwords($role->name) }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label class="switcher">
+                                <input type="checkbox" class="switcher-input" name="user-verification-email">
+                                    <span class="switcher-indicator">
+                                        <span class="switcher-yes"></span>
+                                        <span class="switcher-no"></span>
+                                    </span>
+                                    <span class="switcher-label">Send verification email</span>
+                            </label>
+                            <label class="switcher">
+                                <input type="checkbox" class="switcher-input" name="user-change-password">
+                                <span class="switcher-indicator">
+                                        <span class="switcher-yes"></span>
+                                        <span class="switcher-no"></span>
+                                    </span>
+                                <span class="switcher-label">Change password on login</span>
+                            </label>
                         </div>
                     </div>
                 </div>

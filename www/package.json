@@ -28,6 +28,7 @@
         "jquery-validation": "^1.19.1",
         "react": "^16.11.0",
         "react-fade-in": "^0.1.6",
+        "react-filter-search": "^1.0.8",
         "react-loading": "^2.0.3",
         "react-lottie": "^1.2.3",
         "react-select": "^3.0.8",

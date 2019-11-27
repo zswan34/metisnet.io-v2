@@ -22,3 +22,50 @@
   text-align: center;
   font-size: 8px;
 }
+
+.account-list {
+  max-height: 50vh;
+  position: relative;
+  overflow: auto;
+}
+
+.account-list-item {
+  background: #eaeaea;
+  padding: 10px;
+  cursor: pointer;
+  &:hover{
+    background: #e2e2e2;
+  }
+  &.selected {
+    background: #e2e2e2 !important;
+  }
+}
+
+.account-img-container {
+  width: 50px;
+  height: auto;
+}
+
+.account-img {
+
+}
+
+.account-info {
+
+}
+
+.account-info-name {
+
+}
+
+.account-info-sid {
+
+}
+
+.no-user-selected {
+  margin: 0 auto;
+  width: 100px;
+  position: relative;
+  top: 50%;
+  transform: perspective(1px) translateY(-50%);
+}

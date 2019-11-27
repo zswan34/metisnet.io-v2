@@ -26,7 +26,7 @@ class User extends Authenticatable
         'recovery_email', 'token_2fa', 'token_2fa_expiry', 'change_password',
         'login_attempts', 'login_max_attempts', 'job_and_position_id',
         'disadvantaged', 'google2fa_secret', 'otp_secret', 'otp_exemption',
-        'user_status_id', 'avatar_file_id',
+        'user_status_id', 'avatar_file_id', 'employee'
     ];
 
     /**

@@ -65,6 +65,7 @@ Route::middleware('auth')->group(function() {
 
         Route::prefix('/api/v1')->group(function() {
             Route::get('/users', ['uses' => 'UserController@getUsersApi'])->name('get-users-api');
+            Route::get('/users/{uid}', ['uses' => 'UserController@getUserApi'])->name('get-user-api');
 
             Route::get('/auth', ['uses' => 'AuthController@getAuthUserApi'])->name('get-auth-user-api');
 

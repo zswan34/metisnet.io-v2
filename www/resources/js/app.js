@@ -1,4 +1,4 @@
-
+require('./utils/helpers');
 require('url-parse');
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -8,7 +8,7 @@ require('url-parse');
 
 require('./bootstrap');
 require('./prototypes');
-
+require('react-filter-search');
 /**
  * Next, we will create a fresh React component instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -23,3 +23,5 @@ require('./components/domain_components/DomainRecords');
 require('./components/AuthUser');
 
 require('./components/security_components/RolesAndPermissions');
+
+require('./components/account_components/AccountMain');

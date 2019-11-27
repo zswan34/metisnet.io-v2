@@ -131,7 +131,7 @@ class AuthController extends Controller
                     auth()->user()->update([
                         'ldap_user' => true,
                         'username' => $ldapUser->uid[0],
-                        'pkcs12' => false
+                        'pkcs12' => null
                     ]);
 
                     if (is_null(auth()->user()->email_verified_at)) {
@@ -192,7 +192,7 @@ class AuthController extends Controller
                     auth()->user()->update([
                         'ldap_user' => true,
                         'username' => $ldapUser->uid[0],
-                        'pkcs12' => false
+                        'pkcs12' => null
                     ]);
 
                     if (is_null(auth()->user()->email_verified_at)) {
@@ -271,7 +271,7 @@ class AuthController extends Controller
                     auth()->user()->update([
                         'ldap_user' => true,
                         'username' => $ldapUser->uid[0],
-                        'pkcs12' => false
+                        'pkcs12' => null
                     ]);
                     //auth()->user()->save();
 

@@ -84,7 +84,8 @@
                     {{ config('app.name') }}
                 </div>
                 <div class="links">
-
+                    <a href="{{ route('get-sign-in') }}">Sign In</a>
+                    <a href="{{ route('get-create-account') }}">Register</a>
                 </div>
             </div>
         </div>
