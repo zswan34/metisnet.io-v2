@@ -25,3 +25,4 @@ require('./components/AuthUser');
 require('./components/security_components/RolesAndPermissions');
 
 require('./components/account_components/AccountMain');
+require("./components/account_components/AccountUserMain");

@@ -19,10 +19,9 @@ class Avatar
         {
             if ($user = User::where('email', $email)->first()) {
                 if (!is_null($user->avatar_file_id)) {
-                    $avatar = File::find($user->avatar_file_id);
-                    self::$avatar = url('storage/accounts/' . $user->account->uuid . '/' . $user->uid . '/avatar/' . $avatar->name. '/' . $avatar->original_filename);
+                    self::$avatar = url($user->getAvatarUrl());
                 } else {
-                    self::$avatar = gravatar()->avatar($email);
+                    self::$avatar = gravatar()->avatar($email)->getUrl();
                 }
             } else {
                 self::$avatar = gravatar()->avatar($email);
@@ -32,10 +31,7 @@ class Avatar
         {
             if (auth()->check()) {
                 if (!is_null(auth()->user()->avatar_file_id)) {
-                    $avatar = File::find(auth()->user()->avatar_file_id);
-                    self::$avatar = url('storage/accounts/' . auth()->user()->account->uuid . '/' . auth()->user()->uid . '/avatar/' . $avatar->name . '/' . $avatar->original_filename);
-                    //self::$avatar = Image::make(self::$avatar)->resize(300, 300);
-
+                    self::$avatar = url(auth()->user()->getAvatarUrl());
                 } else {
                     if (gravatar(auth()->user()->email)) {
                         self::$avatar = gravatar(auth()->user()->email);

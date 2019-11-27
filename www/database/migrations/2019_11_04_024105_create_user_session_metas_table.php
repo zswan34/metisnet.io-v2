@@ -36,6 +36,10 @@ class CreateUserSessionMetasTable extends Migration
         Schema::table('user_session_metas', function (Blueprint $table) {
             $table->foreign('timezone_id')->references('id')->on('timezones')->onDelete('cascade');
         });
+
+        Schema::table('user_sessions', function (Blueprint $table) {
+            $table->foreign('user_session_meta_id')->references('id')->on('user_session_metas')->onDelete('cascade');
+        });
     }
 
     /**

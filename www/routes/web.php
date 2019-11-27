@@ -29,7 +29,13 @@ Route::middleware('auth')->group(function() {
     Route::get('/setup', ['uses' => 'AccountController@getSetup'])->name('get-setup');
     Route::post('/setup', ['uses' => 'AccountController@postSetup'])->name('post-setup');
 
+    Route::get('/photos/{user_uid}/{uuid}/{name}/', ['uses' => 'ImageController@getAvatar'])->name('get-avatar');
+
     Route::middleware('setup')->group(function() {
+
+        Route::get('/accounts', ['uses' => 'UserController@getUsers'])->name('get-users');
+        Route::get('/accounts/{uid}', ['uses' => 'UserController@getUser'])->name('get-user');
+
         Route::get('/home', ['uses' => 'AccountController@index'])->name('get-index');
         Route::get('/budgets', ['uses' => 'BudgetController@getBudgets'])->name('get-budgets');
         Route::get('/budgets/builder', ['uses' => 'BudgetController@getBudgetBuilder'])->name('get-budget-builder');
@@ -54,7 +60,6 @@ Route::middleware('auth')->group(function() {
         Route::post('/settings/layout/reversed', ['uses' => 'SettingController@reversed'])->name('post-settings-layout-reversed');
         Route::post('/settings/color/theme', ['uses' => 'SettingController@theme'])->name('post-settings-color-theme');
 
-        Route::get('/accounts', ['uses' => 'UserController@getUsers'])->name('get-users');
 
 
         Route::get('/servers', ['uses' => 'ServerController@getServers'])->name('get-servers');

@@ -27,10 +27,9 @@
         </li>
 
 
-        @role('member')
         <li class="sidenav-header small font-weight-semibold">METISNET</li>
 
-        <li class="sidenav-item {{ Request::is('accounts') ? ' active' : '' }}">
+        <li class="sidenav-item {{ Request::is(['accounts', 'accounts/*']) ? ' active' : '' }}">
             <a href="{{ route('get-users') }}" class="sidenav-link"><i class="sidenav-icon lnr lnr-users"></i>
                 <div>Accounts</div>
             </a>
@@ -67,7 +66,6 @@
                 <div>Settings</div>
             </a>
         </li>
-        @endrole
     </ul>
 </div>
 <!-- / Layout sidenav -->

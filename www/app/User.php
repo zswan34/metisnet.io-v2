@@ -96,9 +96,10 @@ class User extends Authenticatable
 
     public function createSid() {
         $name = explode(' ', $this->getAttribute('name'));
+        $limit = 5;
         if (is_array($name)) {
             if (count($name) >= 2) {
-                if (strlen($name[1]) < 7) {
+                if (strlen($name[1]) < $limit) {
                     $name[1] = substr($name[1], 0, 6);
                 }
 
@@ -112,5 +113,12 @@ class User extends Authenticatable
             }
         }
         return 'error';
+    }
+
+    public function getAvatarUrl() {
+        if (!is_null($this->getAttribute('avatar_file_id'))) {
+            $avatar = File::find($this->getAttribute('avatar_file_id'));
+            return route("get-avatar", ['user_uid' => $this->getAttribute('uid'), 'uuid' => $avatar->uuid, 'name' => $avatar->name]);
+        }
     }
 }

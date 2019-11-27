@@ -8,7 +8,6 @@
             data-toggle="modal" data-target="#create-user-account">
             <span class="ion ion-md-add"></span>&nbsp; Add user</button>
     </h4>
-
     <!-- Filters -->
     <div class="ui-bordered px-4 pt-4 mb-4">
         <div class="form-row align-items-center">
@@ -60,8 +59,6 @@
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Status</th>
-                    <th>LDAP User</th>
-                    <th>PKI Access</th>
                     <th>Type</th>
                 </tr>
                 </thead>
@@ -97,16 +94,6 @@
                     render: (data) => {
                         return (data === null) ? 'Email not verified' :
                             '<i class="lnr lnr-checkmark-circle text-success"></i> Verified';
-                    }
-                },
-                {name: 'has_ldap', data: 'ldap_user',
-                    render: (data) => {
-                        return (data) ? 'Yes' : 'No';
-                    }
-                },
-                {name: 'pkcs12', data: 'pkcs12',
-                    render: (data) => {
-                        return (data !== null) ? 'Yes' : 'False';
                     }
                 },
                 {name: 'user_type_name', data: 'user_type_name',
