@@ -27,6 +27,7 @@
         "jquery": "^3.4.1",
         "jquery-validation": "^1.19.1",
         "react": "^16.11.0",
+        "react-editext": "^3.11.0",
         "react-fade-in": "^0.1.6",
         "react-filter-search": "^1.0.8",
         "react-loading": "^2.0.3",

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import EditText from 'react-editext';
+
 import StandardLoadingComponent from "../loading/StandardLoadingComponent";
 
 const uid = window.location.pathname.split('/')[2];
 const AUTH_USER_URL = '/api/v1/auth/';
 const USER_API_URL = '/api/v1/users/';
+
 export class AccountUserMain extends Component {
     constructor(props) {
         super(props);
@@ -54,9 +57,14 @@ export class AccountUserMain extends Component {
     componentWillMount() {
         this.fetchAuthUser();
         this.fetchUser(uid);
+
+    }
+    onSaveInput(event, field) {
+        console.log(field + ' - ' + event);
     }
 
     render() {
+
         if (!this.state.isLoaded) {
             return (
                 <StandardLoadingComponent/>
@@ -67,7 +75,8 @@ export class AccountUserMain extends Component {
             return (
                 <div className="card mb-4">
                     <div className="card-body">
-                        <div className="media">
+                        <a href="/accounts"><i className="lnr lnr-arrow-left"></i> &nbsp; Go Back</a>
+                        <div className="media mt-2">
                             <img src={user.avatar_url} alt="" style={{height: '80px'}}/>
                                 <div className="media-body pt-2 ml-3">
                                     <h5 className="mb-2">{user.name}</h5>
@@ -103,16 +112,43 @@ export class AccountUserMain extends Component {
                                 <div className="col-6">
                                     <h5 className={"text-center"}>Information</h5>
                                     <div className="mb-2">
-                                        <span className="text-muted">Phone:</span>&nbsp;
-                                        {(user.phone === null) ? 'Not set' : user.phone }
+                                        <span className="text-muted">Phone: &nbsp;</span>
+                                        {(this.userHasPermission('edit users')) ?
+                                            <EditText
+                                                type='text'
+                                                mainContainerClassName={"react-editext-main"}
+                                                onCancel={v => console.log('CANCELLED: ', v)}
+                                                onEditingStart={v => console.log('EDITING STARTED: ', v)}
+                                                onSave={this.onSaveInput.bind(this, 'phone')}
+                                                value={(user.phone === null) ? 'Not set' : user.phone}
+                                            />
+                                        : (user.phone === null) ? 'Not set' : user.phone}
                                     </div>
                                     <div className="mb-2">
                                         <span className="text-muted">Phone Secondary:</span>&nbsp;
-                                        {(user.phone_secondary === null) ? 'Not set' : user.phone_secondary }
+                                        {(this.userHasPermission('edit users')) ?
+                                        <EditText
+                                            type='text'
+                                            mainContainerClassName={"react-editext-main"}
+                                            onCancel={v => console.log('CANCELLED: ', v)}
+                                            onEditingStart={v => console.log('EDITING STARTED: ', v)}
+                                            onSave={this.onSaveInput.bind(this, 'phone_secondary')}
+                                            value={(user.phone_secondary === null) ? 'Not set' : user.phone_secondary}
+                                            />
+                                        : (user.phone_secondary === null) ? 'Not set' : user.phone_secondary}
                                     </div>
                                     <div className="mb-2">
                                         <span className="text-muted">Recover Email:</span>&nbsp;
-                                        {user.recovery_email}
+                                        {(this.userHasPermission('edit users')) ?
+                                            <EditText
+                                                type='text'
+                                                mainContainerClassName={"react-editext-main"}
+                                                onCancel={v => console.log('CANCELLED: ', v)}
+                                                onEditingStart={v => console.log('EDITING STARTED: ', v)}
+                                                onSave={this.onSaveInput.bind(this, 'recovery_email')}
+                                                value={(user.recovery_email === null) ? 'Not set' : user.recovery_email}
+                                            />
+                                        : (user.recovery_email === null) ? 'Not set' : user.recovery_email}
                                     </div>
                                     <div className="mb-2">
                                         <span className="text-muted">LDAP:</span>&nbsp;
