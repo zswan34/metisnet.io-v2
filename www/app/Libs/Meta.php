@@ -27,18 +27,18 @@ class Meta {
                 $userSessionMeta = new UserSessionMeta();
                 $userSessionMeta->user_session_id = '';
                 $userSessionMeta->as = $locationData['as'];
-                $userSessionMeta->city = $locationData->city;
-                $userSessionMeta->country = $locationData->country;
-                $userSessionMeta->countryCode = $locationData->countryCode;
-                $userSessionMeta->isp = $locationData->isp;
-                $userSessionMeta->lat = $locationData->lat;
-                $userSessionMeta->lon = $locationData->lon;
-                $userSessionMeta->org = $locationData->org;
-                $userSessionMeta->query = $locationData->query;
-                $userSessionMeta->region = $locationData->region;
-                $userSessionMeta->regionName = $locationData->regionName;
-                $userSessionMeta->timezone = $locationData->timezone;
-                $userSessionMeta->zip = $locationData->zip;
+                $userSessionMeta->city = $locationData['city'];
+                $userSessionMeta->country = $locationData['country'];
+                $userSessionMeta->countryCode = $locationData['countryCode'];
+                $userSessionMeta->isp = $locationData['isp'];
+                $userSessionMeta->lat = $locationData['lat'];
+                $userSessionMeta->lon = $locationData['lon'];
+                $userSessionMeta->org = $locationData['org'];
+                $userSessionMeta->query = $locationData['query'];
+                $userSessionMeta->region = $locationData['region'];
+                $userSessionMeta->regionName = $locationData['regionName'];
+                $userSessionMeta->timezone = $locationData['timezone'];
+                $userSessionMeta->zip = $locationData['zip'];
                 $userSessionMeta->save();
             }
         }
