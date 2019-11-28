@@ -10,6 +10,7 @@ use App\Observers\SettingObserver;
 use App\Observers\TimezoneObserver;
 use App\Observers\UploadObserver;
 use App\Observers\UserObserver;
+use App\Observers\UserSessionMetaObserver;
 use App\Observers\UserSessionObserver;
 use App\Setting;
 use App\Timezone;
@@ -43,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
         Account::observe(AccountObserver::class);
         UserSession::observe(UserSessionObserver::class);
         Timezone::observe(TimezoneObserver::class);
-        UserSessionMeta::observe(UserSessionMeta::class);
+        UserSessionMeta::observe(UserSessionMetaObserver::class);
         Upload::observe(UploadObserver::class);
         DomainAccountItem::observe(DomainAccountItemObserver::class);
     }
