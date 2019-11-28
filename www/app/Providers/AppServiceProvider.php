@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
         Account::observe(AccountObserver::class);
         UserSession::observe(UserSessionObserver::class);
         Timezone::observe(TimezoneObserver::class);
-        UserSessionMeta::observe(UserSessionObserver::class);
+        UserSessionMeta::observe(UserSessionMeta::class);
         Upload::observe(UploadObserver::class);
         DomainAccountItem::observe(DomainAccountItemObserver::class);
     }
