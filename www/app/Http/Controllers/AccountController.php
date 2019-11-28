@@ -20,7 +20,7 @@ class AccountController extends Controller
 {
     public function index() {
         $locationData = GeoLocate::fetchClient();
-        return response()->json($locationData);
+        return response()->json($locationData->as);
         return view('index');
     }
 
