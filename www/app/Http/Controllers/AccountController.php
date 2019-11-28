@@ -19,7 +19,6 @@ use Jenssegers\Agent\Agent;
 class AccountController extends Controller
 {
     public function index() {
-        return Meta::fromAuthUser();
         return view('index');
     }
 
@@ -45,7 +44,7 @@ class AccountController extends Controller
         ]);
 
         if (auth()->user()->account->save()) {
-            Meta::fromAuthUser();
+            Meta::saveDataFromAuthUser();
 
             $response = [
                 'success' => true,

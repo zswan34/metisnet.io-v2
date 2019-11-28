@@ -8,8 +8,9 @@ use Jenssegers\Agent\Agent;
 
 class Meta {
 
-    public static function fromAuthUser() {
+    public static function saveDataFromAuthUser() {
         if (auth()->check()) {
+
             $agent = new Agent();
             $userSession = new UserSession();
             $userSession->browser = $agent->browser();
@@ -20,6 +21,7 @@ class Meta {
             $userSession->ip_address = request()->getClientIp();
             $userSession->user_id = auth()->user()->id;
             $userSession->save();
+
             if (config('app.env') !== 'local') {
                 $locationData = GeoLocate::fetchClient();
                 $userSessionMeta = new UserSessionMeta();

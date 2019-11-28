@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Adldap\AdldapInterface;
+use App\Libs\Meta;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -59,6 +60,7 @@ class AuthController extends Controller
                     'message' => 'Your account has been locked. Contact your administrator to unlock your account.'
                 ]);
             }
+            Meta::saveDataFromAuthUser();
             $response = [
                 'success' => true,
                 'message' => 'Logged in successfully',
@@ -144,7 +146,7 @@ class AuthController extends Controller
                         'token_2fa_expiry' => Carbon::now()
                     ]);
                     auth()->user()->save();
-
+                    Meta::saveDataFromAuthUser();
                     $response = [
                         'success' => true,
                         'data' => [
@@ -206,6 +208,7 @@ class AuthController extends Controller
                         'token_2fa_expiry' => Carbon::now()
                     ]);
                     auth()->user()->save();
+                    Meta::saveDataFromAuthUser();
                     $response = [
                         'success' => true,
                         'data' => [
@@ -236,6 +239,7 @@ class AuthController extends Controller
                     if($user->save())
                     {
                         auth()->loginUsingid($user->id);
+                        Meta::saveDataFromAuthUser();
                         $response = [
                             'success' => true,
                             'data' => [
@@ -285,6 +289,8 @@ class AuthController extends Controller
                         'token_2fa_expiry' => Carbon::now()
                     ]);
                     auth()->user()->save();
+
+                    Meta::saveDataFromAuthUser();
 
                     $response = [
                         'success' => true,
