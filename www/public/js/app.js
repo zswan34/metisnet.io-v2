@@ -57936,19 +57936,11 @@ function (_Component) {
           className: "mb-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "text-muted"
-        }, "LDAP:"), "\xA0", user.ldap_user), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "mb-2"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "text-muted"
-        }, "Disadvantage:"), "\xA0", user.disadvantaged), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "LDAP:"), "\xA0", user.ldap_user ? 'True' : 'False'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mb-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "text-muted"
         }, "PKI:"), "\xA0", user.pkcs12 !== null ? 'Yes' : 'No'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "mb-4"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "text-muted"
-        }, "Phone:"), "\xA0 +0 (123) 456 7891"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "text-muted"
         }, "Lorem ipsum dolor sit amet, nibh suavitate qualisque ut nam. Ad harum primis electram duo, porro principes ei has.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "col-6"

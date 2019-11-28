@@ -167,19 +167,11 @@ export class AccountUserMain extends Component {
                                     </div>
                                     <div className="mb-2">
                                         <span className="text-muted">LDAP:</span>&nbsp;
-                                        {user.ldap_user}
-                                    </div>
-                                    <div className="mb-2">
-                                        <span className="text-muted">Disadvantage:</span>&nbsp;
-                                        {user.disadvantaged}
+                                        {(user.ldap_user) ? 'True' : 'False'}
                                     </div>
                                     <div className="mb-2">
                                         <span className="text-muted">PKI:</span>&nbsp;
                                         {(user.pkcs12 !== null) ? 'Yes' : 'No'}
-                                    </div>
-                                    <div className="mb-4">
-                                        <span className="text-muted">Phone:</span>&nbsp;
-                                        +0 (123) 456 7891
                                     </div>
                                     <div className="text-muted">
                                         Lorem ipsum dolor sit amet, nibh suavitate qualisque ut nam. Ad harum primis electram duo, porro principes ei has.

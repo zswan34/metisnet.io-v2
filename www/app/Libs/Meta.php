@@ -25,7 +25,7 @@ class Meta {
             if (config('app.env') !== 'local') {
                 $locationData = GeoLocate::fetchClient();
                 $userSessionMeta = new UserSessionMeta();
-                $userSessionMeta->user_session_id = '';
+                $userSessionMeta->user_session_id = $userSession->id;
                 $userSessionMeta->as = $locationData['as'];
                 $userSessionMeta->city = $locationData['city'];
                 $userSessionMeta->country = $locationData['country'];
