@@ -5,3 +5,7 @@ String.prototype.toProperCase = function () {
 String.prototype.replaceChar = function(search, replace) {
     return this.split(search).join(replace);
 };
+
+String.prototype.isEmail = function () {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this);
+};

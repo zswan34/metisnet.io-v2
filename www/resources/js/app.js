@@ -8,6 +8,8 @@ require('url-parse');
 
 require('./bootstrap');
 require('./prototypes');
+require('./location');
+
 require('react-filter-search');
 /**
  * Next, we will create a fresh React component instance and attach it to

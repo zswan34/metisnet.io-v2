@@ -29,16 +29,14 @@ class CreateUserSessionMetasTable extends Migration
             $table->string('org')->nullable();
             $table->string('as')->nullable();
             $table->unsignedBigInteger('timezone_id')->nullable();
+            $table->unsignedBigInteger('user_session_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
 
         Schema::table('user_session_metas', function (Blueprint $table) {
             $table->foreign('timezone_id')->references('id')->on('timezones')->onDelete('cascade');
-        });
-
-        Schema::table('user_sessions', function (Blueprint $table) {
-            $table->foreign('user_session_meta_id')->references('id')->on('user_session_metas')->onDelete('cascade');
+            $table->foreign('user_session_id')->references('id')->on('user_sessions')->onDelete('cascade');
         });
     }
 

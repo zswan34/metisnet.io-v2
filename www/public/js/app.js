@@ -56772,6 +56772,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./prototypes */ "./resources/js/prototypes.js");
 
+__webpack_require__(/*! ./location */ "./resources/js/location.js");
+
 __webpack_require__(/*! react-filter-search */ "./node_modules/react-filter-search/es/index.js");
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -57721,6 +57723,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 var uid = window.location.pathname.split('/')[2];
 var AUTH_USER_URL = '/api/v1/auth/';
+var UPDATE_USER_API = '/api/v1/users/';
 var USER_API_URL = '/api/v1/users/';
 var AccountUserMain =
 /*#__PURE__*/
@@ -57795,9 +57798,24 @@ function (_Component) {
       this.fetchUser(uid);
     }
   }, {
+    key: "updateUser",
+    value: function updateUser(data) {
+      var _this4 = this;
+
+      axios.post(UPDATE_USER_API + this.state.user.uid, data).then(function (res) {
+        if (res.data.success) {
+          _this4.fetchUser(uid);
+        }
+      });
+    }
+  }, {
     key: "onSaveInput",
     value: function onSaveInput(event, field) {
-      console.log(field + ' - ' + event);
+      var data = {
+        field: event,
+        value: field
+      };
+      this.updateUser(data);
     }
   }, {
     key: "render",
@@ -57806,7 +57824,6 @@ function (_Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null);
       } else {
         var user = this.state.user;
-        console.log(user);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "card mb-4"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -57902,6 +57919,10 @@ function (_Component) {
           className: "text-muted"
         }, "Recover Email:"), "\xA0", this.userHasPermission('edit users') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_editext__WEBPACK_IMPORTED_MODULE_2__["default"], {
           type: "text",
+          validation: function validation(v) {
+            return v.isEmail();
+          },
+          validationMessage: "Must be email",
           mainContainerClassName: "react-editext-main",
           onCancel: function onCancel(v) {
             return console.log('CANCELLED: ', v);
@@ -60857,6 +60878,17 @@ if (document.getElementById('roles-and-permissions-wrapper')) {
 
 /***/ }),
 
+/***/ "./resources/js/location.js":
+/*!**********************************!*\
+  !*** ./resources/js/location.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
 /***/ "./resources/js/prototypes.js":
 /*!************************************!*\
   !*** ./resources/js/prototypes.js ***!
@@ -60872,6 +60904,10 @@ String.prototype.toProperCase = function () {
 
 String.prototype.replaceChar = function (search, replace) {
   return this.split(search).join(replace);
+};
+
+String.prototype.isEmail = function () {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this);
 };
 
 /***/ }),

@@ -11,7 +11,7 @@ class UserSessionMeta extends Model
 
     protected $fillable = [
         'status', 'country', 'countryCode', 'region', 'regionName', 'city', 'zip',
-        'lat', 'lon', 'timezone', 'isp', 'org', 'as', 'query'
+        'lat', 'lon', 'timezone', 'isp', 'org', 'as', 'query', 'user_session_id'
     ];
 
 

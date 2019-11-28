@@ -127,6 +127,8 @@
       <path value="$PROJECT_DIR$/www/vendor/yajra/laravel-datatables-oracle" />
       <path value="$PROJECT_DIR$/www/vendor/freshbitsweb/laratables" />
       <path value="$PROJECT_DIR$/www/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/www/vendor/barryvdh/laravel-cors" />
+      <path value="$PROJECT_DIR$/www/vendor/asm89/stack-cors" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

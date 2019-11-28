@@ -22,7 +22,6 @@ class CreateUserSessionsTable extends Migration
             $table->string('platform_version')->nullable();
             $table->string('ip_address')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('user_session_meta_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

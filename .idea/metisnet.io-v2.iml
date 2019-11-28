@@ -7,7 +7,9 @@
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/adldap2/adldap2" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/adldap2/adldap2-laravel" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/anahkiasen/underscore-php" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/asm89/stack-cors" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/bacon/bacon-qr-code" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/barryvdh/laravel-cors" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/dasprid/enum" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/dnoegel/php-xdg-base-dir" />

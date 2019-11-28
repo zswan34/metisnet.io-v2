@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Libs\Avatar;
 use App\User;
+use App\UserSession;
 use App\UserType;
 use Illuminate\Support\Facades\DB;
 
@@ -25,7 +26,11 @@ class UserController extends Controller
             ->get();
 
         foreach($users as $user) {
-            $user->avatar_url = Avatar::render($user->email);;
+            $user->avatar_url = Avatar::render($user->email);
+
+            $user->meta = [
+                'sessions' => UserSession::where('user_id', $user->id)->first()
+            ];
         }
 
         return datatables($users)->toJson();
@@ -41,8 +46,24 @@ class UserController extends Controller
 
         foreach($users as $user) {
             $user->avatar_url = Avatar::render($user->email);;
+            $user->meta = [
+                'sessions' => UserSession::where('user_id', $user->id)->first()
+            ];
         }
-
         return datatables($users)->toJson();
+    }
+    public function postUserApi($uid) {
+        $user = User::findByUid($uid);
+
+        $user->update([
+            request('field') => request('value')
+        ]);
+
+        if ($user->save()) {
+            return [
+                'success' => true,
+                'message' => 'Updated user successfully'
+            ];
+        }
     }
 }

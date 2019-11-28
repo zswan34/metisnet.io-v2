@@ -6,6 +6,7 @@ use App\Account;
 use App\FooterColor;
 use App\Libs\DigitalOcean;
 use App\Libs\GeoLocate;
+use App\Libs\Meta;
 use App\Libs\ServerStatus;
 use App\Libs\Time;
 use App\NavbarColor;
@@ -18,6 +19,7 @@ use Jenssegers\Agent\Agent;
 class AccountController extends Controller
 {
     public function index() {
+        return Meta::fromAuthUser();
         return view('index');
     }
 
@@ -26,6 +28,7 @@ class AccountController extends Controller
     }
 
     public function postSetup() {
+
         $timezone = request('timezone');
         $recoverEmail = request('secondary-email');
         $tz = Timezone::findByValue($timezone);
@@ -42,6 +45,8 @@ class AccountController extends Controller
         ]);
 
         if (auth()->user()->account->save()) {
+            Meta::fromAuthUser();
+
             $response = [
                 'success' => true,
                 'message' => 'Account created successfully'

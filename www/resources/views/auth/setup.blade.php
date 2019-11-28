@@ -17,8 +17,8 @@
                             <small class="form-text text-muted">This is your recovery email</small>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Timezone</label>
-                            <select type="text" class="form-control" name="timezone">
+                            <label class="form-label" for="timezone">Timezone</label>
+                            <select id="timezone" type="text" class="form-control select2" name="timezone">
                                 @foreach(\App\Timezone::all() as $timezone)
                                     @php
                                         $default = '';
@@ -96,6 +96,15 @@
                     console.log(err);
             })
         }
+    });
+
+    $('.select2').each(function() {
+        $(this)
+            .wrap('<div class="position-relative"></div>')
+            .select2({
+                placeholder: 'Select value',
+                dropdownParent: $(this).parent()
+            });
     })
     </script>
 @endsection

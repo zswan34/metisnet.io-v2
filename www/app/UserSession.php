@@ -11,7 +11,7 @@ class UserSession extends Model
 
     protected $fillable = [
         'browser', 'browser_version', 'device', 'platform', 'platform_version',
-        'ip_address', 'user_id', 'user_session_meta_id'
+        'ip_address', 'user_id',
     ];
 
     public function user() {

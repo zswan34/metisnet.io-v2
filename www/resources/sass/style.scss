@@ -74,21 +74,57 @@
 button[editext="edit-button"] {
   color: #000;
   border: none;
+  padding: 0;
+  outline: none;
+
+  &:hover {
+    background: none;
+    outline: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
 }
 button[editext="save-button"] {
+  border: none;
+  padding: 0;
+  outline: none;
+
   &:hover {
-    background: #EAEAEA;
+    background: none;
+    outline: none;
+  }
+
+  &:focus {
+    outline: none;
   }
 }
 button[editext="cancel-button"] {
+  border: none;
+  padding: 0;
+  outline: none;
+
   &:hover {
-    background: crimson;
-    color: #fff;
+    background: none;
+    outline: none;
+  }
+
+  &:focus {
+    outline: none;
   }
 }
 div[editext="view-container"],
 div[editext="edit-container"] {
   display: inline-flex;
+
+  input {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
 }
 
 .react-editext-main {

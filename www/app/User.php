@@ -121,4 +121,8 @@ class User extends Authenticatable
             return route("get-avatar", ['user_uid' => $this->getAttribute('uid'), 'uuid' => $avatar->uuid, 'name' => $avatar->name]);
         }
     }
+
+    public static function findByUid($uid) {
+        return self::where('uid', $uid)->first();
+    }
 }

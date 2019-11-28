@@ -6,6 +6,7 @@ import StandardLoadingComponent from "../loading/StandardLoadingComponent";
 
 const uid = window.location.pathname.split('/')[2];
 const AUTH_USER_URL = '/api/v1/auth/';
+const UPDATE_USER_API = '/api/v1/users/';
 const USER_API_URL = '/api/v1/users/';
 
 export class AccountUserMain extends Component {
@@ -59,8 +60,21 @@ export class AccountUserMain extends Component {
         this.fetchUser(uid);
 
     }
+    updateUser(data) {
+        axios.post(UPDATE_USER_API + this.state.user.uid, data)
+            .then((res) => {
+                if (res.data.success) {
+                    this.fetchUser(uid);
+                }
+            })
+    }
+
     onSaveInput(event, field) {
-        console.log(field + ' - ' + event);
+        let data = {
+            field: event,
+            value: field
+        };
+        this.updateUser(data);
     }
 
     render() {
@@ -71,7 +85,6 @@ export class AccountUserMain extends Component {
             )
         } else {
             const user = this.state.user;
-            console.log(user);
             return (
                 <div className="card mb-4">
                     <div className="card-body">
@@ -142,6 +155,8 @@ export class AccountUserMain extends Component {
                                         {(this.userHasPermission('edit users')) ?
                                             <EditText
                                                 type='text'
+                                                validation={v => v.isEmail()}
+                                                validationMessage={"Must be email"}
                                                 mainContainerClassName={"react-editext-main"}
                                                 onCancel={v => console.log('CANCELLED: ', v)}
                                                 onEditingStart={v => console.log('EDITING STARTED: ', v)}
