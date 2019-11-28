@@ -73,27 +73,27 @@
         <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/AuthController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="137">
-              <caret line="293" column="55" lean-forward="false" selection-start-line="293" selection-start-column="49" selection-end-line="293" selection-end-column="55" />
+              <caret line="295" column="32" lean-forward="false" selection-start-line="295" selection-start-column="25" selection-end-line="295" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AccountController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AccountController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/AccountController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-252">
-              <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+            <state relative-caret-position="150">
+              <caret line="22" column="47" lean-forward="false" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Meta.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Meta.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/app/Libs/Meta.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="20" column="55" lean-forward="true" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
+            <state relative-caret-position="222">
+              <caret line="25" column="49" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding>
                 <element signature="e#29#49#0#PHP" expanded="true" />
               </folding>
@@ -190,7 +190,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>backgroundColor</find>
       <find>record</find>
       <find>.join('-')</find>
       <find>permissionsFromRoleNameByCategory</find>
@@ -220,6 +219,7 @@
       <find>si</find>
       <find>select</find>
       <find>verify</find>
+      <find>success</find>
     </findStrings>
     <replaceStrings>
       <replace>', '</replace>
@@ -270,7 +270,6 @@
         <option value="$PROJECT_DIR$/www/database/migrations/2014_10_12_000000_create_users_table.php" />
         <option value="$PROJECT_DIR$/www/database/migrations/2019_11_22_230952_create_offices_table.php" />
         <option value="$PROJECT_DIR$/www/app/Office.php" />
-        <option value="$PROJECT_DIR$/www/app/Http/Controllers/AuthController.php" />
         <option value="$PROJECT_DIR$/www/resources/views/pages/accounts/modals/create-account.blade.php" />
         <option value="$PROJECT_DIR$/www/database/seeds/UserTableSeeder.php" />
         <option value="$PROJECT_DIR$/www/resources/views/pages/accounts/user-accounts-v2.blade.php" />
@@ -296,8 +295,9 @@
         <option value="$PROJECT_DIR$/www/resources/views/layouts/app-blank.blade.php" />
         <option value="$PROJECT_DIR$/www/resources/js/location.js" />
         <option value="$PROJECT_DIR$/www/resources/views/auth/setup.blade.php" />
-        <option value="$PROJECT_DIR$/www/app/Http/Controllers/AccountController.php" />
         <option value="$PROJECT_DIR$/www/app/Libs/Meta.php" />
+        <option value="$PROJECT_DIR$/www/app/Http/Controllers/AuthController.php" />
+        <option value="$PROJECT_DIR$/www/app/Http/Controllers/AccountController.php" />
       </list>
     </option>
   </component>
@@ -686,7 +686,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="387122000" />
+    <option name="totallyTimeSpent" value="387643000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1440" height="877" extended-state="6" />
@@ -1246,14 +1246,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/AuthController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="293" column="55" lean-forward="false" selection-start-line="293" selection-start-column="49" selection-end-line="293" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/app/UserSession.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="141">
@@ -1262,21 +1254,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/AccountController.php">
+    <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/AuthController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-252">
-          <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+        <state relative-caret-position="137">
+          <caret line="295" column="32" lean-forward="false" selection-start-line="295" selection-start-column="25" selection-end-line="295" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/app/Libs/Meta.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="20" column="55" lean-forward="true" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
+        <state relative-caret-position="222">
+          <caret line="25" column="49" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
             <element signature="e#29#49#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/app/Http/Controllers/AccountController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="22" column="47" lean-forward="false" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>

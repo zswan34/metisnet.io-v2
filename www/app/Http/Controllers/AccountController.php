@@ -19,6 +19,8 @@ use Jenssegers\Agent\Agent;
 class AccountController extends Controller
 {
     public function index() {
+        $locationData = GeoLocate::fetchClient();
+        return response()->json($locationData);
         return view('index');
     }
 
