@@ -23,6 +23,8 @@ class UserObserver
 
         if (config('app.env') === 'local') {
             $geo = 'America/Denver';
+        } else {
+            $geo = $geo['timezone'];
         }
 
         $timezone = Timezone::findByValue($geo);
