@@ -12,6 +12,7 @@ class User extends Authenticatable
 {
     use HasRoles;
     use Notifiable;
+    use SoftDeletes;
 
 
     /**
@@ -26,7 +27,7 @@ class User extends Authenticatable
         'recovery_email', 'token_2fa', 'token_2fa_expiry', 'change_password',
         'login_attempts', 'login_max_attempts', 'job_and_position_id',
         'disadvantaged', 'google2fa_secret', 'otp_secret', 'otp_exemption',
-        'user_status_id', 'avatar_file_id', 'employee'
+        'user_status_id', 'avatar_file_id', 'employee', 'auth_type_id'
     ];
 
     /**
@@ -85,6 +86,10 @@ class User extends Authenticatable
         return $this->setAttribute('locked', false);
     }
 
+    public function getRoles() {
+        return $this->getRoleNames();
+    }
+
     public function userType() {
         return $this->hasOne(UserType::class);
     }
@@ -123,6 +128,7 @@ class User extends Authenticatable
     }
 
     public static function findByUid($uid) {
-        return self::where('uid', $uid)->first();
+        $user = self::where('uid', $uid)->first();
+        return (!is_null($user) ? $user : abort(404));
     }
 }

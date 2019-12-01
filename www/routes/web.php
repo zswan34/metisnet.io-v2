@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function() {
             Route::get('/users', ['uses' => 'UserController@getUsersApi'])->name('get-users-api');
             Route::get('/users/{uid}', ['uses' => 'UserController@getUserApi'])->name('get-user-api');
             Route::post('/users/{uid}', ['uses' => 'UserController@postUserApi'])->name('post-user-api');
+            Route::get('/users/{uid}/activity', ['uses' => 'UserController@getUserActivitiesApi'])->name('get-user-activity-api');
 
             Route::get('/auth', ['uses' => 'AuthController@getAuthUserApi'])->name('get-auth-user-api');
 

@@ -13,7 +13,12 @@ class Ldap {
         self::$ldap = $ldap;
     }
 
-    public static function getListing() {
-        // self::$ldap->search()->listing()->get();
+    public static function getListing()
+    {
+        //
+    }
+
+    public static function getByEmail($email) {
+        return self::$ldap->search()->where('mail', $email)->first();
     }
 }

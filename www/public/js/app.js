@@ -57683,22 +57683,18 @@ if (document.getElementById('user-accounts-wrapper')) {
 
 /***/ }),
 
-/***/ "./resources/js/components/account_components/AccountUserMain.js":
-/*!***********************************************************************!*\
-  !*** ./resources/js/components/account_components/AccountUserMain.js ***!
-  \***********************************************************************/
-/*! exports provided: AccountUserMain */
+/***/ "./resources/js/components/account_components/AccountUserActivity.js":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/account_components/AccountUserActivity.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountUserMain", function() { return AccountUserMain; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AccountUserActivity; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_editext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-editext */ "./node_modules/react-editext/dist/index.es.js");
-/* harmony import */ var _loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../loading/StandardLoadingComponent */ "./resources/js/components/loading/StandardLoadingComponent.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -57716,6 +57712,175 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+var USER_API_URL = '/api/v1/users/';
+
+var AccountUserActivity =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(AccountUserActivity, _Component);
+
+  function AccountUserActivity(props) {
+    var _this;
+
+    _classCallCheck(this, AccountUserActivity);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(AccountUserActivity).call(this, props));
+    _this.state = {
+      errors: null,
+      activities: [],
+      isLoaded: false,
+      hasError: false,
+      user: _this.props.user,
+      authUser: _this.props.authUser
+    };
+    return _this;
+  }
+
+  _createClass(AccountUserActivity, [{
+    key: "fetchActivities",
+    value: function fetchActivities() {
+      var _this2 = this;
+
+      fetch(USER_API_URL + this.props.user.uid + '/activity?limit=10').then(function (response) {
+        return response.json();
+      }).then(function (result) {
+        return _this2.setState({
+          activities: result,
+          isLoaded: true
+        });
+      })["catch"](function (error) {
+        return _this2.setState({
+          errors: error,
+          isLoaded: false,
+          hasError: true
+        });
+      });
+    }
+  }, {
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      this.fetchActivities();
+    }
+  }, {
+    key: "updateActivities",
+    value: function updateActivities() {
+      this.fetchActivities();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.state.isLoaded) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          style: {
+            position: 'relative'
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "text-primary",
+          onClick: this.updateActivities.bind(this),
+          style: {
+            cursor: 'pointer',
+            position: 'absolute',
+            top: '-35px',
+            right: '0px'
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "ion ion-md-refresh"
+        })), this.state.activities.map(function (activity, index) {
+          var timeAgo = moment(activity.created_at);
+
+          if (timeAgo.diff(moment(), 'days') > 2) {
+            timeAgo = moment.tz(activity.created_at, activity.timezone).format('dddd, MMMM Do YYYY');
+          } else {
+            timeAgo = moment.tz(activity.created_at, activity.timezone).fromNow();
+          }
+
+          var bg = '';
+          var icon = 'ion ion-ios-list-box';
+
+          if (activity.log_name === 'auth') {
+            bg = 'bg-success';
+            icon = 'ion ion-ios-unlock';
+          }
+
+          if (activity.log_name === 'auth-failed') {
+            bg = 'bg-danger';
+            icon = 'ion ion-ios-lock';
+          }
+
+          if (activity.log_name === 'user-created') {
+            bg = 'bg-info';
+            icon = 'ion ion-md-person-add';
+          }
+
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "media pb-1 mb-3",
+            key: index
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "account-activity-category " + bg
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: icon
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "media-body ml-3"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "mb-1"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", {
+            className: "font-weight-semibold"
+          }, activity.description), " \xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+            className: "text-muted"
+          }, timeAgo)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+            className: "text-body"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Client IP: ", activity.properties.session.ip_address), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Browser: ", activity.properties.session.browser), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "OS: ", activity.properties.session.platform))));
+        }));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Loading...");
+      }
+    }
+  }]);
+
+  return AccountUserActivity;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/account_components/AccountUserMain.js":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/account_components/AccountUserMain.js ***!
+  \***********************************************************************/
+/*! exports provided: AccountUserMain */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountUserMain", function() { return AccountUserMain; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_editext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-editext */ "./node_modules/react-editext/dist/index.es.js");
+/* harmony import */ var _loading_StandardLoadingComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../loading/StandardLoadingComponent */ "./resources/js/components/loading/StandardLoadingComponent.js");
+/* harmony import */ var _AccountUserActivity__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AccountUserActivity */ "./resources/js/components/account_components/AccountUserActivity.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -57825,128 +57990,215 @@ function (_Component) {
       } else {
         var user = this.state.user;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "card mb-4"
+          className: "row"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card col-md-4 col-sm-12 account-right"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "card-body"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: "/accounts"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "lnr lnr-arrow-left"
-        }), " \xA0 Go Back"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }), " \xA0 Accounts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "media mt-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          className: "m-auto text-center",
           src: user.avatar_url,
           alt: "",
           style: {
-            height: '80px'
+            height: '100px',
+            borderRadius: '100%'
           }
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "media-body pt-2 ml-3"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "media-body pt-2 ml-3 text-center"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
           className: "mb-2"
         }, user.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "text-muted small"
         }, user.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "mt-2"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "#",
-          className: "text-twitter"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "ion ion-logo-twitter"
-        })), "\xA0\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "#",
-          className: "text-facebook"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "ion ion-logo-facebook"
-        })), "\xA0\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "#",
-          className: "text-instagram"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "ion ion-logo-instagram"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "text-muted small mt-2"
+        }, user.employee ? 'Employee' : 'Non-employee' + (user.user_type_name !== null ? ' | ' + user.user_type_name.toProperCase() : null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mt-3"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "#",
-          className: "btn btn-primary btn-sm rounded-pill"
-        }, "+\xA0 Follow"), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: "#",
           className: "btn icon-btn btn-default btn-sm md-btn-flat rounded-pill"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "ion ion-md-mail"
-        })))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+        }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
           className: "border-light m-0"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card-body",
+          style: {
+            maxHeight: '400px',
+            overflow: 'auto'
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Recent Activity", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+          className: 'ml-2'
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "/accounts/" + user.uid + '/activity'
+        }, "See more"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AccountUserActivity__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          authUser: this.state.authUser,
+          user: this.state.user
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card col-md-8 col-sm-12 account-left p-0"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card-body p-0"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "nav-tabs-top"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+          className: "nav nav-tabs"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "nav-item"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          className: "nav-link active",
+          "data-toggle": "tab",
+          href: "#navs-top-account"
+        }, "Account")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "nav-item"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          className: "nav-link",
+          "data-toggle": "tab",
+          href: "#navs-top-activity"
+        }, "Activity")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "nav-item"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          className: "nav-link",
+          "data-toggle": "tab",
+          href: "#navs-top-sessions"
+        }, "Sessions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "tab-content"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "tab-pane fade active show",
+          id: "navs-top-account"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "card-body"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "col-6"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-          className: "text-center"
-        }, "Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "section-heading"
+        }, "Profile"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "mb-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "text-muted"
+        }, "SID:"), "\xA0", user.sid), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "mb-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "text-muted"
+        }, "Name: \xA0"), this.userHasPermission('edit users') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_editext__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          type: "text",
+          mainContainerClassName: "react-editext-main",
+          saveButtonContent: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: 'lnr lnr-checkmark-circle text-success'
+          }),
+          cancelButtonContent: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: 'lnr lnr-cross-circle text-danger'
+          }),
+          editButtonContent: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: 'text-primary'
+          }, "edit"),
+          hideIcons: true,
+          onSave: this.onSaveInput.bind(this, 'name'),
+          value: user.name === null ? 'Not set' : user.name
+        }) : user.name === null ? 'Not set' : user.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "mb-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "text-muted"
+        }, "Email: \xA0"), user.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mb-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "text-muted"
         }, "Phone: \xA0"), this.userHasPermission('edit users') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_editext__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          type: "text",
+          type: "tel",
           mainContainerClassName: "react-editext-main",
-          onCancel: function onCancel(v) {
-            return console.log('CANCELLED: ', v);
-          },
-          onEditingStart: function onEditingStart(v) {
-            return console.log('EDITING STARTED: ', v);
-          },
+          saveButtonContent: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: 'lnr lnr-checkmark-circle text-success'
+          }),
+          cancelButtonContent: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: 'lnr lnr-cross-circle text-danger'
+          }),
+          editButtonContent: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: 'text-primary'
+          }, "edit"),
+          hideIcons: true,
           onSave: this.onSaveInput.bind(this, 'phone'),
           value: user.phone === null ? 'Not set' : user.phone
         }) : user.phone === null ? 'Not set' : user.phone), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mb-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "text-muted"
-        }, "Phone Secondary:"), "\xA0", this.userHasPermission('edit users') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_editext__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          type: "text",
-          mainContainerClassName: "react-editext-main",
-          onCancel: function onCancel(v) {
-            return console.log('CANCELLED: ', v);
-          },
-          onEditingStart: function onEditingStart(v) {
-            return console.log('EDITING STARTED: ', v);
-          },
-          onSave: this.onSaveInput.bind(this, 'phone_secondary'),
-          value: user.phone_secondary === null ? 'Not set' : user.phone_secondary
-        }) : user.phone_secondary === null ? 'Not set' : user.phone_secondary), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "Country:"), "\xA0", user.country !== null ? user.country.toProperCase() : 'N/A'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mb-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "text-muted"
-        }, "Recover Email:"), "\xA0", this.userHasPermission('edit users') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_editext__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          type: "text",
-          validation: function validation(v) {
-            return v.isEmail();
-          },
-          validationMessage: "Must be email",
-          mainContainerClassName: "react-editext-main",
-          onCancel: function onCancel(v) {
-            return console.log('CANCELLED: ', v);
-          },
-          onEditingStart: function onEditingStart(v) {
-            return console.log('EDITING STARTED: ', v);
-          },
-          onSave: this.onSaveInput.bind(this, 'recovery_email'),
-          value: user.recovery_email === null ? 'Not set' : user.recovery_email
-        }) : user.recovery_email === null ? 'Not set' : user.recovery_email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "State:"), "\xA0", user.state !== null ? user.state.toProperCase() : 'N/A'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mb-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "text-muted"
-        }, "LDAP:"), "\xA0", user.ldap_user ? 'True' : 'False'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "mb-2"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "text-muted"
-        }, "PKI:"), "\xA0", user.pkcs12 !== null ? 'Yes' : 'No'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "text-muted"
-        }, "Lorem ipsum dolor sit amet, nibh suavitate qualisque ut nam. Ad harum primis electram duo, porro principes ei has.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "City:"), "\xA0", user.city !== null ? user.city.toProperCase() : 'N/A')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "col-6"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-          className: "text-center"
-        }, "Sessions")))));
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "row"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-12"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "section-heading"
+        }, "Security"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "mb-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "text-muted"
+        }, "Account:"), "\xA0", user.locked ? 'Disabled' : 'Enabled'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "mb-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "text-muted"
+        }, "Verified:"), "\xA0", user.email_verified_at !== null ? 'Verified' : 'Not verified'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "mb-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "text-muted"
+        }, "One Time Password:"), "\xA0", user.otp_exemption ? 'Enabled' : 'Disabled'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "row mt-2"
+        }, user.ldap_user ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-12"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+          className: "border-light m-0"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "section-heading"
+        }, "LDAP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "mb-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "text-muted"
+        }, "CN:"), "\xA0", user.meta.ldap.cn), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "mb-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "text-muted"
+        }, "Mail:"), "\xA0", user.meta.ldap.mail), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "mb-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "text-muted"
+        }, "GivenName:"), "\xA0", user.meta.ldap.givenname), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "mb-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "text-muted"
+        }, "SN:"), "\xA0", user.meta.ldap.sn), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "mb-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "text-muted"
+        }, "UID:"), "\xA0", user.meta.ldap.uid), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "mb-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "text-muted"
+        }, "DN:"), "\xA0", user.meta.ldap.dn)) : null))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "tab-pane fade",
+          id: "navs-top-activity"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card-body"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "tab-pane fade",
+          id: "navs-top-sessions"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card-body"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr."))))))));
       }
     }
   }]);

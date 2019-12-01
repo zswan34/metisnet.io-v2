@@ -49,6 +49,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('created_by_id')->nullable();
             $table->unsignedBigInteger('timezone_id')->nullable();
             $table->unsignedBigInteger('avatar_file_id')->nullable();
+            $table->unsignedBigInteger('auth_type_id')->default(1);
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

@@ -12,8 +12,6 @@ class UserTypeSeeder extends Seeder
     public function run()
     {
         $userTypes = [
-            'full time',
-            'part time',
             'affiliate',
             'contractor',
             'temporary',

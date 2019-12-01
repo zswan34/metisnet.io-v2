@@ -1,3 +1,5 @@
+$breakpoint-tablet: 768px;
+
 .server-item {
   cursor: pointer;
   &:hover {
@@ -118,7 +120,7 @@ button[editext="cancel-button"] {
 div[editext="view-container"],
 div[editext="edit-container"] {
   display: inline-flex;
-
+  
   input {
     border: none;
     padding: 0;
@@ -129,4 +131,50 @@ div[editext="edit-container"] {
 
 .react-editext-main {
   display: inline-flex;
+}
+
+.account-left {
+  left: 5px;
+  @media (max-width: $breakpoint-tablet) {
+    left: 0;
+  }
+}
+
+.account-right {
+  right: 5px;
+  @media (max-width: $breakpoint-tablet) {
+    right: 0;
+  }
+}
+
+.section-heading {
+  font-style: italic;
+  font-weight: bold;
+  font-size: .8rem;
+  padding: 5px 0;
+}
+
+.account-activity-category {
+  height: 40px;
+  width: 40px;
+  background: #898989;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  position: relative;
+  
+  span {
+    color: #EAEAEA;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
 }

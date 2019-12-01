@@ -123,6 +123,52 @@ div[editext=edit-container] input {
   display: inline-flex;
 }
 
+.account-left {
+  left: 5px;
+}
+
+@media (max-width: 768px) {
+  .account-left {
+    left: 0;
+  }
+}
+
+.account-right {
+  right: 5px;
+}
+
+@media (max-width: 768px) {
+  .account-right {
+    right: 0;
+  }
+}
+
+.section-heading {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 0.8rem;
+  padding: 5px 0;
+}
+
+.account-activity-category {
+  height: 40px;
+  width: 40px;
+  background: #898989;
+  border-radius: 100%;
+  position: relative;
+}
+
+.account-activity-category span {
+  color: #EAEAEA;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
 @keyframes lds-ripple {
   0% {
     top: 96px;

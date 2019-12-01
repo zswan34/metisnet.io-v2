@@ -55,10 +55,7 @@ class AuthController extends Controller
 
             if (auth()->user()->locked) {
                 auth()->logout();
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Your account has been locked. Contact your administrator to unlock your account.'
-                ]);
+                return $this->failedAuthAttempt($email, 'email_password');
             }
             Meta::saveDataFromAuthUser();
             $response = [
@@ -67,19 +64,26 @@ class AuthController extends Controller
                 'redirect' => redirect()->intended()->getTargetUrl()
             ];
 
-            auth()->user()->session()->create();
+            $session = auth()->user()->session()->create();
+
+            activity('auth')
+                ->on(User::find(auth()->user()->id))
+                ->withProperties([
+                    'uid' => auth()->user()->uid,
+                    'auth_type' => 'email_password',
+                    'session' => $session])
+                ->log('Authenticated successfully');
 
             return response()->json($response, 200);
         }
         else {
-            return $this->failedAuthAttempt($email);
+            return $this->failedAuthAttempt($email, 'email_password');
         }
     }
 
-    protected function failedAuthAttempt($email)
+    protected function failedAuthAttempt($email, $type)
     {
         if ($user = User::where('email', $email)->first()) {
-
             if ($user->login_attempts > $this->max_attempts) {
                 if (!$user->locked) {
                     $user->update([
@@ -87,23 +91,49 @@ class AuthController extends Controller
                     ]);
                     $user->save();
                 }
+
+                $session = $user->session()->create();
+
+                activity('auth-failed')
+                    ->on($user)
+                    ->causedBy($user)
+                    ->withProperties([
+                        'uid' => $user->uid,
+                        'account_locked' => true,
+                        'auth_type' => $type,
+                        'session' => $session])
+                    ->log('Authenticated failed');
+
                 return response()->json([
                     'success' => false,
                     'message' => 'Your account has been locked. Contact your administrator to unlock your account.'
                 ]);
+
             } else {
 
                 $user->update([
                     'login_attempts' => $user->login_attempts + 1
                 ]);
+
                 $user->save();
+
+                $session = $user->session()->create();
+
+                activity('auth-failed')
+                    ->on($user)
+                    ->causedBy($user)
+                    ->withProperties([
+                        'uid' => $user->uid,
+                        'account_locked' => false,
+                        'auth_type' => $type,
+                        'session' => $session])
+                    ->log('Authenticated failed');
 
                 $response = [
                     'success' => false,
                     'message' => 'Incorrect email and password combination',
                 ];
                 return response()->json($response, 200);
-
             }
         } else {
             $response = [
@@ -127,8 +157,7 @@ class AuthController extends Controller
                         return $this->attemptAuth($email, $password, $remember);
                     }
                 } else {
-
-                    auth()->loginUsingId($user->id);
+                    auth()->loginUsingId($user->id, $remember);
 
                     auth()->user()->update([
                         'ldap_user' => true,
@@ -146,7 +175,17 @@ class AuthController extends Controller
                         'token_2fa_expiry' => Carbon::now()
                     ]);
                     auth()->user()->save();
-                    Meta::saveDataFromAuthUser();
+
+                    $session = auth()->user()->session()->create();
+
+                    activity('auth')
+                        ->on(User::find(auth()->user()->id))
+                        ->withProperties([
+                            'uid' => auth()->user()->uid,
+                            'auth_type' => 'ldap',
+                            'session' => $session])
+                        ->log('Authenticated successfully');
+
                     $response = [
                         'success' => true,
                         'data' => [
@@ -159,10 +198,7 @@ class AuthController extends Controller
 
                 }
             } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Incorrect email and password combination'
-                ]);
+                return $this->failedAuthAttempt($email, 'ldap');
             }
         }
     }
@@ -176,153 +212,20 @@ class AuthController extends Controller
         $user->email_verified_at = now();
         $user->ldap_user = true;
         $user->disadvantaged = true;
+
         if($user->save()) {
+            $session = $user->session()->create();
+            activity('user-created')
+                ->on($user)
+                ->withProperties([
+                    'uid' => $user->uid,
+                    'created_from' => 'ldap',
+                    'created_by' => null,
+                    'session' => $session])
+                ->log('User created successfully');
             return true;
         } else {
             return false;
-        }
-    }
-
-    protected function attemptLAuth($email, $password, $remember) {
-        if ($ldapUser = $this->ldap->search()->where('mail', $email)->first()) {
-            $userDN = 'uid='.$ldapUser->uid[0].','.config('ldap.connections.default.settings.base_dn');
-
-            if($this->ldap->auth()->attempt($userDN, $password, $bindAsUser = true)) {
-                if (!$user = User::where('email', $email)->first()) {
-                    auth()->loginUsingId($user->id);
-                } else {
-                    auth()->user()->update([
-                        'ldap_user' => true,
-                        'username' => $ldapUser->uid[0],
-                        'pkcs12' => null
-                    ]);
-
-                    if (is_null(auth()->user()->email_verified_at)) {
-                        auth()->user()->update(['email_verified_at' => now()]);
-                        auth()->user()->save();
-                    }
-
-                    auth()->user()->update([
-                        'last_login' => Carbon::now(),
-                        'api_token' => $this->api_token,
-                        'token_2fa_expiry' => Carbon::now()
-                    ]);
-                    auth()->user()->save();
-                    Meta::saveDataFromAuthUser();
-                    $response = [
-                        'success' => true,
-                        'data' => [
-                            'user' => auth()->user(),
-                        ],
-                        'redirect' => route('get-verify', ['ref' => 'sign-in']),
-                        'api_token' => $this->api_token
-                    ];
-
-                    $response['redirect'] = redirect()->intended()->getTargetUrl();
-                    if (request()->has('url')) {
-                        $response['redirect'] = request()->get('url');
-                    }
-                    $status = 200;
-                    activity()->by(auth()->user())->on(auth()->user())
-                        ->withProperties(['auth' => 'success', 'user' => ['uid' => auth()->user()->uid]])
-                        ->log('User authenticated successfully from ldap.');
-                }
-                if (!$user) {
-                    $user = new User();
-                    $user->name = $ldapUser->cn[0];
-                    $user->email = $ldapUser->mail[0];
-                    $user->username = $ldapUser->uid[0];
-                    $user->password = bcrypt($password);
-                    $user->email_verified_at = now();
-                    $user->ldap_user = true;
-                    $user->disadvantaged = $this->disadvantaged;
-                    if($user->save())
-                    {
-                        auth()->loginUsingid($user->id);
-                        Meta::saveDataFromAuthUser();
-                        $response = [
-                            'success' => true,
-                            'data' => [
-                                'user' => auth()->user(),
-                            ],
-                            'redirect' => route('get-verify', ['ref' => 'sign-in']),
-                            'api_token' => $this->api_token
-                        ];
-                        if (!is_null(auth()->user()->email_verified_at)) {
-                            auth()->user()->update([
-                                'last_login' => Carbon::now(),
-                                'api_token' => $this->api_token,
-                                'token_2fa_expiry' => Carbon::now()
-                            ]);
-                            auth()->user()->save();
-
-                            $response['redirect'] = redirect()->intended()->getTargetUrl();
-                            if (request()->has('url')) {
-                                $response['redirect'] = request()->get('url');
-                            }
-                        }
-
-                        $status = 200;
-                        activity()->by(auth()->user())->on(auth()->user())
-                            ->withProperties(['auth' => 'success', 'user' => ['uid' => auth()->user()->uid]])
-                            ->log('User authenticated successfully from ldap.');
-                    } else {
-                        // User not saved
-                        return json_encode(['user' => 'not signed in']);
-                    }
-                } else {
-                    auth()->loginUsingid($user->id);
-                    auth()->user()->update([
-                        'ldap_user' => true,
-                        'username' => $ldapUser->uid[0],
-                        'pkcs12' => null
-                    ]);
-                    //auth()->user()->save();
-
-                    if (is_null(auth()->user()->email_verified_at)) {
-                        auth()->user()->update(['email_verified_at' => now()]);
-                        auth()->user()->save();
-                    }
-                    auth()->user()->update([
-                        'last_login' => Carbon::now(),
-                        'api_token' => $this->api_token,
-                        'token_2fa_expiry' => Carbon::now()
-                    ]);
-                    auth()->user()->save();
-
-                    Meta::saveDataFromAuthUser();
-
-                    $response = [
-                        'success' => true,
-                        'data' => [
-                            'user' => auth()->user(),
-                        ],
-                        'redirect' => route('get-verify', ['ref' => 'sign-in']),
-                        'api_token' => $this->api_token
-                    ];
-
-                    $response['redirect'] = redirect()->intended()->getTargetUrl();
-                    if (request()->has('url')) {
-                        $response['redirect'] = request()->get('url');
-                    }
-
-                    $status = 200;
-                    activity()->by(auth()->user())->on(auth()->user())
-                        ->withProperties(['auth' => 'success', 'user' => ['uid' => auth()->user()->uid]])
-                        ->log('User authenticated successfully from ldap.');
-                }
-            } else {
-                $response = [
-                    'success' => false,
-                    'data' => [
-                        'message' => 'Incorrect email and password combination'
-                    ]
-                ];
-                $status = 401;
-                activity()->withProperties(['auth' => 'failed', 'email' => $email])
-                    ->log('Authentication attempt failed against ldap.');
-                TODO: //
-            }
         }
     }
 
@@ -340,7 +243,8 @@ class AuthController extends Controller
             'auth' => [
                 'user' => $user,
                 'roles' => $user->getRoleNames(),
-                'permissions' => json_decode($user->getPermissionsViaRoles())
+                'permissions' => json_decode($user->getPermissionsViaRoles()),
+                'timezone' => $user->getTimezone()
             ]
         ];
 
