@@ -130,7 +130,7 @@ div[editext="edit-container"] {
 }
 
 .react-editext-main {
-  display: inline-flex;
+  display: block;
 }
 
 .account-left {
@@ -155,8 +155,8 @@ div[editext="edit-container"] {
 }
 
 .account-activity-category {
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   background: #898989;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
@@ -173,8 +173,24 @@ div[editext="edit-container"] {
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    font-size: 1.25rem;
+    font-size: .9rem;
     font-weight: bold;
   }
 
+}
+
+.user-action-btn {
+  margin: 10px;
+  border-radius: 100%;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    background: #f8f8f8;
+  }
+}
+
+.nav-tabs-top>.tab-content {
+  box-shadow: none;
 }

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import ReactTooltip from 'react-tooltip'
 import EditText from 'react-editext';
 
-import StandardLoadingComponent from "../loading/StandardLoadingComponent";
 import AccountUserActivity from "./AccountUserActivity";
+import EclipseLoadingComponent from "../loading/EclipseLoadingComponent";
+
 
 const uid = window.location.pathname.split('/')[2];
 const AUTH_USER_URL = '/api/v1/auth/';
@@ -56,10 +58,10 @@ export class AccountUserMain extends Component {
         return match;
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.fetchAuthUser();
         this.fetchUser(uid);
-
+        $('[data-toggle="tooltip"]').tooltip()
     }
     updateUser(data) {
         axios.post(UPDATE_USER_API + this.state.user.uid, data)
@@ -81,39 +83,49 @@ export class AccountUserMain extends Component {
     render() {
         if (!this.state.isLoaded) {
             return (
-                <StandardLoadingComponent/>
+                <EclipseLoadingComponent/>
             )
         } else {
             const user = this.state.user;
+            let userType = (user.user_type_name !== null) ? user.user_type_name.toProperCase() : null;
             return (
                 <div className={"row"}>
+                    <ReactTooltip />
                     <div className="card col-md-4 col-sm-12 account-right">
                         <div className="card-body">
                             <a href="/accounts"><i className="lnr lnr-arrow-left"></i> &nbsp; Accounts</a>
                             <div className="media mt-2">
                                 <img className={"m-auto text-center"} src={user.avatar_url} alt=""
-                                     style={{height: '100px', borderRadius: '100%'}}/>
+                                     style={{height: '80px', borderRadius: '100%'}}/>
                             </div>
                             <div className="media-body pt-2 ml-3 text-center">
-                                <h3 className="mb-2">{user.name}</h3>
-                                <div className="text-muted small">{user.email}</div>
-
-                                <div className="text-muted small mt-2">
-                                    {(user.employee) ? 'Employee' : 'Non-employee' +
-                                        ((user.user_type_name !== null) ? ' | ' +
-                                            user.user_type_name.toProperCase() : null)}
+                                <h4 className="mb-1">{user.name}</h4>
+                                <div className="text-muted small">
+                                    {(user.employee) ? 'Employee' : 'Non-employee | ' + userType}
                                 </div>
 
-                                <div className="mt-3">
-                                    <a href="#" className="btn icon-btn btn-default btn-sm md-btn-flat rounded-pill">
+                                <div className="mt-1">
+                                    <span className="btn icon-btn btn-primary btn-sm md-btn-flat border border-primary user-action-btn"
+                                          data-tip={"Send mesage"}>
                                         <span className="ion ion-md-mail"></span>
-                                    </a>
+                                    </span>
+                                    {user.locked ?
+                                        <span className="btn icon-btn btn-primary btn-sm md-btn-flat border border-primary user-action-btn"
+                                              data-tip={"Unlock account"}>
+                                            <span className="ion ion-md-lock"></span>
+                                        </span>
+                                        :
+                                        <span className="btn icon-btn btn-primary btn-sm md-btn-flat border border-primary user-action-btn"
+                                              data-tip={"Lock account"}>
+                                            <span className="ion ion-md-unlock"></span>
+                                        </span>
+                                    }
                                 </div>
                             </div>
                         </div>
                         <hr className="border-light m-0"/>
                         <div className="card-body" style={{maxHeight: '400px', overflow: 'auto'}}>
-                            <h5>Recent Activity
+                            <h5 className={"mb-4"}>Recent Activity
                                 <small className={'ml-2'}>
                                     <a href={"/accounts/" + user.uid + '/activity'}>See more</a>
                                 </small>
@@ -125,137 +137,98 @@ export class AccountUserMain extends Component {
                         </div>
                     </div>
                     <div className="card col-md-8 col-sm-12 account-left p-0">
-                        <div className="card-body p-0">
-                            <div className="nav-tabs-top">
-                                <ul className="nav nav-tabs">
-                                    <li className="nav-item">
-                                        <a className="nav-link active" data-toggle="tab" href="#navs-top-profile">Profile</a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a className="nav-link" data-toggle="tab" href="#navs-top-security">Security</a>
-                                    </li>
-                                    {this.state.user.ldap_user ?
-                                        <li className="nav-item">
-                                            <a className="nav-link" data-toggle="tab" href="#navs-top-ldap">LDAP</a>
-                                        </li>
-                                    : null }
-                                </ul>
-                                <div className="tab-content">
-                                    <div className="tab-pane fade active show" id="navs-top-profile">
-                                        <div className="card-body">
-                                            <div className="row">
-                                                <div className="col-6">
-                                                    <div className="section-heading">Profile</div>
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">SID:</span>&nbsp;
-                                                        {user.sid}
-                                                    </div>
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">Name: &nbsp;</span>
-                                                        {(this.userHasPermission('edit users')) ?
-                                                            <EditText
-                                                                type='text'
-                                                                mainContainerClassName={"react-editext-main"}
-                                                                saveButtonContent={<i className={'lnr lnr-checkmark-circle text-success'}></i>}
-                                                                cancelButtonContent={<i className={'lnr lnr-cross-circle text-danger'}></i>}
-                                                                editButtonContent={<span className={'text-primary'}>edit</span>}
-                                                                hideIcons={true}
-                                                                onSave={this.onSaveInput.bind(this, 'name')}
-                                                                value={(user.name === null) ? 'Not set' : user.name}
-                                                            />
-                                                            :  (user.name === null) ? 'Not set' : user.name}
-                                                    </div>
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">Email: &nbsp;</span>
-                                                        {user.email}
-                                                    </div>
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">Phone: &nbsp;</span>
-                                                        {(this.userHasPermission('edit users')) ?
-                                                            <EditText
-                                                                type='tel'
-                                                                mainContainerClassName={"react-editext-main"}
-                                                                saveButtonContent={<i className={'lnr lnr-checkmark-circle text-success'}></i>}
-                                                                cancelButtonContent={<i className={'lnr lnr-cross-circle text-danger'}></i>}
-                                                                editButtonContent={<span className={'text-primary'}>edit</span>}
-                                                                hideIcons={true}
-                                                                onSave={this.onSaveInput.bind(this, 'phone')}
-                                                                value={(user.phone === null) ? 'Not set' : user.phone}
-                                                            />
-                                                            : (user.phone === null) ? 'Not set' : user.phone}
-                                                    </div>
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">Country:</span>&nbsp;
-                                                        {(user.country !== null) ? user.country.toProperCase() : 'N/A'}
-                                                    </div>
+                        <h4 className={"card-header"}>Profile</h4>
+                        <div className="card-body">
+                            <div className="row">
+                                <div className="col-md-6 col-sm-12">
+                                    <div className="form-group">
+                                        <label className="form-label">SID</label>
+                                        <span className={"d-block"}>{user.sid}</span>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="form-label">Name</label>
+                                        {(this.userHasPermission('edit users')) ?
+                                            <EditText
+                                                type='text'
+                                                mainContainerClassName={"react-editext-main"}
+                                                saveButtonContent={<i className={'lnr lnr-checkmark-circle text-success'}></i>}
+                                                cancelButtonContent={<i className={'lnr lnr-cross-circle text-danger'}></i>}
+                                                editButtonContent={<span className={'text-primary'}>edit</span>}
+                                                hideIcons={true}
+                                                onSave={this.onSaveInput.bind(this, 'name')}
+                                                value={(user.name === null) ? 'Not set' : user.name}
+                                            />
+                                            :  (user.name === null) ? 'Not set' : user.name}
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="form-label">Email</label>
+                                        <span className={"d-block"}>{user.email}</span>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="form-label">Phone</label>
+                                        {(this.userHasPermission('edit users')) ?
+                                            <EditText
+                                                type='tel'
+                                                mainContainerClassName={"react-editext-main"}
+                                                saveButtonContent={<i className={'lnr lnr-checkmark-circle text-success'}></i>}
+                                                cancelButtonContent={<i className={'lnr lnr-cross-circle text-danger'}></i>}
+                                                editButtonContent={<span className={'text-primary'}>edit</span>}
+                                                hideIcons={true}
+                                                onSave={this.onSaveInput.bind(this, 'phone')}
+                                                value={(user.phone === null) ? 'Not set' : user.phone}
+                                            />
+                                            : (user.phone === null) ? 'Not set' : user.phone}
+                                    </div>
+                                    <div className="form-group">
+                                    <label className="form-label">Country</label>
+                                        <span className={"d-block"}> {(user.country !== null) ? user.country.toProperCase() : 'N/A'}</span>
+                                </div>
+                                    <div className="form-group">
+                                        <label className="form-label">State</label>&nbsp;
+                                        <span className={"d-block"}> {(user.state !== null) ? user.state.toProperCase() : 'N/A'}</span>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="form-label">City</label>
+                                        <span className={"d-block"}> {(user.city !== null) ? user.city.toProperCase() : 'N/A'}</span>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className={"form-label"}>Account Locked</label>
+                                        <span className={"d-block"}> {(user.locked) ? 'True' : 'False'}</span>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className={"form-label"}>Account Verified</label>
+                                        <span className={"d-block"}> {(user.email_verified_at !== null) ? 'True' : 'False'}</span>
+                                    </div>
+                                </div>
+                                <div className="col-md-6 col-sm-12">
+                                    {(user.ldap_user) ?
+                                    <div>
+                                <div className="form-group">
+                                    <label className="form-label">CN</label>
+                                    <span className={"d-block"}>{user.meta.ldap.cn}</span>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Email</label>
+                                    <span className={"d-block"}>{user.meta.ldap.mail}</span>
+                                </div>
 
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">State:</span>&nbsp;
-                                                        {(user.state !== null) ? user.state.toProperCase() : 'N/A'}
-                                                    </div>
-
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">City:</span>&nbsp;
-                                                        {(user.city !== null) ? user.city.toProperCase() : 'N/A'}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="tab-pane fade" id="navs-top-security">
-                                        <div className="card-body">
-                                            <div className="row">
-                                                <div className="col-12">
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">Account:</span>&nbsp;
-                                                        {(user.locked) ? 'Disabled' : 'Enabled'}
-                                                    </div>
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">Verified:</span>&nbsp;
-                                                        {(user.email_verified_at !== null) ? 'Verified' : 'Not verified'}
-                                                    </div>
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">One Time Password:</span>&nbsp;
-                                                        {(user.otp_exemption) ? 'Enabled' : 'Disabled'}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {this.state.user.ldap_user ?
-                                    <div className="tab-pane fade" id="navs-top-ldap">
-                                        <div className="card-body">
-                                            <div className="row mt-2">
-                                                <div className="col-12">
-                                                    <hr className="border-light m-0"/>
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">CN:</span>&nbsp;
-                                                        {user.meta.ldap.cn}
-                                                    </div>
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">Mail:</span>&nbsp;
-                                                        {user.meta.ldap.mail}
-                                                    </div>
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">GivenName:</span>&nbsp;
-                                                        {user.meta.ldap.givenname}
-                                                    </div>
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">SN:</span>&nbsp;
-                                                        {user.meta.ldap.sn}
-                                                    </div>
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">UID:</span>&nbsp;
-                                                        {user.meta.ldap.uid}
-                                                    </div>
-                                                    <div className="mb-2">
-                                                        <span className="text-muted">DN:</span>&nbsp;
-                                                        {user.meta.ldap.dn}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div className="form-group">
+                                    <label className="form-label">GivenName:</label>
+                                    <span className={"d-block"}>{user.meta.ldap.givenname}</span>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">SN:</label>
+                                    <span className={"d-block"}>{user.meta.ldap.sn}</span>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">UID:</label>
+                                    <span className={"d-block"}>{user.meta.ldap.uid}</span>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">DN:</label>
+                                    <span className={"d-block"}>{user.meta.ldap.dn}</span>
+                                </div>
+                            </div>
                                     : null }
                                 </div>
                             </div>

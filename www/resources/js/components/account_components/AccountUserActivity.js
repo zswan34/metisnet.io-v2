@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ReactTooltip from 'react-tooltip'
+import EclipseElementLoadingComponent from "../loading/EclipseElementLoadingComponent";
 
 const USER_API_URL = '/api/v1/users/';
 
@@ -27,11 +29,14 @@ export default class AccountUserActivity extends Component {
             .catch(error => this.setState({ errors: error, isLoaded: false, hasError: true }));
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.fetchActivities()
     }
 
     updateActivities() {
+        this.setState({
+            isLoaded: false
+        });
         this.fetchActivities();
     }
 
@@ -40,8 +45,9 @@ export default class AccountUserActivity extends Component {
         if (this.state.isLoaded) {
             return (
                 <div style={{position: 'relative'}}>
-                    <span className={"text-primary"} onClick={this.updateActivities.bind(this)}
-                          style={{cursor: 'pointer', position: 'absolute', top: '-35px', right: '0px'}}>
+                    <ReactTooltip/>
+                    <span className={"text-primary"} onClick={this.updateActivities.bind(this)} data-tip="Refresh"
+                          style={{cursor: 'pointer', position: 'absolute', top: '-40px', right: '0px'}}>
                         <i className={"ion ion-md-refresh"}></i>
                             </span>
                 {this.state.activities.map((activity, index) => {
@@ -55,15 +61,25 @@ export default class AccountUserActivity extends Component {
 
                     let bg = '';
                     let icon = 'ion ion-ios-list-box';
-
+                    let html = '';
                     if (activity.log_name === 'auth') {
                         bg = 'bg-success';
-                        icon = 'ion ion-ios-unlock';
+                        icon = 'ion ion-md-unlock';
+                        html = <small className="text-body">
+                                    <div>Client IP: {activity.properties.session.ip_address}</div>
+                                    <div>Browser: {activity.properties.session.browser}</div>
+                                    <div>OS: {activity.properties.session.platform}</div>
+                                </small>;
                     }
 
                     if (activity.log_name === 'auth-failed') {
                         bg = 'bg-danger';
-                        icon = 'ion ion-ios-lock';
+                        icon = 'ion ion-md-lock';
+                        html = <small className="text-body">
+                                    <div>Client IP: {activity.properties.session.ip_address}</div>
+                                    <div>Browser: {activity.properties.session.browser}</div>
+                                    <div>OS: {activity.properties.session.platform}</div>
+                                </small>;
                     }
 
                     if (activity.log_name === 'user-created') {
@@ -81,11 +97,7 @@ export default class AccountUserActivity extends Component {
                                     <strong className="font-weight-semibold">{activity.description}</strong> &nbsp;
                                     <small className="text-muted">{ timeAgo }</small>
                                 </div>
-                                <small className="text-body">
-                                    <div>Client IP: {activity.properties.session.ip_address}</div>
-                                    <div>Browser: {activity.properties.session.browser}</div>
-                                    <div>OS: {activity.properties.session.platform}</div>
-                                </small>
+                                {html}
                             </div>
                         </div>
                     )
@@ -94,7 +106,7 @@ export default class AccountUserActivity extends Component {
             )
         } else {
             return (
-                <p>Loading...</p>
+                <EclipseElementLoadingComponent/>
             )
         }
     }
