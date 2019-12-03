@@ -58052,24 +58052,24 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           className: "nav-link active",
           "data-toggle": "tab",
-          href: "#navs-top-account"
-        }, "Account")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          href: "#navs-top-profile"
+        }, "Profile")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           className: "nav-item"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           className: "nav-link",
           "data-toggle": "tab",
-          href: "#navs-top-activity"
-        }, "Activity")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          href: "#navs-top-security"
+        }, "Security")), this.state.user.ldap_user ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           className: "nav-item"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           className: "nav-link",
           "data-toggle": "tab",
-          href: "#navs-top-sessions"
-        }, "Sessions"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          href: "#navs-top-ldap"
+        }, "LDAP")) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "tab-content"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "tab-pane fade active show",
-          id: "navs-top-account"
+          id: "navs-top-profile"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "card-body"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -58136,15 +58136,16 @@ function (_Component) {
           className: "mb-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "text-muted"
-        }, "City:"), "\xA0", user.city !== null ? user.city.toProperCase() : 'N/A')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-6"
+        }, "City:"), "\xA0", user.city !== null ? user.city.toProperCase() : 'N/A'))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "tab-pane fade",
+          id: "navs-top-security"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card-body"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "col-12"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "section-heading"
-        }, "Security"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mb-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "text-muted"
@@ -58156,15 +58157,18 @@ function (_Component) {
           className: "mb-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "text-muted"
-        }, "One Time Password:"), "\xA0", user.otp_exemption ? 'Enabled' : 'Disabled'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "One Time Password:"), "\xA0", user.otp_exemption ? 'Enabled' : 'Disabled'))))), this.state.user.ldap_user ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "tab-pane fade",
+          id: "navs-top-ldap"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card-body"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "row mt-2"
-        }, user.ldap_user ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "col-12"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
           className: "border-light m-0"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "section-heading"
-        }, "LDAP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "mb-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "text-muted"
@@ -58188,17 +58192,7 @@ function (_Component) {
           className: "mb-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "text-muted"
-        }, "DN:"), "\xA0", user.meta.ldap.dn)) : null))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "tab-pane fade",
-          id: "navs-top-activity"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "card-body"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "tab-pane fade",
-          id: "navs-top-sessions"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "card-body"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr."))))))));
+        }, "DN:"), "\xA0", user.meta.ldap.dn))))) : null)))));
       }
     }
   }]);
