@@ -141,12 +141,15 @@ export class AccountUserMain extends Component {
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-md-6 col-sm-12">
+
+                                    <h5 className={"mb-0 text-primary"}>General Information</h5>
+                                    <hr className={'bg-primary'}/>
                                     <div className="form-group">
-                                        <label className="form-label">SID</label>
+                                        <label className="form-label italics">SID</label>
                                         <span className={"d-block"}>{user.sid}</span>
                                     </div>
                                     <div className="form-group">
-                                        <label className="form-label">Name</label>
+                                        <label className="form-label italics">Name</label>
                                         {(this.userHasPermission('edit users')) ?
                                             <EditText
                                                 type='text'
@@ -161,11 +164,11 @@ export class AccountUserMain extends Component {
                                             :  (user.name === null) ? 'Not set' : user.name}
                                     </div>
                                     <div className="form-group">
-                                        <label className="form-label">Email</label>
+                                        <label className="form-label italics">Email</label>
                                         <span className={"d-block"}>{user.email}</span>
                                     </div>
                                     <div className="form-group">
-                                        <label className="form-label">Phone</label>
+                                        <label className="form-label italics">Phone</label>
                                         {(this.userHasPermission('edit users')) ?
                                             <EditText
                                                 type='tel'
@@ -180,55 +183,60 @@ export class AccountUserMain extends Component {
                                             : (user.phone === null) ? 'Not set' : user.phone}
                                     </div>
                                     <div className="form-group">
-                                    <label className="form-label">Country</label>
+                                    <label className="form-label italics">Country</label>
                                         <span className={"d-block"}> {(user.country !== null) ? user.country.toProperCase() : 'N/A'}</span>
                                 </div>
                                     <div className="form-group">
-                                        <label className="form-label">State</label>&nbsp;
+                                        <label className="form-label italics">State</label>&nbsp;
                                         <span className={"d-block"}> {(user.state !== null) ? user.state.toProperCase() : 'N/A'}</span>
                                     </div>
                                     <div className="form-group">
-                                        <label className="form-label">City</label>
+                                        <label className="form-label italics">City</label>
                                         <span className={"d-block"}> {(user.city !== null) ? user.city.toProperCase() : 'N/A'}</span>
                                     </div>
+
+                                </div>
+                                <div className="col-md-6 col-sm-12">
+                                    <h5 className={"mb-0 text-primary"}>Account</h5>
+                                    <hr className={'bg-primary'}/>
                                     <div className="form-group">
-                                        <label className={"form-label"}>Account Locked</label>
+                                        <label className={"form-label italics"}>Account Locked</label>
                                         <span className={"d-block"}> {(user.locked) ? 'True' : 'False'}</span>
                                     </div>
                                     <div className="form-group">
-                                        <label className={"form-label"}>Account Verified</label>
+                                        <label className={"form-label italics"}>Account Verified</label>
                                         <span className={"d-block"}> {(user.email_verified_at !== null) ? 'True' : 'False'}</span>
                                     </div>
-                                </div>
-                                <div className="col-md-6 col-sm-12">
                                     {(user.ldap_user) ?
-                                    <div>
-                                <div className="form-group">
-                                    <label className="form-label">CN</label>
-                                    <span className={"d-block"}>{user.meta.ldap.cn}</span>
-                                </div>
-                                <div className="form-group">
-                                    <label className="form-label">Email</label>
-                                    <span className={"d-block"}>{user.meta.ldap.mail}</span>
-                                </div>
+                                    <div className={"mt-4 mb-3"}>
+                                        <h6 className={"mb-0 text-primary"}>LDAP</h6>
+                                        <hr className={'bg-primary'}/>
+                                        <div className="form-group">
+                                            <label className="form-label italics">CN</label>
+                                            <span className={"d-block"}>{user.meta.ldap.cn}</span>
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="form-label italics">Email</label>
+                                            <span className={"d-block"}>{user.meta.ldap.mail}</span>
+                                        </div>
 
-                                <div className="form-group">
-                                    <label className="form-label">GivenName:</label>
-                                    <span className={"d-block"}>{user.meta.ldap.givenname}</span>
-                                </div>
-                                <div className="form-group">
-                                    <label className="form-label">SN:</label>
-                                    <span className={"d-block"}>{user.meta.ldap.sn}</span>
-                                </div>
-                                <div className="form-group">
-                                    <label className="form-label">UID:</label>
-                                    <span className={"d-block"}>{user.meta.ldap.uid}</span>
-                                </div>
-                                <div className="form-group">
-                                    <label className="form-label">DN:</label>
-                                    <span className={"d-block"}>{user.meta.ldap.dn}</span>
-                                </div>
-                            </div>
+                                        <div className="form-group">
+                                            <label className="form-label italics">GivenName:</label>
+                                            <span className={"d-block"}>{user.meta.ldap.givenname}</span>
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="form-label italics">SN:</label>
+                                            <span className={"d-block"}>{user.meta.ldap.sn}</span>
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="form-label italics">UID:</label>
+                                            <span className={"d-block"}>{user.meta.ldap.uid}</span>
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="form-label italics">DN:</label>
+                                            <span className={"d-block"}>{user.meta.ldap.dn}</span>
+                                        </div>
+                                    </div>
                                     : null }
                                 </div>
                             </div>

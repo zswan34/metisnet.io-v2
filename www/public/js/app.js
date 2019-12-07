@@ -59692,16 +59692,20 @@ function (_Component) {
           className: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "col-md-6 col-sm-12"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+          className: "mb-0 text-primary"
+        }, "General Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+          className: 'bg-primary'
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "form-label"
+          className: "form-label italics"
         }, "SID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "d-block"
         }, user.sid)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "form-label"
+          className: "form-label italics"
         }, "Name"), this.userHasPermission('edit users') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_editext__WEBPACK_IMPORTED_MODULE_3__["default"], {
           type: "text",
           mainContainerClassName: "react-editext-main",
@@ -59720,13 +59724,13 @@ function (_Component) {
         }) : user.name === null ? 'Not set' : user.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "form-label"
+          className: "form-label italics"
         }, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "d-block"
         }, user.email)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "form-label"
+          className: "form-label italics"
         }, "Phone"), this.userHasPermission('edit users') ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_editext__WEBPACK_IMPORTED_MODULE_3__["default"], {
           type: "tel",
           mainContainerClassName: "react-editext-main",
@@ -59745,69 +59749,79 @@ function (_Component) {
         }) : user.phone === null ? 'Not set' : user.phone), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "form-label"
+          className: "form-label italics"
         }, "Country"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "d-block"
         }, " ", user.country !== null ? user.country.toProperCase() : 'N/A')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "form-label"
+          className: "form-label italics"
         }, "State"), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "d-block"
         }, " ", user.state !== null ? user.state.toProperCase() : 'N/A')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "form-label"
+          className: "form-label italics"
         }, "City"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "d-block"
-        }, " ", user.city !== null ? user.city.toProperCase() : 'N/A')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, " ", user.city !== null ? user.city.toProperCase() : 'N/A'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-md-6 col-sm-12"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+          className: "mb-0 text-primary"
+        }, "Account"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+          className: 'bg-primary'
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "form-label"
+          className: "form-label italics"
         }, "Account Locked"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "d-block"
         }, " ", user.locked ? 'True' : 'False')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "form-label"
+          className: "form-label italics"
         }, "Account Verified"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "d-block"
-        }, " ", user.email_verified_at !== null ? 'True' : 'False'))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-md-6 col-sm-12"
-        }, user.ldap_user ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, " ", user.email_verified_at !== null ? 'True' : 'False')), user.ldap_user ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "mt-4 mb-3"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+          className: "mb-0 text-primary"
+        }, "LDAP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+          className: 'bg-primary'
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "form-label"
+          className: "form-label italics"
         }, "CN"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "d-block"
         }, user.meta.ldap.cn)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "form-label"
+          className: "form-label italics"
         }, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "d-block"
         }, user.meta.ldap.mail)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "form-label"
+          className: "form-label italics"
         }, "GivenName:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "d-block"
         }, user.meta.ldap.givenname)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "form-label"
+          className: "form-label italics"
         }, "SN:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "d-block"
         }, user.meta.ldap.sn)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "form-label"
+          className: "form-label italics"
         }, "UID:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "d-block"
         }, user.meta.ldap.uid)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-          className: "form-label"
+          className: "form-label italics"
         }, "DN:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "d-block"
         }, user.meta.ldap.dn))) : null)))));

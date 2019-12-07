@@ -9,11 +9,16 @@ use App\Libs\GeoLocate;
 use App\Libs\Meta;
 use App\Libs\ServerStatus;
 use App\Libs\Time;
+use App\Mail\EmailVerification;
+use App\Mail\TestMail;
 use App\NavbarColor;
 use App\SidenavColor;
 use App\Timezone;
+use App\Token;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redis;
 use Jenssegers\Agent\Agent;
 
 class AccountController extends Controller

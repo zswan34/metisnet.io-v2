@@ -185,6 +185,10 @@ div[editext=edit-container] input {
   box-shadow: none;
 }
 
+.italics {
+  font-style: italic;
+}
+
 @keyframes lds-ripple {
   0% {
     top: 96px;

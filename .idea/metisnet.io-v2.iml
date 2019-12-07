@@ -75,6 +75,7 @@
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/pragmarx/google2fa-laravel" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/pragmarx/google2fa-qrcode" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/pragmarx/support" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/predis/predis" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/projectstage/godaddy-api-wrapper" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/psr/container" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/psr/http-message" />
